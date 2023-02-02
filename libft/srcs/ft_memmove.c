@@ -1,21 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/02 13:04:38 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/02 13:43:52 by mpignet          ###   ########.fr       */
+/*   Created: 2022/05/03 12:07:00 by mpignet           #+#    #+#             */
+/*   Updated: 2022/09/06 16:39:35 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../inc/libft.h"
 
-int	main(int ac, char **av)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	if (ac != 2)
-		return (ft_putstr_fd("cub3d: wrong number of arguments !\n", 2), 1);
-	parsing(av[1]);
-	return (0);
+	size_t	i;
+
+	if (dst > src)
+	{
+		while (len-- > 0)
+			*(unsigned char *)(dst + len) = *(unsigned char *)(src + len);
+	}
+	else
+	{
+		i = 0;
+		while (i < len)
+		{
+			*(unsigned char *)(dst + i) = *(unsigned char *)(src + i);
+			i++;
+		}
+	}
+	return (dst);
 }

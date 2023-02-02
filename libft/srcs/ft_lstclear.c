@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/02 13:04:38 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/02 13:43:52 by mpignet          ###   ########.fr       */
+/*   Created: 2022/05/09 15:57:12 by mpignet           #+#    #+#             */
+/*   Updated: 2022/09/06 16:39:01 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../inc/libft.h"
 
-int	main(int ac, char **av)
+void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	if (ac != 2)
-		return (ft_putstr_fd("cub3d: wrong number of arguments !\n", 2), 1);
-	parsing(av[1]);
-	return (0);
+	t_list	*temp;
+
+	if (!lst || !del)
+		return ;
+	temp = *lst;
+	while (*lst)
+	{
+		*lst = (*lst)->next;
+		ft_lstdelone(temp, del);
+		temp = *lst;
+	}
 }

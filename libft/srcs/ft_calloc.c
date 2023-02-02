@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/02 13:04:38 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/02 13:43:52 by mpignet          ###   ########.fr       */
+/*   Created: 2022/05/03 11:59:02 by mpignet           #+#    #+#             */
+/*   Updated: 2022/09/06 16:37:47 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../inc/libft.h"
 
-int	main(int ac, char **av)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	if (ac != 2)
-		return (ft_putstr_fd("cub3d: wrong number of arguments !\n", 2), 1);
-	parsing(av[1]);
-	return (0);
+	void	*ptr;
+
+	if (nmemb != 0 && ((nmemb * size) / nmemb != size))
+		return (NULL);
+	ptr = (void *)malloc(nmemb * size);
+	if (!ptr)
+		return (0);
+	ft_bzero(ptr, nmemb * size);
+	return (ptr);
 }

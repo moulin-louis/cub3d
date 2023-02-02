@@ -1,21 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_printnbr_unsigned.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/02 13:04:38 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/02 13:43:52 by mpignet          ###   ########.fr       */
+/*   Created: 2022/05/16 15:30:29 by mpignet           #+#    #+#             */
+/*   Updated: 2022/09/07 14:39:22 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../inc/libft.h"
 
-int	main(int ac, char **av)
+static int	ft_nbrlen_unsigned(unsigned int nbr)
 {
-	if (ac != 2)
-		return (ft_putstr_fd("cub3d: wrong number of arguments !\n", 2), 1);
-	parsing(av[1]);
-	return (0);
+	int	i;
+
+	i = 0;
+	if (nbr == 0)
+		return (1);
+	while (nbr != 0)
+	{
+		nbr /= 10;
+		i++;
+	}
+	return (i);
+}
+
+int	ft_printnbr_unsigned(unsigned int n)
+{
+	unsigned int	i;
+
+	i = n;
+	if (i > 9)
+	{
+		ft_printnbr_unsigned(i / 10);
+		i = i % 10;
+	}
+	ft_putchar('0' + i);
+	return (ft_nbrlen_unsigned(n));
 }

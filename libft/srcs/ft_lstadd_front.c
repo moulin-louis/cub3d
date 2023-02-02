@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/02 13:04:38 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/02 13:43:52 by mpignet          ###   ########.fr       */
+/*   Created: 2022/05/09 14:42:02 by mpignet           #+#    #+#             */
+/*   Updated: 2022/09/06 16:38:59 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../inc/libft.h"
 
-int	main(int ac, char **av)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	if (ac != 2)
-		return (ft_putstr_fd("cub3d: wrong number of arguments !\n", 2), 1);
-	parsing(av[1]);
-	return (0);
+	if (!lst || !new)
+		return ;
+	new->next = *lst;
+	*lst = new;
 }
