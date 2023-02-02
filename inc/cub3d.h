@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/02 14:07:59 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/02 16:48:30 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <math.h>
+#include <time.h>
 # include "libft.h"
-
+# include "../MLX42/include/MLX42/MLX42.h"
+# define FOV 80
 typedef struct s_map
 {
 	void	*mlx;
@@ -40,6 +42,7 @@ typedef struct s_map
 	int		win_height;
 }	t_map;
 
-int	parsing(char *path_map);
-
+int		parsing(char *path_map);
+void	rendering( t_map data);
+int get_rgba(int r, int g, int b);
 #endif
