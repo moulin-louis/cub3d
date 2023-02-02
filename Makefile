@@ -6,7 +6,7 @@
 #    By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/13 13:30:11 by loumouli          #+#    #+#              #
-#    Updated: 2023/02/02 13:06:15 by loumouli         ###   ########.fr        #
+#    Updated: 2023/02/02 14:00:23 by loumouli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,8 @@ CFLAGS		= -Wall -Wextra -Werror -g -MMD
 #                INCLUDES            #
 # ################################## #
 CINCLUDES	=	-I ./inc
+MLX			= 	./MLX42/build/libmlx.all
+LIBFT 		= 	./libft/libft.a
 
 # ################################## #
 #                RULES               #
@@ -60,7 +62,16 @@ $(O_DIR)/%.o: $(C_DIR)/%.c
 			$(CC) $(CFLAGS) $(CINCLUDES) -c $< -o $@
 
 
-$(NAME): $(O_DIR) $(OBJS)
+$(MLX):
+		echo "Compiling MLX from source"
+		cmake ./MLX42 -B ./MLX42/build
+		cmake --build ./MLX42/build
+
+$(LIBFT):
+		make -C ./libft
+
+
+$(NAME): $(MLX) $(O_DIR) $(OBJS)
 			$(CC) $(OBJS) $(CFLAGS) -o $@
 
 # ################################## #
@@ -68,10 +79,14 @@ $(NAME): $(O_DIR) $(OBJS)
 # ################################## #
 
 clean:
+			make -C ./libft clean
 			$(RM) $(O_DIR)
 
 fclean:		clean
+			${RM} ./MLX42/build
+			make -C ./libft fclean
 			$(RM) $(NAME)
+
 
 re:			fclean all
 
