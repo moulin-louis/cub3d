@@ -6,7 +6,7 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/13 13:30:11 by loumouli          #+#    #+#              #
-#    Updated: 2023/02/02 14:09:57 by mpignet          ###   ########.fr        #
+#    Updated: 2023/02/02 17:49:00 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ CFLAGS		= -Wall -Wextra -Werror -g -MMD
 # ################################## #
 #                INCLUDES            #
 # ################################## #
-CINCLUDES	=	-I ./inc -I ./libft/inc
+CINCLUDES	=	-I ./inc -I ./libft/inc -I ./MLX42/include/MLX42
 MLX			= 	./MLX42/build/libmlx42.a
 LIBFT 		= 	./libft/libft.a
 
