@@ -6,7 +6,7 @@
 #    By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/13 13:30:11 by loumouli          #+#    #+#              #
-#    Updated: 2023/02/02 13:04:03 by loumouli         ###   ########.fr        #
+#    Updated: 2023/02/02 13:06:15 by loumouli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,5 +76,7 @@ fclean:		clean
 re:			fclean all
 
 .PHONY: all clean fclean re
+
+-include ./objs/*.d
 
 .NOTPARALLEL:fclean
