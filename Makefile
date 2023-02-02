@@ -6,7 +6,7 @@
 #    By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/13 13:30:11 by loumouli          #+#    #+#              #
-#    Updated: 2023/02/02 14:00:23 by loumouli         ###   ########.fr        #
+#    Updated: 2023/02/02 14:04:05 by loumouli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,9 @@ NAME		= cub3d
 #               SOURCES              #
 # ################################## #
 C_DIR		= src
-C_FILES		= main.c
-
+C_FILES		=	main.c			\
+				parsing/parsing.c		\
+					
 SRCS		= $(patsubst %, $(C_DIR)/%, $(C_FILES))
 
 # ################################## #
@@ -45,7 +46,7 @@ CFLAGS		= -Wall -Wextra -Werror -g -MMD
 # ################################## #
 #                INCLUDES            #
 # ################################## #
-CINCLUDES	=	-I ./inc
+CINCLUDES	=	-I ./inc -I ./libft/inc
 MLX			= 	./MLX42/build/libmlx.all
 LIBFT 		= 	./libft/libft.a
 
@@ -57,6 +58,7 @@ all:	$(NAME)
 
 $(O_DIR):
 			$(MKDIR) $(O_DIR)
+			$(MKDIR) $(O_DIR)/parsing
 
 $(O_DIR)/%.o: $(C_DIR)/%.c
 			$(CC) $(CFLAGS) $(CINCLUDES) -c $< -o $@
