@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+         #
+#    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/13 13:30:11 by loumouli          #+#    #+#              #
-#    Updated: 2023/02/02 14:04:05 by loumouli         ###   ########.fr        #
+#    Updated: 2023/02/02 14:09:57 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ CFLAGS		= -Wall -Wextra -Werror -g -MMD
 #                INCLUDES            #
 # ################################## #
 CINCLUDES	=	-I ./inc -I ./libft/inc
-MLX			= 	./MLX42/build/libmlx.all
+MLX			= 	./MLX42/build/libmlx42.a
 LIBFT 		= 	./libft/libft.a
 
 # ################################## #
@@ -73,8 +73,8 @@ $(LIBFT):
 		make -C ./libft
 
 
-$(NAME): $(MLX) $(O_DIR) $(OBJS)
-			$(CC) $(OBJS) $(CFLAGS) -o $@
+$(NAME): $(MLX) $(LIBFT) $(O_DIR) $(OBJS)
+			$(CC) $(OBJS) $(CFLAGS) $(MLX) $(LIBFT) -o $@
 
 # ################################## #
 #                CLEAN               #
