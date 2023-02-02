@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/02 13:34:07 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/02 13:50:14 by mpignet          ###   ########.fr       */
+/*   Created: 2022/05/09 15:42:01 by mpignet           #+#    #+#             */
+/*   Updated: 2022/09/06 16:39:04 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
+#include "../inc/libft.h"
 
-int	parsing(char *path_map)
+void	ft_lstdelone(t_list *lst, void (*del)(void*))
 {
-	
+	if (!lst || !del)
+		return ;
+	del(lst->content);
+	free(lst);
 }

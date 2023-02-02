@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/02 13:34:07 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/02 13:50:14 by mpignet          ###   ########.fr       */
+/*   Created: 2022/05/04 15:40:54 by mpignet           #+#    #+#             */
+/*   Updated: 2022/09/06 16:39:54 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
+#include "../inc/libft.h"
 
-int	parsing(char *path_map)
+void	ft_putstr_fd(char *s, int fd)
 {
-	
+	write (fd, s, ft_strlen(s));
 }

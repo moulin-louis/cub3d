@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/02 13:34:07 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/02 13:50:14 by mpignet          ###   ########.fr       */
+/*   Created: 2022/05/03 12:14:33 by mpignet           #+#    #+#             */
+/*   Updated: 2022/09/06 16:48:31 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
+#include "../inc/libft.h"
 
-int	parsing(char *path_map)
+size_t	ft_strlen(const char *s)
 {
-	
+	size_t	i;
+
+	if (!s)
+		return (0);
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }

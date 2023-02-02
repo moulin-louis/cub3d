@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/02 13:37:41 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/02 13:50:22 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,7 @@ typedef struct s_map
 	int		win_width;
 	int		win_height;
 }	t_map;
+
+int	parsing(char *path_map);
 
 #endif

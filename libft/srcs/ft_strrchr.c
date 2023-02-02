@@ -1,18 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/02 13:34:07 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/02 13:50:14 by mpignet          ###   ########.fr       */
+/*   Created: 2022/05/03 12:15:24 by mpignet           #+#    #+#             */
+/*   Updated: 2022/09/06 16:40:48 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
+#include "../inc/libft.h"
 
-int	parsing(char *path_map)
+char	*ft_strrchr(const char *s, int c)
 {
-	
+	size_t	i;
+
+	i = ft_strlen(s);
+	while (i > 0)
+	{
+		if (s[i] == (char)c)
+			return ((char *)&s[i]);
+		i--;
+	}
+	if (s[i] == (char)c)
+		return ((char *)&s[i]);
+	return (0);
 }

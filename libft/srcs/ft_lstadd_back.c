@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/02 13:34:07 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/02 13:50:14 by mpignet          ###   ########.fr       */
+/*   Created: 2022/05/09 15:29:28 by mpignet           #+#    #+#             */
+/*   Updated: 2022/09/06 16:38:56 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
+#include "../inc/libft.h"
 
-int	parsing(char *path_map)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	
+	t_list	*tmp;
+
+	if (!lst)
+		return ;
+	if (!*lst)
+		*lst = new;
+	else
+	{
+		tmp = ft_lstlast(*lst);
+		tmp->next = new;
+	}
 }

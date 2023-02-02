@@ -1,18 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/02 13:34:07 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/02 13:50:14 by mpignet          ###   ########.fr       */
+/*   Created: 2022/05/04 15:50:57 by mpignet           #+#    #+#             */
+/*   Updated: 2022/09/06 16:39:50 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
+#include "../inc/libft.h"
 
-int	parsing(char *path_map)
+void	ft_putnbr_fd(int n, int fd)
 {
-	
+	int	i;
+
+	if (n < 0 && n > -2147483648)
+	{
+		ft_putchar_fd('-', fd);
+		i = -n;
+	}
+	else
+		i = n;
+	if (i > 9)
+	{
+		ft_putnbr_fd(i / 10, fd);
+		i = i % 10;
+	}
+	if (n == -2147483648)
+	{
+		write (fd, "-2147483648", 11);
+	}
+	else
+		ft_putchar_fd(('0' + i), fd);
 }
