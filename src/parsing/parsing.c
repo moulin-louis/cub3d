@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:34:07 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/03 18:30:26 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/03 18:53:43 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,39 @@ void	add_textures(t_data *data, char **map_buff)
 	}
 }
 
+int	get_map_len(char **map_buff)
+{
+	int	i;
+	int	len;
+
+	i = -1;
+	len = 0;
+	while(map_buff[++i])
+	{
+		while(map_buff[i] && (map_buff[i][0] == '1' || map_buff[i][0] == ' '))
+		{
+			len++;
+			i++;
+		}
+	}
+	return (len);
+}
+
+void	add_map(t_data *data, char **map_buff)
+{
+	int		i;
+
+	i = -1;
+	data->map = malloc(sizeof(double *) * get_map_len(map_buff));
+	if (!data->map)
+		cub3d_err(data, "Malloc error\n");
+	while (map_buff[++i])
+	{
+		while(map_buff[i] && (map_buff[i][0] == '1' || map_buff[i][0] == ' '))
+			i++;
+	}
+}
+
 t_data	parsing(char *path_map)
 {
 	t_data	data;
@@ -144,5 +177,6 @@ t_data	parsing(char *path_map)
 	if (!data.mlx)
 		mlx_err(&data);
 	add_textures(&data, map_buff);
+	//add_map(&data, map_buff);
 	return (data);
 }
