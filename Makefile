@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
+#    By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/13 13:30:11 by loumouli          #+#    #+#              #
-#    Updated: 2023/02/02 17:49:00 by mpignet          ###   ########.fr        #
+#    Updated: 2023/02/03 12:14:18 by loumouli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,8 @@ $(O_DIR)/%.o: $(C_DIR)/%.c
 
 
 $(MLX):
-		echo "Compiling MLX from source"
+		@echo "Compiling MLX from source :"
+		@echo
 		cmake ./MLX42 -B ./MLX42/build
 		cmake --build ./MLX42/build
 
