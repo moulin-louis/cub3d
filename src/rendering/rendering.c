@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:19:27 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/03 16:08:50 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/03 18:03:18 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,13 @@ time_t	gettime(void)
 void	rendering(void * ptr)
 {
 	t_data* data = (t_data *)ptr;
-	double	posX; //current pos X
-	double	posY; //current pos Y
-	double	dirX; //direction vector in X
-	double	dirY; //direction vector in Y
 	double	planeX; //2d version of the camera plance in X
 	double	planeY; //2d version of the camera plance in Y aka FOV (i think)
 
-	posX = 22;
-	posY = 12;
-	dirX = -1;
-	dirY = 0;
+	data->posX = 22;
+	data->posY = 12;
+	data->dirX = -1;
+	data->dirY = 0;
 	planeX = 0;
 	planeY = 0.66;
 	static long int time; //time of current frame
@@ -77,11 +73,11 @@ void	rendering(void * ptr)
 	for (int x = 0; x< WIDTH; x++)
 	{
 		double cameraX = 2 * x / (double)WIDTH - 1;
-		double rayDirX = dirX + planeX * cameraX;
-		double rayDirY  = dirY + planeY * cameraX;
+		double rayDirX = data->dirX + planeX * cameraX;
+		double rayDirY  = data->dirY + planeY * cameraX;
 
-		int mapX = (int)posX;
-		int mapY = (int)posY;
+		int mapX = (int)data->posX;
+		int mapY = (int)data->posY;
 
 		double sideDistX;
 		double sideDistY;
@@ -99,22 +95,22 @@ void	rendering(void * ptr)
 		if (rayDirX < 0)
 		{
 			stepX = -1;
-			sideDistX = (posX - mapX) * deltaDistX;
+			sideDistX = (data->posX - mapX) * deltaDistX;
 		}
 		else
 		{
 			stepX = 1;
-			sideDistX = (mapX + 1.0 - posX) * deltaDistX;
+			sideDistX = (mapX + 1.0 - data->posX) * deltaDistX;
 		}
 		if (rayDirY < 0)
 		{
 			stepY = -1;
-			sideDistY = (posY - mapY) * deltaDistY;
+			sideDistY = (data->posY - mapY) * deltaDistY;
 		}
 		else
 		{
 			stepY = 1;
-			sideDistY = (mapY + 1.0 - posY) * deltaDistY;
+			sideDistY = (mapY + 1.0 - data->posY) * deltaDistY;
 		}	
 		//perform DDA
 		while (hit == 0)
@@ -161,12 +157,14 @@ void	rendering(void * ptr)
 		}
 		if (side == 1)
 			color = color / 2;
-		//printf("color = %d\n", color);
-		memset(data->img[x]->pixels, color, (data->img[x]->width * data->img[x]->height) * sizeof(int));
+		printf("nbr pixel to draw = %d\n", drawEnd - drawStart);
+		memset(data->img[x]->pixels, data->ceiling, drawStart * sizeof(int32_t));
+		memset(data->img[x]->pixels + drawStart, color, (drawEnd - drawStart) * sizeof(int32_t));
+		memset(data->img[x]->pixels + drawEnd, data->floor, (HEIGHT - drawEnd) * sizeof(int32_t));
 	}
 	oldTime = time;
     time = gettime();
 	//dprintf(2, "old time = %ld time = %ld\n", oldTime, time);
-	dprintf(2, "%ld ms since last frame\n", time - oldTime);
+	//dprintf(2, "%ld ms since last frame\n", time - oldTime);
 	return ;
 }

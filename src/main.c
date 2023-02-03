@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:38 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/03 16:15:23 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/03 18:00:56 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,45 +14,66 @@
 
 void close_prog(void *ptr)
 {
-	t_data	*data = (t_data *)ptr;
+	t_data *data = (t_data *)ptr;
 	mlx_terminate(data->mlx);
 	data->mlx = NULL;
 	exit(1);
 }
 
-void	init_image(t_data *data)
+void init_image(t_data *data)
 {
-	int	x;
+	int x;
 
 	x = 0;
 	while (x < WIDTH)
 	{
 		data->img[x] = mlx_new_image(data->mlx, 1, HEIGHT);
 		if (!data->img[x])
-			break ;
+			break;
 		mlx_image_to_window(data->mlx, data->img[x], x, 0);
 		x++;
 	}
 	if (x < WIDTH)
 		mlx_err(data);
+	return;
+}
+
+void	camera(mlx_key_data_t key, void *ptr)
+{
+	t_data *data;
+
+	data = (t_data*)ptr;
+	if (key.key == MLX_KEY_W && (key.action == MLX_REPEAT || key.action == MLX_PRESS))
+	{
+		printf("pressing W detected\n");
+		data->posX += data->dirX * 1.5;
+		data->posY += data->dirY * 1.5;
+	}
+	if (key.key == MLX_KEY_S && (key.action == MLX_REPEAT || key.action == MLX_PRESS))
+	{
+		printf("pressing S detected\n");
+		data->posX -= data->dirX * 1.5;
+		data->posY -= data->dirY * 1.5;
+	}
 	return ;
 }
 
-int	main(int ac, char **av)
+int main(int ac, char **av)
 {
-	t_data *data;
+	t_data data;
+
 	if (ac != 2)
 		return (ft_putstr_fd("Error\ncub3d: wrong number of arguments !\n", 2), 1);
-	data = parsing(av[1]);
-	memset(data, 0, sizeof(t_data));
-	data->mlx = mlx_init(WIDTH, HEIGHT, "test", false);
-	if (!data->mlx)
-		return (printf("Error\n, %s", mlx_strerror(mlx_errno)), 1);
-	mlx_close_hook(data->mlx, close_prog, (void *)data);
-	init_image(data);
-	mlx_loop_hook(data->mlx, rendering, (void *)data);
-	mlx_loop(data->mlx);
-	if (data->mlx)
-		mlx_terminate(data->mlx);
+	/// data = parsing(av[1]);
+	(void)av;
+	data.mlx = mlx_init(WIDTH, HEIGHT, "CUB3D", false);
+	init_image(&data);
+	printf("size of a pixel for an img = %ld\n", data.img[0]->width * data.img[0]->height * sizeof(int32_t));
+	mlx_close_hook(data.mlx, close_prog, (void *)&data);
+	mlx_key_hook(data.mlx, camera, (void *)&data);
+	mlx_loop_hook(data.mlx, rendering, (void *)&data);
+	mlx_loop(data.mlx);
+	if (data.mlx)
+		mlx_terminate(data.mlx);
 	return (0);
 }

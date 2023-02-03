@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/03 16:16:00 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/03 17:29:00 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ typedef struct s_data
 	mlx_image_t	*east;
 
 	double	**map;
-
+	double	posX;
+	double	posY;
+	double	dirX;
+	double	dirY;
 }	t_data;
 
 /*-----------------------------------PARSING--------------------------------*/
