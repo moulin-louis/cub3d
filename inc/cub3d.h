@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/03 16:03:31 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/03 16:07:48 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ typedef struct s_data
 
 t_data	*parsing(char *path_map);
 
-int		parsing(char *path_map);
 void	rendering( void* data);
 int get_rgba(int r, int g, int b);
 #endif

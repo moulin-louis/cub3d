@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:19:27 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/03 15:55:40 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/03 16:08:50 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ time_t	gettime(void)
 
 void	rendering(void * ptr)
 {
-	t_map* data = (t_map *)ptr;
+	t_data* data = (t_data *)ptr;
 	double	posX; //current pos X
 	double	posY; //current pos Y
 	double	dirX; //direction vector in X
