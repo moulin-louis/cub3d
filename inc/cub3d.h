@@ -6,7 +6,11 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/02/03 16:07:48 by loumouli         ###   ########.fr       */
+=======
+/*   Updated: 2023/02/03 15:39:54 by mpignet          ###   ########.fr       */
+>>>>>>> mael
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +33,9 @@
 # define WIDTH 640
 # define HEIGHT 480
 
+# define WIDTH 1280
+# define HEIGHT 720
+
 typedef struct s_data
 {
 	mlx_t	*mlx;
@@ -39,18 +46,24 @@ typedef struct s_data
 
 	mlx_image_t	*nord;
 	mlx_image_t	*south;
-	mlx_image_t	*east;
 	mlx_image_t	*west;
+	mlx_image_t	*east;
 
 	double	**map;
 
-	int		win_width;
-	int		win_height;
 }	t_data;
 
 /*-----------------------------------PARSING--------------------------------*/
 
 t_data	*parsing(char *path_map);
+int		check_file_name(char *file);
+int		check_walls(t_data *data);
+int		ft_strcmp(const char *s1, const char *s2);
+
+/*-----------------------------------ERROR--------------------------------*/
+
+void	mlx_err(t_data *data);
+void	cub3d_err(t_data *data, char *err);
 
 void	rendering( void* data);
 int get_rgba(int r, int g, int b);

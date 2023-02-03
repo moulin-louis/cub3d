@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 17:39:50 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/02 17:43:53 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/03 14:53:36 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,22 +78,6 @@ int	check_walls(t_data *data)
 	return (0);
 } */
 
-/* int	check_square(t_data *data)
-{
-	int		i;
-	size_t	len;
-
-	i = 1;
-	len = ft_strlen(data->map[0]);
-	while (data->map[i])
-	{
-		if (len != ft_strlen(data->map[i]))
-			return (ft_putstr_fd("Error\nMap is not a rectangle\n", 2), 1);
-		i++;
-	}
-	return (0);
-} */
-
 int	check_empty_lines(char *line)
 {
 	int	i;
@@ -102,8 +86,23 @@ int	check_empty_lines(char *line)
 	while (line[i])
 	{
 		if (line[i] == '\n' && line[i - 1] == '\n')
-			return (ft_putstr_fd("Error\nEmpty line in file\n", 2), 1);
+			return (ft_putstr_fd("Error\nEmpty line in map\n", 2), 1);
 		i++;
 	}
 	return (0);
+}
+
+int	check_file_name(char *file)
+{
+	size_t	i;
+
+	i = 0;
+	while (file[i])
+		i++;
+	if (i < 4)
+		return (1);
+	else if (file[i - 4] == '.' && file[i - 3] == 'c'
+		&& file[i - 2] == 'u' && file[i - 1] == 'b')
+		return (0);
+	return (1);
 }
