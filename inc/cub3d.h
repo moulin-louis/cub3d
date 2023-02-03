@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/02/03 16:07:48 by loumouli         ###   ########.fr       */
-=======
-/*   Updated: 2023/02/03 15:39:54 by mpignet          ###   ########.fr       */
->>>>>>> mael
+/*   Updated: 2023/02/03 16:16:00 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +24,9 @@
 # include <math.h>
 #include <time.h>
 # include "libft.h"
-# include "../MLX42/include/MLX42/MLX42.h"
-# define FOV 80
-# define WIDTH 640
-# define HEIGHT 480
+# include "MLX42.h"
 
+# define FOV 80
 # define WIDTH 1280
 # define HEIGHT 720
 
@@ -66,5 +60,5 @@ void	mlx_err(t_data *data);
 void	cub3d_err(t_data *data, char *err);
 
 void	rendering( void* data);
-int get_rgba(int r, int g, int b);
+int 	get_rgba(int r, int g, int b);
 #endif

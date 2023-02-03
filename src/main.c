@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:38 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/03 16:13:03 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/03 16:15:23 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	init_image(t_data *data)
 		x++;
 	}
 	if (x < WIDTH)
-		mlx_error(data);
+		mlx_err(data);
 	return ;
 }
 
