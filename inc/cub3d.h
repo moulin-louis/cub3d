@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/02 17:50:47 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/03 16:03:31 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,12 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <math.h>
+#include <time.h>
 # include "libft.h"
-# include "MLX42.h"
+# include "../MLX42/include/MLX42/MLX42.h"
+# define FOV 80
+# define WIDTH 640
+# define HEIGHT 480
 
 typedef struct s_data
 {
@@ -31,6 +35,7 @@ typedef struct s_data
 
 	int	floor;
 	int	ceiling;
+	mlx_image_t* img[WIDTH];
 
 	mlx_image_t	*nord;
 	mlx_image_t	*south;
@@ -46,6 +51,8 @@ typedef struct s_data
 /*-----------------------------------PARSING--------------------------------*/
 
 t_data	*parsing(char *path_map);
-int		check_walls(t_data *data);
 
+int		parsing(char *path_map);
+void	rendering( void* data);
+int get_rgba(int r, int g, int b);
 #endif

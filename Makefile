@@ -6,7 +6,7 @@
 #    By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/13 13:30:11 by loumouli          #+#    #+#              #
-#    Updated: 2023/02/03 12:14:18 by loumouli         ###   ########.fr        #
+#    Updated: 2023/02/03 16:01:17 by loumouli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,10 @@ NAME		= cub3d
 #               SOURCES              #
 # ################################## #
 C_DIR		= src
-C_FILES		=	main.c			\
+C_FILES		=	main.c					\
 				parsing/parsing.c		\
+				rendering/rendering.c	\
+				rendering/get_rgba.c	\
 					
 SRCS		= $(patsubst %, $(C_DIR)/%, $(C_FILES))
 
@@ -59,6 +61,7 @@ all:	$(NAME)
 $(O_DIR):
 			$(MKDIR) $(O_DIR)
 			$(MKDIR) $(O_DIR)/parsing
+			$(MKDIR) $(O_DIR)/rendering
 
 $(O_DIR)/%.o: $(C_DIR)/%.c
 			$(CC) $(CFLAGS) $(CINCLUDES) -c $< -o $@
@@ -75,7 +78,7 @@ $(LIBFT):
 
 
 $(NAME): $(MLX) $(LIBFT) $(O_DIR) $(OBJS)
-			$(CC) $(OBJS) $(CFLAGS) $(MLX) $(LIBFT) -o $@
+			$(CC) $(OBJS) $(CFLAGS) $(MLX) $(LIBFT) -ldl -lglfw -o $@
 
 # ################################## #
 #                CLEAN               #
