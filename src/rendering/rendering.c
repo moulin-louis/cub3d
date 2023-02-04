@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:19:27 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/03 18:03:18 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/04 09:17:06 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,6 @@ void	rendering(void * ptr)
 	oldTime = time;
     time = gettime();
 	//dprintf(2, "old time = %ld time = %ld\n", oldTime, time);
-	//dprintf(2, "%ld ms since last frame\n", time - oldTime);
+	dprintf(2, "%ld ms since last frame\n", time - oldTime);
 	return ;
 }

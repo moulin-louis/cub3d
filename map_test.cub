@@ -1,7 +1,7 @@
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+NO ./BRICK_1A.png
+SO ./BRICK_2A.png
+WE ./BRICK_3D.png
+EA ./BRICK_4A.png
 
 F 220,100,0
 C 225,30,0

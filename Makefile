@@ -6,7 +6,7 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/13 13:30:11 by loumouli          #+#    #+#              #
-#    Updated: 2023/02/03 16:16:28 by mpignet          ###   ########.fr        #
+#    Updated: 2023/02/03 17:56:14 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,11 +27,12 @@ NAME		= cub3d
 # ################################## #
 C_DIR		= src
 C_FILES		=	main.c					\
+				error_exit.c			\
 				parsing/parsing.c		\
 				parsing/check_map.c		\
-				parsing/parsing_utils.c		\
+				parsing/parsing_utils.c	\
 				rendering/rendering.c	\
-				rendering/get_rgba.c	\
+				rendering/get_rgb.c	\
 					
 SRCS		= $(patsubst %, $(C_DIR)/%, $(C_FILES))
 

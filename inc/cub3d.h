@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/03 17:29:00 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/04 09:16:41 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,26 @@ typedef struct s_data
 	double	dirY;
 }	t_data;
 
-/*-----------------------------------PARSING--------------------------------*/
+/*----------------------------------PARSING--------------------------------*/
 
-t_data	*parsing(char *path_map);
+t_data	parsing(char *path_map);
 int		check_file_name(char *file);
 int		check_walls(t_data *data);
-int		ft_strcmp(const char *s1, const char *s2);
 
-/*-----------------------------------ERROR--------------------------------*/
+/*----------------------------------RENDRING-------------------------------*/
+
+void	rendering( void* data);
+int 	get_rgb(int r, int g, int b);
+
+/*-----------------------------------UTILS---------------------------------*/
+
+int		ft_strcmp(const char *s1, const char *s2);
+int		array_len(void **array);
+
+/*-----------------------------------ERROR---------------------------------*/
 
 void	mlx_err(t_data *data);
 void	cub3d_err(t_data *data, char *err);
+void	free_array(void **array);
 
-void	rendering( void* data);
-int 	get_rgba(int r, int g, int b);
 #endif

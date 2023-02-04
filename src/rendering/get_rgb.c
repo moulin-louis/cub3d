@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_rgba.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:50:51 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/02 16:47:55 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/03 17:56:03 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int get_rgba(int r, int g, int b)
+int get_rgb(int r, int g, int b)
 {
     return (r << 16 | g << 8 | b );
 }

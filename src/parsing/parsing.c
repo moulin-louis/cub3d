@@ -6,18 +6,11 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:34:07 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/03 16:08:23 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/03 18:53:43 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	init_data(t_data *data)
-{
-	data = ft_calloc(sizeof(t_data), 1);
-	if (!data)
-		cub3d_err(data, "malloc error\n");
-}
 
 void	fill_line(t_data *data, char *line, int len, int x)
 {
@@ -33,93 +26,157 @@ void	fill_line(t_data *data, char *line, int len, int x)
 	return ;
 }
 
-mlx_image_t *texture_to_img(t_data *data, char *file)
+mlx_image_t *texture_to_img(t_data *data, char **tmp)
 {
 	mlx_image_t		*img;
 	mlx_texture_t	*texture;
 
-	texture = mlx_load_png(file);
+	texture = mlx_load_png(tmp[1]);
 	if (!texture)
-        mlx_err(data);
+        return (free_array((void **)tmp), mlx_err(data), NULL);
 	img = mlx_texture_to_image(data->mlx, texture);
 	if (!img)
-        mlx_err(data);
+        return (free_array((void **)tmp), mlx_err(data), NULL);
 	return (img);
 }
 
-char	**parse_file(t_data *data, char *path_file)
+int	get_nbr_lines(int fd)
 {
-	int		fd;
+	int		nbr;
+	char	*line;
 
-	fd = open(path_file, O_RDONLY);
-	if (fd == -1)
-		cub3d_err(data, "Failed opening file\n");
-	//line = get_next_line(fd);
-	return (NULL);
+	nbr = 0;
+	line = get_next_line(fd);
+	while (line != NULL)
+	{
+		free(line);
+		line = get_next_line(fd);
+		nbr++;
+	}
+	return (nbr);
 }
 
-/* t_data	*add_components(t_data *data, char **map_buff)
+char	**parse_file(t_data *data, char *file)
 {
-	char	*line;
-	int		len;
-	int		x;
+	int		i;
+	int		nbr_lines;
+	int		fd;
+	char	**buff;
+
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		cub3d_err(data, "Failed opening file\n");
+	i = -1;
+	nbr_lines = get_nbr_lines(fd);
+	buff = malloc(sizeof(char *) * nbr_lines + 1);
+	if (!buff)
+		cub3d_err(data, "Malloc error\n");
+	close(fd);
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		cub3d_err(data, "Failed opening file\n");
+	while (++i < nbr_lines)
+	{
+		buff[i] = get_next_line(fd);
+		buff [i] = ft_strtrim(buff[i], "\n");
+	}
+	buff[i] = NULL;
+	return (buff);
+}
+
+int	get_color(t_data *data, char **tmp)
+{
+	int	color;
+	char	**buff;
+
+	buff = ft_split(tmp[1], ',');
+	if (!buff)
+		cub3d_err(data, "Malloc error\n");
+	else if (array_len((void **)buff) != 3)
+	{
+		free_array((void **)tmp);
+		free_array((void **)buff);
+		cub3d_err(data, "Color description error\n");
+	}
+	color = get_rgb(ft_atoi(buff[0]), ft_atoi(buff[1]), ft_atoi(buff[2]));
+	return (free_array((void **)buff), color);
+}
+
+void	add_textures(t_data *data, char **map_buff)
+{
+	int		i;
 	char	**tmp;
 
-	x = 0;
-	while (line)
+	i = -1;
+	while (map_buff[++i])
 	{
-		if (!line)
+		if (map_buff[i] == NULL)
 			continue;
-		tmp = ft_split(line, " ");
+		tmp = ft_split(map_buff[i], ' ');
 		if (!tmp)
-			exit(42);
-		if (!ft_strcmp(tmp[0], "F"))
-			;
-		if (!ft_strcmp(tmp[0], "C"))
-			;
+			cub3d_err(data, "Malloc error\n");
 		if (!ft_strcmp(tmp[0], "NO"))
-			data->nord = texture_to_img(data, tmp[1]);
-		if (!ft_strcmp(tmp[0], "SO"))
-			data->south = texture_to_img(data, tmp[1]);
-		if (!ft_strcmp(tmp[0], "WE"))
-			data->west = texture_to_img(data, tmp[1]);
-		if (!ft_strcmp(tmp[0], "EA"))
-			data->east = texture_to_img(data, tmp[1]);
-		free(line);
-		line = get_next_line(fd);
+			data->nord = texture_to_img(data, tmp);
+		else if (!ft_strcmp(tmp[0], "SO"))
+			data->south = texture_to_img(data, tmp);
+		else if (!ft_strcmp(tmp[0], "WE"))
+			data->west = texture_to_img(data, tmp);
+		else if (!ft_strcmp(tmp[0], "EA"))
+			data->east = texture_to_img(data, tmp);
+		else if (!ft_strcmp(tmp[0], "F"))
+			data->floor = get_color(data, tmp);
+		else if (!ft_strcmp(tmp[0], "C"))
+			data->ceiling = get_color(data, tmp);
+		free_array((void **)tmp);
 	}
-	line = get_next_line(fd);
-	while (line)
-	{
-		len = 0;
-		while (line[len] && line[len] != '\n')
-			len++;
-		data->map[x] = malloc(sizeof(char) * (len + 1));
-		if (!data->map[x])
-			return (close(fd), 1);
-		fill_line(data, line, len, x);
-		free(line);
-		line = get_next_line(fd);
-		x++;
-	}
-	data->map[x] = NULL;
-	return (close(fd), 0);
-	return (data);
-} */
+}
 
-t_data	*parsing(char *path_map)
+int	get_map_len(char **map_buff)
+{
+	int	i;
+	int	len;
+
+	i = -1;
+	len = 0;
+	while(map_buff[++i])
+	{
+		while(map_buff[i] && (map_buff[i][0] == '1' || map_buff[i][0] == ' '))
+		{
+			len++;
+			i++;
+		}
+	}
+	return (len);
+}
+
+void	add_map(t_data *data, char **map_buff)
+{
+	int		i;
+
+	i = -1;
+	data->map = malloc(sizeof(double *) * get_map_len(map_buff));
+	if (!data->map)
+		cub3d_err(data, "Malloc error\n");
+	while (map_buff[++i])
+	{
+		while(map_buff[i] && (map_buff[i][0] == '1' || map_buff[i][0] == ' '))
+			i++;
+	}
+}
+
+t_data	parsing(char *path_map)
 {
 	t_data	data;
 	char	**map_buff;
 
-	init_data(&data);
+	memset(&data, 0, sizeof(t_data));
 	if (check_file_name(path_map))
 		cub3d_err(&data, "file given is not .cub type\n");
 	map_buff = parse_file(&data, path_map);
 	data.mlx = mlx_init(WIDTH, HEIGHT, "cub3d", false);
 	if (!data.mlx)
 		mlx_err(&data);
-	(void)map_buff;
-	//add_components(&data, map_buff);
-	return (NULL);
+	add_textures(&data, map_buff);
+	//add_map(&data, map_buff);
+	return (data);
 }

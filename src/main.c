@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:38 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/03 18:00:56 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/04 09:16:37 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,11 @@ void	camera(mlx_key_data_t key, void *ptr)
 int main(int ac, char **av)
 {
 	t_data data;
-
 	if (ac != 2)
 		return (ft_putstr_fd("Error\ncub3d: wrong number of arguments !\n", 2), 1);
-	/// data = parsing(av[1]);
-	(void)av;
-	data.mlx = mlx_init(WIDTH, HEIGHT, "CUB3D", false);
-	init_image(&data);
-	printf("size of a pixel for an img = %ld\n", data.img[0]->width * data.img[0]->height * sizeof(int32_t));
+	data = parsing(av[1]);
 	mlx_close_hook(data.mlx, close_prog, (void *)&data);
-	mlx_key_hook(data.mlx, camera, (void *)&data);
+	init_image(&data);
 	mlx_loop_hook(data.mlx, rendering, (void *)&data);
 	mlx_loop(data.mlx);
 	if (data.mlx)
