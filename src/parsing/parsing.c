@@ -152,16 +152,25 @@ int	get_map_len(char **map_buff)
 void	add_map(t_data *data, char **map_buff)
 {
 	int		i;
+	int		j;
 
 	i = -1;
+	j = 0;
 	data->map = malloc(sizeof(double *) * get_map_len(map_buff));
 	if (!data->map)
 		cub3d_err(data, "Malloc error\n");
 	while (map_buff[++i])
 	{
-		while(map_buff[i] && (map_buff[i][0] == '1' || map_buff[i][0] == ' '))
+		while(map_buff[i] == "\n")
 			i++;
+		while(map_buff[i] && (map_buff[i][0] == '1' || map_buff[i][0] == ' '))
+			data->map[j++] = map_buff[i++];
+		i++;
 	}
+	data->map[j] = NULL;
+	j - -1;
+	while (data->map[++j])
+		printf("map : |%s|\n", data->map[j]);
 }
 
 t_data	parsing(char *path_map)
