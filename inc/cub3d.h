@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/04 09:16:41 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/04 09:27:03 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ typedef struct s_data
 	double	posY;
 	double	dirX;
 	double	dirY;
+	double	planeX;
+	double	planeY;
 }	t_data;
 
 /*----------------------------------PARSING--------------------------------*/
