@@ -6,16 +6,19 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:19:27 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/04 09:41:13 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/04 11:14:49 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <sys/time.h>
+time_t	gettime(void)
+{
+	struct timeval	tv;
 
-/*What i need:
-- start pos
-*/
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+}
 
 #define mapWidth 24
 #define mapHeight 24
@@ -48,13 +51,7 @@ int worldMap[mapWidth][mapHeight]=
 	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 };
 
-time_t	gettime(void)
-{
-	struct timeval	tv;
 
-	gettimeofday(&tv, NULL);
-	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
-}
 
 void	rendering(void * ptr)
 {
@@ -68,17 +65,17 @@ void	rendering(void * ptr)
 	for (int x = 0; x< WIDTH; x++)
 	{
 		double cameraX = 2 * x / (double)WIDTH - 1;
-		double rayDirX = data->dirX + data->planeX * cameraX;
-		double rayDirY  = data->dirY + data->planeY * cameraX;
+		double raydir_x = data->dir_x + data->plane_x * cameraX;
+		double raydir_y  = data->dir_y + data->plane_y * cameraX;
 
-		int mapX = (int)data->posX;
-		int mapY = (int)data->posY;
+		int mapX = (int)data->pos_x;
+		int mapY = (int)data->pos_y;
 
 		double sideDistX;
 		double sideDistY;
 
-		double deltaDistX = fabs(1 / rayDirX);
-		double deltaDistY = fabs(1 / rayDirY);
+		double deltaDistX = fabs(1 / raydir_x);
+		double deltaDistY = fabs(1 / raydir_y);
 
 		double perpWallDist;
 		
@@ -87,25 +84,25 @@ void	rendering(void * ptr)
 
 		int hit = 0;
 		int side;
-		if (rayDirX < 0)
+		if (raydir_x < 0)
 		{
 			stepX = -1;
-			sideDistX = (data->posX - mapX) * deltaDistX;
+			sideDistX = (data->pos_x - mapX) * deltaDistX;
 		}
 		else
 		{
 			stepX = 1;
-			sideDistX = (mapX + 1.0 - data->posX) * deltaDistX;
+			sideDistX = (mapX + 1.0 - data->pos_x) * deltaDistX;
 		}
-		if (rayDirY < 0)
+		if (raydir_y < 0)
 		{
 			stepY = -1;
-			sideDistY = (data->posY - mapY) * deltaDistY;
+			sideDistY = (data->pos_y - mapY) * deltaDistY;
 		}
 		else
 		{
 			stepY = 1;
-			sideDistY = (mapY + 1.0 - data->posY) * deltaDistY;
+			sideDistY = (mapY + 1.0 - data->pos_y) * deltaDistY;
 		}	
 		//perform DDA
 		while (hit == 0)
