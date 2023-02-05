@@ -1,7 +1,7 @@
-NO ./BRICK_1A.png
-SO ./BRICK_2A.png
-WE ./BRICK_3D.png
-EA ./BRICK_4A.png
+NO /mnt/nfs/homes/loumouli/cub3d/BRICK_1A.png
+SO /mnt/nfs/homes/loumouli/cub3d/BRICK_2A.png
+WE /mnt/nfs/homes/loumouli/cub3d/BRICK_3D.png
+EA /mnt/nfs/homes/loumouli/cub3d/BRICK_4A.png
 
 F 220,100,0
 C 225,30,0,

@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:38 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/05 16:51:43 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/05 17:24:07 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	init_image(t_data *data)
 void	init_data(t_data *data)
 {
 	data->pos_x = 11;
-	data->pos_y = 27;
-	data->dir_x = 0;
+	data->pos_y = 25;
+	data->dir_x = -1;
 	data->dir_y = 0;
 	data->plane_x = 0;
 	data->plane_y = 0.66;

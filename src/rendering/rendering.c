@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:19:27 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/05 16:54:50 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/05 19:07:24 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,22 @@ void	rendering(void *ptr)
 
 		double sideDistX;
 		double sideDistY;
+		dprintf(2, "raydir_x = %f\n", raydir_x);
+		dprintf(2, "raydir_y = %f\n", raydir_y);
 
-		double deltaDistX = (raydir_x == 0) ? 1e30 : fabs(1 / raydir_x);
-      	double deltaDistY = (raydir_y == 0) ? 1e30 : fabs(1 / raydir_y);
+		double deltaDistX;
+		if (raydir_x == 0)
+			deltaDistX = 0.0001;
+		else
+			deltaDistX = fabs(1 / raydir_x);
+		dprintf(2, "deltaDistX = %f\n", deltaDistX);
+
+		double deltaDistY;
+		if (raydir_y == 0)
+			deltaDistY = 0.0001;
+		else
+	       	deltaDistY = fabs(1 / raydir_y);
+		dprintf(2, "deltaDistY = %f\n", deltaDistY);
 		double perpWallDist;
 		
 		int stepX;
@@ -97,7 +110,6 @@ void	rendering(void *ptr)
 		//perform DDA
 		while (hit == 0)
 		{
-			//printf("in while \n");
 			//jump to next map square, either in x-direction, or in y-direction
 			if (sideDistX < sideDistY)
 			{
@@ -118,27 +130,26 @@ void	rendering(void *ptr)
 	
 		if(side == 0)
 		{
-			//printf("sideDistX = %f deltaDistX = %f\n", sideDistX, deltaDistX);
+			dprintf(2, "sideDistX = %f deltaDistX = %f\n", sideDistX, deltaDistX);
 			perpWallDist = (sideDistX - deltaDistX);
 		}
 		else
 		{
-			//printf("sideDistY = %f deltaDistY = %f\n", sideDistY, deltaDistY);
+			dprintf(2, "sideDistY = %f deltaDistY = %f\n", sideDistY, deltaDistY);
 			perpWallDist = (sideDistY - deltaDistY);
 		}
 
-		//printf("perpWallDist = %f\n", perpWallDist);
+		dprintf(2, "perpWallDist = %f\n", perpWallDist);
 		int lineHeight = (int)(HEIGHT / perpWallDist);
 
-		int drawStart = -lineHeight / 2 + HEIGHT / 2;
-		if(drawStart < 0)
+		unsigned int drawStart = -lineHeight / 2 + HEIGHT / 2;
+		if(drawStart > HEIGHT)
 			drawStart = 0;
 
-		//printf("lineH = %d H = %d\n", lineHeight, HEIGHT);
-		int drawEnd = lineHeight / 2 + HEIGHT / 2;
+		printf("lineH = %d H = %d\n", lineHeight, HEIGHT);
+		unsigned int drawEnd = lineHeight / 2 + HEIGHT / 2;
 		if(drawEnd >= HEIGHT)
 			drawEnd = HEIGHT - 1;
-			
 		int color;
 		switch(data->map[mapX][mapY])
 		{
@@ -146,10 +157,10 @@ void	rendering(void *ptr)
 		}
 		if (side == 1)
 			color = color / 2;
-		//printf("drawStart = %d\n", drawStart);
-		//printf("drawend = %d\n", drawEnd);
+		printf("drawStart = %u\n", drawStart);
+		printf("drawEnd = %u\n", drawEnd);
 		//printf("nbr pixel to draw = %d\n", drawEnd - drawStart);
-		for (int it = 0; it < (drawStart * 4);)
+		for (unsigned int it = 0; it < (drawStart * 4);)
 		{
 			data->img[x]->pixels[it] = (uint8_t)255;//et_r(data->ceiling);
 			it++;
@@ -160,7 +171,7 @@ void	rendering(void *ptr)
 			data->img[x]->pixels[it] = (uint8_t)255;//get_a(data->ceiling);
 			it++;
 		}
-		for (int it = drawStart; it < (drawEnd * 4);)
+		for (unsigned int it = drawStart; it < (drawEnd * 4);)
 		{
 			data->img[x]->pixels[it] = (uint8_t)get_r(color);
 			it++;
@@ -171,9 +182,8 @@ void	rendering(void *ptr)
 			data->img[x]->pixels[it] = (uint8_t)255;
 			it++;
 		}
-		for (int it = drawEnd; it <( (HEIGHT - drawEnd) * 4);)
+		for (unsigned int it = drawEnd; it <( (HEIGHT - drawEnd) * 4);)
 		{
-			//printf("it = %d\n", it / 4);
 			data->img[x]->pixels[it] = (uint8_t)0;//get_r(data->floor);
 			it++;
 			data->img[x]->pixels[it] = (uint8_t)0;//get_g(data->floor);
