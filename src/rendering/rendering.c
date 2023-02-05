@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:19:27 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/04 11:14:49 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/05 10:34:12 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,39 @@ int worldMap[mapWidth][mapHeight]=
 	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 };
 
-
-
-void	rendering(void * ptr)
+void	print_map_n_pos(t_data *data)
 {
-	t_data* data = (t_data *)ptr;
-	 //2d version of the camera plance in X
-	 //2d version of the camera plance in Y aka FOV (i think)
+	int	x;
+	int	y;
 
+	x = 0;
+	y = 0;
+	(void)data;
+	printf("\033[2J");
+	while (x < mapHeight)
+	{
+		y = 0;
+		while (y < mapWidth)
+		{
+			if (x == (int)data->pos_x && y == (int)data->pos_y)
+				printf("\x1B[31mJ \x1B[37m");
+			else
+				printf("%d ", worldMap[x][y]);
+			y++;
+		}
+		printf("\n");
+		x++;
+	}
+}
 
-	static long int time; //time of current frame
-  	long int oldTime;
+void	rendering(void *ptr)
+{
+	t_data* 		data;
+	static long int time;
+  	long int 		oldTime;
+	
+	data = (t_data *)ptr;
+	print_map_n_pos(data);
 	for (int x = 0; x< WIDTH; x++)
 	{
 		double cameraX = 2 * x / (double)WIDTH - 1;

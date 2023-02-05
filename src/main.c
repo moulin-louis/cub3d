@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:38 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/04 11:03:34 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/05 10:26:59 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,10 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		return (ft_putstr_fd("Error\ncub3d: wrong number of args !\n", 2), 1);
-	data = parsing(av[1]);
+	//data = parsing(av[1]);
+	(void)av;
+	memset(&data, 0, sizeof(t_data));
+	data.mlx = mlx_init(WIDTH, HEIGHT, "CUB3D", false);
 	mlx_close_hook(data.mlx, close_prog, (void *)&data);
 	init_image(&data);
 	init_data(&data);
