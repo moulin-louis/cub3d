@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/05 16:47:58 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/05 20:32:03 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_data
 	mlx_t		*mlx;
 	int			floor;
 	int			ceiling;
-	mlx_image_t	*img[WIDTH];
+	mlx_image_t	*img;
 
 	mlx_image_t	*nord;
 	mlx_image_t	*south;
