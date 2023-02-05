@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 17:39:50 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/03 14:53:36 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/05 15:09:27 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static int	check_walls_line(t_data *data, int i)
 	int	j;
 
 	j = 0;
-	while (data->map[i][j])
+	while (data->tmp_map[i][j])
 	{
-		if (data->map[i][j] != '1')
+		if (data->tmp_map[i][j] != '1')
 			return (1);
 		j++;
 	}
