@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:19:27 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/05 16:27:04 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/05 16:54:50 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ void	print_map_n_pos(t_data *data)
 		x++;
 	}
 }
-
-
 
 void	rendering(void *ptr)
 {
@@ -99,7 +97,7 @@ void	rendering(void *ptr)
 		//perform DDA
 		while (hit == 0)
 		{
-			printf("in while \n");
+			//printf("in while \n");
 			//jump to next map square, either in x-direction, or in y-direction
 			if (sideDistX < sideDistY)
 			{
@@ -129,7 +127,7 @@ void	rendering(void *ptr)
 			perpWallDist = (sideDistY - deltaDistY);
 		}
 
-		printf("perpWallDist = %f\n", perpWallDist);
+		//printf("perpWallDist = %f\n", perpWallDist);
 		int lineHeight = (int)(HEIGHT / perpWallDist);
 
 		int drawStart = -lineHeight / 2 + HEIGHT / 2;
@@ -150,7 +148,7 @@ void	rendering(void *ptr)
 			color = color / 2;
 		//printf("drawStart = %d\n", drawStart);
 		//printf("drawend = %d\n", drawEnd);
-		printf("nbr pixel to draw = %d\n", drawEnd - drawStart);
+		//printf("nbr pixel to draw = %d\n", drawEnd - drawStart);
 		for (int it = 0; it < (drawStart * 4);)
 		{
 			data->img[x]->pixels[it] = (uint8_t)255;//et_r(data->ceiling);
@@ -175,7 +173,7 @@ void	rendering(void *ptr)
 		}
 		for (int it = drawEnd; it <( (HEIGHT - drawEnd) * 4);)
 		{
-			printf("it = %d\n", it / 4);
+			//printf("it = %d\n", it / 4);
 			data->img[x]->pixels[it] = (uint8_t)0;//get_r(data->floor);
 			it++;
 			data->img[x]->pixels[it] = (uint8_t)0;//get_g(data->floor);
