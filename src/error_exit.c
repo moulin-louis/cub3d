@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:39:48 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/05 12:33:22 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/05 20:32:47 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	free_array(void **array)
 
 static	void	clean_exit(t_data *data, int err)
 {
-	int	x;
+	//int	x;
 
 	if (data)
 	{
@@ -38,12 +38,13 @@ static	void	clean_exit(t_data *data, int err)
 			mlx_delete_image(data->mlx, data->west);
 		if (data->east)
 			mlx_delete_image(data->mlx, data->east);
-		x = 0;
-		while (x < WIDTH)
-		{
-			mlx_delete_image(data->mlx, data->img[x]);
-			x++;
-		}		
+		// x = 0;
+		// while (x < WIDTH)
+		// {
+		// 	mlx_delete_image(data->mlx, data->img[x]);
+		// 	x++;
+		// }	
+		mlx_delete_image(data->mlx, data->img);	
 		if (data->mlx)
 			mlx_terminate(data->mlx);
 		if (data->map)
