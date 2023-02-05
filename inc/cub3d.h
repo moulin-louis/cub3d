@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/05 15:08:28 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/05 16:47:58 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct s_data
 t_data	parsing(char *path_map);
 int		check_file_name(char *file);
 int		check_walls(t_data *data);
+void	add_map(t_data *data);
 
 /*----------------------------------RENDRING-------------------------------*/
 
@@ -86,6 +87,7 @@ int		get_rgba(int r, int g, int b, int a);
 
 int		ft_strcmp(const char *s1, const char *s2);
 int		array_len(void **array);
+int		get_nbr_lines(int fd);
 
 /*-----------------------------------ERROR---------------------------------*/
 

@@ -6,11 +6,27 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:56:27 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/03 18:02:22 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/05 16:47:49 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	get_nbr_lines(int fd)
+{
+	int		nbr;
+	char	*line;
+
+	nbr = 0;
+	line = get_next_line(fd);
+	while (line != NULL)
+	{
+		free(line);
+		line = get_next_line(fd);
+		nbr++;
+	}
+	return (nbr);
+}
 
 int	array_len(void **array)
 {

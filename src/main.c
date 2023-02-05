@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:38 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/05 15:08:17 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/05 16:49:52 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,7 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (ft_putstr_fd("Error\ncub3d: wrong number of args !\n", 2), 1);
 	(void)av;
-	memset(&data, 0, sizeof(t_data));
-	data.mlx = mlx_init(WIDTH, HEIGHT, "CUB3D", false);
+	data = parsing(av[1]);
 	mlx_close_hook(data.mlx, close_prog, (void *)&data);
 	init_image(&data);
 	init_data(&data);

@@ -6,25 +6,11 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:34:07 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/05 15:08:41 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/05 16:47:46 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	fill_line(t_data *data, char *line, int len, int x)
-{
-	int	i;
-
-	i = 0;
-	while (i < len)
-	{
-		data->map[x][i] = line[i];
-		i++;
-	}
-	data->map[x][i] = '\0';
-	return ;
-}
 
 mlx_image_t *texture_to_img(t_data *data, char **tmp)
 {
@@ -40,22 +26,6 @@ mlx_image_t *texture_to_img(t_data *data, char **tmp)
 	return (img);
 }
 
-int	get_nbr_lines(int fd)
-{
-	int		nbr;
-	char	*line;
-
-	nbr = 0;
-	line = get_next_line(fd);
-	while (line != NULL)
-	{
-		free(line);
-		line = get_next_line(fd);
-		nbr++;
-	}
-	return (nbr);
-}
-
 char	**parse_file(t_data *data, char *file)
 {
 	int		i;
@@ -68,7 +38,7 @@ char	**parse_file(t_data *data, char *file)
 		cub3d_err(data, "Failed opening file\n");
 	i = -1;
 	nbr_lines = get_nbr_lines(fd);
-	buff = malloc(sizeof(char *) * nbr_lines + 1);
+	buff = malloc(sizeof(char *) * (nbr_lines + 1));
 	if (!buff)
 		cub3d_err(data, "Malloc error\n");
 	close(fd);
@@ -99,7 +69,7 @@ int	get_color(t_data *data, char **tmp)
 		free_array((void **)buff);
 		cub3d_err(data, "Color description error : format needed: r, g, b\n");
 	}
-	color = get_rgb(ft_atoi(buff[0]), ft_atoi(buff[1]), ft_atoi(buff[2]), 255);
+	color = get_rgba(ft_atoi(buff[0]), ft_atoi(buff[1]), ft_atoi(buff[2]), 255);
 	return (free_array((void **)buff), color);
 }
 
@@ -129,79 +99,6 @@ void	add_textures(t_data *data)
 		else if (!ft_strcmp(tmp[0], "C"))
 			data->ceiling = get_color(data, tmp);
 		free_array((void **)tmp);
-	}
-}
-
-int	get_map_len(t_data *data)
-{
-	int	i;
-	int	len;
-
-	i = 0;
-	len = 0;
-	while(data->tmp_map && data->tmp_map[i])
-	{
-		if(data->tmp_map[i] && (data->tmp_map[i][0] == '1' || data->tmp_map[i][0] == ' '))
-		{
-			data->map_index = i;	
-			while(data->tmp_map[i] && (data->tmp_map[i][0] == '1' || data->tmp_map[i][0] == ' '))
-			{
-				len++;
-				i++;
-			}
-			return(len);
-		}
-		i++;
-	}
-	return (len);
-}
-
-void	add_map(t_data *data)
-{
-	int		i;
-	int		j;
-	int		k;
-	int		len;
-
-	i = 0;
-	k = 0;
-	data->map = malloc(sizeof(int *) * get_map_len(data));
-	if (!data->map)
-		cub3d_err(data, "Malloc error\n");
-	while (i < data->map_index)
-		i++;
-	while (data->tmp_map[i])
-	{
-		j = -1;
-		len = ft_strlen(data->tmp_map[i]);
-		data->map[k] = malloc(sizeof(int) * len);
-		data->map[k][len] = END;
-		while(data->tmp_map[i][++j])
-		{
-			if (data->tmp_map[i][j] == ' ')
-				data->map[k][j] = SPACE;
-			else if (data->tmp_map[i][j] == 'N')
-				data->map[k][j] = START_N;
-			else if (data->tmp_map[i][j] == 'S')
-				data->map[k][j] = START_S;
-			else if (data->tmp_map[i][j] == 'W')
-				data->map[k][j] = START_W;
-			else if (data->tmp_map[i][j] == 'E')
-				data->map[k][j] = START_E;
-			else
-				data->map[k][j] = data->tmp_map[i][j] - 48;
-		}
-		i++;
-		k++;
-	}
-	i = -1;
-	while(data->map[++i])
-	{
-		j = -1;
-		printf("data->map[%d] : ", i);
-		while(data->map[i][++j] != END)
-			printf("%d", data->map[i][j]);
-		printf("\n");
 	}
 }
 
