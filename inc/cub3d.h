@@ -3,15 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/02/05 15:01:36 by mpignet          ###   ########.fr       */
-=======
-/*   Updated: 2023/02/05 14:36:30 by loumouli         ###   ########.fr       */
->>>>>>> louis
+/*   Updated: 2023/02/05 15:08:28 by loumouli         ###   ########.fr       */
 /*                                                                            */
+/* ************************************************************************** */
+
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
@@ -56,12 +54,13 @@ typedef struct s_data
 	char		**tmp_map;
 	int			**map;
 
-	double	posX;
-	double	posY;
-	double	dirX;
-	double	dirY;
-	double	planeX;
-	double	planeY;
+	double		pos_x;
+	double		pos_y;
+	double		dir_x;
+	double		dir_y;
+	double		plane_x;
+	double		plane_y;
+
 }	t_data;
 
 /*----------------------------------PARSING--------------------------------*/
