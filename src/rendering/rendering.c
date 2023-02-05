@@ -6,12 +6,13 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:19:27 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/05 10:34:12 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/05 15:04:11 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <sys/time.h>
+	
 time_t	gettime(void)
 {
 	struct timeval	tv;
@@ -58,7 +59,6 @@ void	print_map_n_pos(t_data *data)
 
 	x = 0;
 	y = 0;
-	(void)data;
 	printf("\033[2J");
 	while (x < mapHeight)
 	{
@@ -76,6 +76,8 @@ void	print_map_n_pos(t_data *data)
 	}
 }
 
+
+
 void	rendering(void *ptr)
 {
 	t_data* 		data;
@@ -84,7 +86,7 @@ void	rendering(void *ptr)
 	
 	data = (t_data *)ptr;
 	print_map_n_pos(data);
-	for (int x = 0; x< WIDTH; x++)
+	for (int x = 0; x < WIDTH; x++)
 	{
 		double cameraX = 2 * x / (double)WIDTH - 1;
 		double raydir_x = data->dir_x + data->plane_x * cameraX;
@@ -105,7 +107,7 @@ void	rendering(void *ptr)
 		int stepY;
 
 		int hit = 0;
-		int side;
+		int side = 0;
 		if (raydir_x < 0)
 		{
 			stepX = -1;
@@ -164,18 +166,49 @@ void	rendering(void *ptr)
 		int color;
 		switch(worldMap[mapX][mapY])
 		{
-			case 1:  color = 16711680;  break; //red
-			case 2:  color = 32768;  break; //green
-			case 3:  color = 255;   break; //blue
-			case 4:  color = 0;  break; //white
-			default: color = 16777215;
+			case 1:  color = get_rgba(255, 0, 0, 255); break; //red
+			case 2:  color = get_rgba(0, 255, 0, 255); break; //green
+			case 3:  color = get_rgba(0, 0, 255, 255); break; //blue
+			case 4:  color = get_rgba(255, 255, 255, 255); break; //white
+			default: color = get_rgba(0, 0, 0, 255);
 		}
 		if (side == 1)
 			color = color / 2;
+		
 		//printf("nbr pixel to draw = %d\n", drawEnd - drawStart);
-		memset(data->img[x]->pixels, data->ceiling, drawStart * sizeof(int32_t));
-		memset(data->img[x]->pixels + drawStart, color, (drawEnd - drawStart) * sizeof(int32_t));
-		memset(data->img[x]->pixels + drawEnd, data->floor, (HEIGHT - drawEnd) * sizeof(int32_t));
+		for (unsigned long it = 0; it < drawStart * sizeof(int32_t);)
+		{
+			data->img[x]->pixels[it] = (uint8_t)255;//et_r(data->ceiling);
+			it++;
+			data->img[x]->pixels[it] = (uint8_t)255;//get_g(data->ceiling);
+			it++;
+			data->img[x]->pixels[it] = (uint8_t)255;//get_b(data->ceiling);
+			it++;
+			data->img[x]->pixels[it] = (uint8_t)255;//get_a(data->ceiling);
+			it++;
+		}
+		for (unsigned long it = drawStart; it < drawStart * sizeof(int32_t); )
+		{
+			data->img[x]->pixels[it] = (uint8_t)get_r(color);
+			it++;
+			data->img[x]->pixels[it] = (uint8_t)get_g(color);
+			it++;
+			data->img[x]->pixels[it] = (uint8_t)get_b(color);
+			it++;
+			data->img[x]->pixels[it] = (uint8_t)get_a(color);
+			it++;
+		}
+		for (unsigned long it = drawEnd; it < (HEIGHT - drawEnd) * sizeof(int32_t); )
+		{
+			data->img[x]->pixels[it] = (uint8_t)0;//get_r(data->floor);
+			it++;
+			data->img[x]->pixels[it] = (uint8_t)0;//get_g(data->floor);
+			it++;
+			data->img[x]->pixels[it] = (uint8_t)0;//get_b(data->floor);
+			it++;
+			data->img[x]->pixels[it] = (uint8_t)0;//get_a(data->floor);
+			it++;
+		}
 	}
 	oldTime = time;
     time = gettime();

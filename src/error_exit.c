@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:39:48 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/04 11:18:10 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/05 12:33:22 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	free_array(void **array)
 	free(array);
 }
 
-static void	clean_exit(t_data *data, int err)
+static	void	clean_exit(t_data *data, int err)
 {
 	int	x;
 
@@ -50,6 +50,13 @@ static void	clean_exit(t_data *data, int err)
 			free_array((void **)data->map);
 	}
 	exit(err);
+}
+
+
+void	close_prog(void *ptr)
+{
+	clean_exit((t_data *)ptr, 0);
+	exit(1);
 }
 
 void	mlx_err(t_data *data)
