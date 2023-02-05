@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/05 14:55:27 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/05 15:01:36 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,12 @@ typedef struct s_data
 	char		**tmp_map;
 	int			**map;
 
+	double	posX;
+	double	posY;
+	double	dirX;
+	double	dirY;
+	double	planeX;
+	double	planeY;
 }	t_data;
 
 /*----------------------------------PARSING--------------------------------*/

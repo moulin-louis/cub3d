@@ -6,7 +6,7 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/13 13:30:11 by loumouli          #+#    #+#              #
-#    Updated: 2023/02/03 17:56:14 by mpignet          ###   ########.fr        #
+#    Updated: 2023/02/05 15:02:50 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,7 +81,7 @@ $(LIBFT):
 
 
 $(NAME): $(MLX) $(LIBFT) $(O_DIR) $(OBJS)
-			$(CC) $(OBJS) $(CFLAGS) $(MLX) $(LIBFT) -ldl -lglfw -o $@
+			$(CC) $(OBJS) $(CFLAGS) $(MLX) $(LIBFT) -ldl -lglfw -lm -o $@
 
 # ################################## #
 #                CLEAN               #
