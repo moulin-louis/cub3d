@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:34:07 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/05 15:01:55 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/05 15:08:41 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	get_color(t_data *data, char **tmp)
 	{
 		free_array((void **)tmp);
 		free_array((void **)buff);
-		cub3d_err(data, "Color description error\n");
+		cub3d_err(data, "Color description error : format needed: r, g, b\n");
 	}
 	color = get_rgb(ft_atoi(buff[0]), ft_atoi(buff[1]), ft_atoi(buff[2]), 255);
 	return (free_array((void **)buff), color);
@@ -161,6 +161,7 @@ void	add_map(t_data *data)
 	int		i;
 	int		j;
 	int		k;
+	int		len;
 
 	i = 0;
 	k = 0;
@@ -172,8 +173,9 @@ void	add_map(t_data *data)
 	while (data->tmp_map[i])
 	{
 		j = -1;
-		data->map[k] = malloc(sizeof(int) * ft_strlen(data->tmp_map[i]));
-		data->map[k][ft_strlen(data->tmp_map[i])] = END;
+		len = ft_strlen(data->tmp_map[i]);
+		data->map[k] = malloc(sizeof(int) * len);
+		data->map[k][len] = END;
 		while(data->tmp_map[i][++j])
 		{
 			if (data->tmp_map[i][j] == ' ')
