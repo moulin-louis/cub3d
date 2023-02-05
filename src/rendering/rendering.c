@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:19:27 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/05 15:45:21 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/05 16:27:04 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,29 +21,29 @@ time_t	gettime(void)
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
-// void	print_map_n_pos(t_data *data)
-// {
-// 	int	x;
-// 	int	y;
+void	print_map_n_pos(t_data *data)
+{
+	int	x;
+	int	y;
 
-// 	x = 0;
-// 	y = 0;
-// 	printf("\033[2J");
-// 	while (data->map[x])
-// 	{
-// 		y = 0;
-// 		while (y != END)
-// 		{
-// 			if (x == (int)data->pos_x && y == (int)data->pos_y)
-// 				printf("\x1B[31mJ \x1B[37m");
-// 			else
-// 				printf("%d ", data->map[x][y]);
-// 			y++;
-// 		}
-// 		printf("\n");
-// 		x++;
-// 	}
-// }
+	x = 0;
+	y = 0;
+	printf("\033[2J");
+	while (data->map[x])
+	{
+		y = 0;
+		while (data->map[x][y] != END)
+		{
+			if (x == (int)data->pos_x && y == (int)data->pos_y)
+				printf("\x1B[31mJ \x1B[37m");
+			else
+				printf("%d ", data->map[x][y]);
+			y++;
+		}
+		printf("\n");
+		x++;
+	}
+}
 
 
 
@@ -67,9 +67,8 @@ void	rendering(void *ptr)
 		double sideDistX;
 		double sideDistY;
 
-		double deltaDistX = fabs(1 / raydir_x);
-		double deltaDistY = fabs(1 / raydir_y);
-
+		double deltaDistX = (raydir_x == 0) ? 1e30 : fabs(1 / raydir_x);
+      	double deltaDistY = (raydir_y == 0) ? 1e30 : fabs(1 / raydir_y);
 		double perpWallDist;
 		
 		int stepX;
@@ -100,6 +99,7 @@ void	rendering(void *ptr)
 		//perform DDA
 		while (hit == 0)
 		{
+			printf("in while \n");
 			//jump to next map square, either in x-direction, or in y-direction
 			if (sideDistX < sideDistY)
 			{
@@ -117,17 +117,26 @@ void	rendering(void *ptr)
 			if (data->map[mapX][mapY] > 0)
 				hit = 1;
 		}
+	
 		if(side == 0)
+		{
+			//printf("sideDistX = %f deltaDistX = %f\n", sideDistX, deltaDistX);
 			perpWallDist = (sideDistX - deltaDistX);
+		}
 		else
+		{
+			//printf("sideDistY = %f deltaDistY = %f\n", sideDistY, deltaDistY);
 			perpWallDist = (sideDistY - deltaDistY);
+		}
 
+		printf("perpWallDist = %f\n", perpWallDist);
 		int lineHeight = (int)(HEIGHT / perpWallDist);
 
 		int drawStart = -lineHeight / 2 + HEIGHT / 2;
 		if(drawStart < 0)
 			drawStart = 0;
 
+		//printf("lineH = %d H = %d\n", lineHeight, HEIGHT);
 		int drawEnd = lineHeight / 2 + HEIGHT / 2;
 		if(drawEnd >= HEIGHT)
 			drawEnd = HEIGHT - 1;
@@ -136,16 +145,13 @@ void	rendering(void *ptr)
 		switch(data->map[mapX][mapY])
 		{
 			case 1:  color = get_rgba(255, 0, 0, 255); break; //red
-			case 2:  color = get_rgba(0, 255, 0, 255); break; //green
-			case 3:  color = get_rgba(0, 0, 255, 255); break; //blue
-			case 4:  color = get_rgba(255, 255, 255, 255); break; //white
-			default: color = get_rgba(0, 0, 0, 255);
 		}
 		if (side == 1)
 			color = color / 2;
-		
-		//printf("nbr pixel to draw = %d\n", drawEnd - drawStart);
-		for (unsigned long it = 0; it < drawStart * sizeof(int32_t);)
+		//printf("drawStart = %d\n", drawStart);
+		//printf("drawend = %d\n", drawEnd);
+		printf("nbr pixel to draw = %d\n", drawEnd - drawStart);
+		for (int it = 0; it < (drawStart * 4);)
 		{
 			data->img[x]->pixels[it] = (uint8_t)255;//et_r(data->ceiling);
 			it++;
@@ -156,7 +162,7 @@ void	rendering(void *ptr)
 			data->img[x]->pixels[it] = (uint8_t)255;//get_a(data->ceiling);
 			it++;
 		}
-		for (unsigned long it = drawStart; it < drawStart * sizeof(int32_t); )
+		for (int it = drawStart; it < (drawEnd * 4);)
 		{
 			data->img[x]->pixels[it] = (uint8_t)get_r(color);
 			it++;
@@ -164,18 +170,19 @@ void	rendering(void *ptr)
 			it++;
 			data->img[x]->pixels[it] = (uint8_t)get_b(color);
 			it++;
-			data->img[x]->pixels[it] = (uint8_t)get_a(color);
+			data->img[x]->pixels[it] = (uint8_t)255;
 			it++;
 		}
-		for (unsigned long it = drawEnd; it < (HEIGHT - drawEnd) * sizeof(int32_t); )
+		for (int it = drawEnd; it <( (HEIGHT - drawEnd) * 4);)
 		{
+			printf("it = %d\n", it / 4);
 			data->img[x]->pixels[it] = (uint8_t)0;//get_r(data->floor);
 			it++;
 			data->img[x]->pixels[it] = (uint8_t)0;//get_g(data->floor);
 			it++;
 			data->img[x]->pixels[it] = (uint8_t)0;//get_b(data->floor);
 			it++;
-			data->img[x]->pixels[it] = (uint8_t)0;//get_a(data->floor);
+			data->img[x]->pixels[it] = (uint8_t)255;//get_a(data->floor);
 			it++;
 		}
 	}

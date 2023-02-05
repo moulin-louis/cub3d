@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:38 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/05 15:47:10 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/05 16:30:02 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	init_image(t_data *data)
 	while (x < WIDTH)
 	{
 		data->img[x] = mlx_new_image(data->mlx, 1, HEIGHT);
+		memset(data->img[x]->pixels, 255, data->img[x]->width * data->img[x]->height * sizeof(int32_t));
 		if (!data->img[x])
 			break ;
 		mlx_image_to_window(data->mlx, data->img[x], x, 0);
@@ -41,7 +42,7 @@ void	init_data(t_data *data)
 {
 	data->pos_x = 11;
 	data->pos_y = 27;
-	data->dir_x = -1;
+	data->dir_x = 0;
 	data->dir_y = 0;
 	data->plane_x = 0;
 	data->plane_y = 0.66;
@@ -55,9 +56,7 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		return (ft_putstr_fd("Error\ncub3d: wrong number of args !\n", 2), 1);
-	(void)av;
-	memset(&data, 0, sizeof(t_data));
-	data.mlx = mlx_init(WIDTH, HEIGHT, "CUB3D", false);
+	data = parsing(av[1]);
 	mlx_close_hook(data.mlx, close_prog, (void *)&data);
 	init_image(&data);
 	init_data(&data);

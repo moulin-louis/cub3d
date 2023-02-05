@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:34:07 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/05 15:08:41 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/05 16:16:42 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	**parse_file(t_data *data, char *file)
 		cub3d_err(data, "Failed opening file\n");
 	i = -1;
 	nbr_lines = get_nbr_lines(fd);
-	buff = malloc(sizeof(char *) * nbr_lines + 1);
+	buff = malloc(sizeof(char *) * nbr_lines + 2);
 	if (!buff)
 		cub3d_err(data, "Malloc error\n");
 	close(fd);
@@ -81,7 +81,7 @@ char	**parse_file(t_data *data, char *file)
 		buff[i] = get_next_line(fd);
 		buff[i] = ft_strtrim(buff[i], "\n");
 	}
-	buff[i] = NULL;
+	//buff[i] = NULL;
 	return (buff);
 }
 
@@ -99,7 +99,7 @@ int	get_color(t_data *data, char **tmp)
 		free_array((void **)buff);
 		cub3d_err(data, "Color description error : format needed: r, g, b\n");
 	}
-	color = get_rgb(ft_atoi(buff[0]), ft_atoi(buff[1]), ft_atoi(buff[2]), 255);
+	color = get_rgba(ft_atoi(buff[0]), ft_atoi(buff[1]), ft_atoi(buff[2]), 255);
 	return (free_array((void **)buff), color);
 }
 
@@ -195,14 +195,14 @@ void	add_map(t_data *data)
 		k++;
 	}
 	i = -1;
-	while(data->map[++i])
-	{
-		j = -1;
-		printf("data->map[%d] : ", i);
-		while(data->map[i][++j] != END)
-			printf("%d", data->map[i][j]);
-		printf("\n");
-	}
+	// while(data->map[++i])
+	// {
+	// 	j = -1;
+	// 	printf("data->map[%d] : ", i);
+	// 	while(data->map[i][++j] != END)
+	// 		printf("%d", data->map[i][j]);
+	// 	printf("\n");
+	// }
 }
 
 t_data	parsing(char *path_map)
