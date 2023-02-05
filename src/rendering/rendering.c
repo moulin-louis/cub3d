@@ -6,16 +6,20 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:19:27 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/04 09:41:13 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/05 15:04:11 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <sys/time.h>
+	
+time_t	gettime(void)
+{
+	struct timeval	tv;
 
-/*What i need:
-- start pos
-*/
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+}
 
 #define mapWidth 24
 #define mapHeight 24
@@ -48,37 +52,54 @@ int worldMap[mapWidth][mapHeight]=
 	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 };
 
-time_t	gettime(void)
+void	print_map_n_pos(t_data *data)
 {
-	struct timeval	tv;
+	int	x;
+	int	y;
 
-	gettimeofday(&tv, NULL);
-	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+	x = 0;
+	y = 0;
+	printf("\033[2J");
+	while (x < mapHeight)
+	{
+		y = 0;
+		while (y < mapWidth)
+		{
+			if (x == (int)data->pos_x && y == (int)data->pos_y)
+				printf("\x1B[31mJ \x1B[37m");
+			else
+				printf("%d ", worldMap[x][y]);
+			y++;
+		}
+		printf("\n");
+		x++;
+	}
 }
 
-void	rendering(void * ptr)
+
+
+void	rendering(void *ptr)
 {
-	t_data* data = (t_data *)ptr;
-	 //2d version of the camera plance in X
-	 //2d version of the camera plance in Y aka FOV (i think)
-
-
-	static long int time; //time of current frame
-  	long int oldTime;
-	for (int x = 0; x< WIDTH; x++)
+	t_data* 		data;
+	static long int time;
+  	long int 		oldTime;
+	
+	data = (t_data *)ptr;
+	print_map_n_pos(data);
+	for (int x = 0; x < WIDTH; x++)
 	{
 		double cameraX = 2 * x / (double)WIDTH - 1;
-		double rayDirX = data->dirX + data->planeX * cameraX;
-		double rayDirY  = data->dirY + data->planeY * cameraX;
+		double raydir_x = data->dir_x + data->plane_x * cameraX;
+		double raydir_y  = data->dir_y + data->plane_y * cameraX;
 
-		int mapX = (int)data->posX;
-		int mapY = (int)data->posY;
+		int mapX = (int)data->pos_x;
+		int mapY = (int)data->pos_y;
 
 		double sideDistX;
 		double sideDistY;
 
-		double deltaDistX = fabs(1 / rayDirX);
-		double deltaDistY = fabs(1 / rayDirY);
+		double deltaDistX = fabs(1 / raydir_x);
+		double deltaDistY = fabs(1 / raydir_y);
 
 		double perpWallDist;
 		
@@ -86,26 +107,26 @@ void	rendering(void * ptr)
 		int stepY;
 
 		int hit = 0;
-		int side;
-		if (rayDirX < 0)
+		int side = 0;
+		if (raydir_x < 0)
 		{
 			stepX = -1;
-			sideDistX = (data->posX - mapX) * deltaDistX;
+			sideDistX = (data->pos_x - mapX) * deltaDistX;
 		}
 		else
 		{
 			stepX = 1;
-			sideDistX = (mapX + 1.0 - data->posX) * deltaDistX;
+			sideDistX = (mapX + 1.0 - data->pos_x) * deltaDistX;
 		}
-		if (rayDirY < 0)
+		if (raydir_y < 0)
 		{
 			stepY = -1;
-			sideDistY = (data->posY - mapY) * deltaDistY;
+			sideDistY = (data->pos_y - mapY) * deltaDistY;
 		}
 		else
 		{
 			stepY = 1;
-			sideDistY = (mapY + 1.0 - data->posY) * deltaDistY;
+			sideDistY = (mapY + 1.0 - data->pos_y) * deltaDistY;
 		}	
 		//perform DDA
 		while (hit == 0)
@@ -145,18 +166,49 @@ void	rendering(void * ptr)
 		int color;
 		switch(worldMap[mapX][mapY])
 		{
-			case 1:  color = 16711680;  break; //red
-			case 2:  color = 32768;  break; //green
-			case 3:  color = 255;   break; //blue
-			case 4:  color = 0;  break; //white
-			default: color = 16777215;
+			case 1:  color = get_rgba(255, 0, 0, 255); break; //red
+			case 2:  color = get_rgba(0, 255, 0, 255); break; //green
+			case 3:  color = get_rgba(0, 0, 255, 255); break; //blue
+			case 4:  color = get_rgba(255, 255, 255, 255); break; //white
+			default: color = get_rgba(0, 0, 0, 255);
 		}
 		if (side == 1)
 			color = color / 2;
+		
 		//printf("nbr pixel to draw = %d\n", drawEnd - drawStart);
-		memset(data->img[x]->pixels, data->ceiling, drawStart * sizeof(int32_t));
-		memset(data->img[x]->pixels + drawStart, color, (drawEnd - drawStart) * sizeof(int32_t));
-		memset(data->img[x]->pixels + drawEnd, data->floor, (HEIGHT - drawEnd) * sizeof(int32_t));
+		for (unsigned long it = 0; it < drawStart * sizeof(int32_t);)
+		{
+			data->img[x]->pixels[it] = (uint8_t)255;//et_r(data->ceiling);
+			it++;
+			data->img[x]->pixels[it] = (uint8_t)255;//get_g(data->ceiling);
+			it++;
+			data->img[x]->pixels[it] = (uint8_t)255;//get_b(data->ceiling);
+			it++;
+			data->img[x]->pixels[it] = (uint8_t)255;//get_a(data->ceiling);
+			it++;
+		}
+		for (unsigned long it = drawStart; it < drawStart * sizeof(int32_t); )
+		{
+			data->img[x]->pixels[it] = (uint8_t)get_r(color);
+			it++;
+			data->img[x]->pixels[it] = (uint8_t)get_g(color);
+			it++;
+			data->img[x]->pixels[it] = (uint8_t)get_b(color);
+			it++;
+			data->img[x]->pixels[it] = (uint8_t)get_a(color);
+			it++;
+		}
+		for (unsigned long it = drawEnd; it < (HEIGHT - drawEnd) * sizeof(int32_t); )
+		{
+			data->img[x]->pixels[it] = (uint8_t)0;//get_r(data->floor);
+			it++;
+			data->img[x]->pixels[it] = (uint8_t)0;//get_g(data->floor);
+			it++;
+			data->img[x]->pixels[it] = (uint8_t)0;//get_b(data->floor);
+			it++;
+			data->img[x]->pixels[it] = (uint8_t)0;//get_a(data->floor);
+			it++;
+		}
 	}
 	oldTime = time;
     time = gettime();

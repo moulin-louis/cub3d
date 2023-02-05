@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
+#    By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/13 13:30:11 by loumouli          #+#    #+#              #
-#    Updated: 2023/02/05 15:02:50 by mpignet          ###   ########.fr        #
+#    Updated: 2023/02/05 15:07:05 by loumouli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,13 +26,15 @@ NAME		= cub3d
 #               SOURCES              #
 # ################################## #
 C_DIR		= src
-C_FILES		=	main.c					\
-				error_exit.c			\
-				parsing/parsing.c		\
-				parsing/check_map.c		\
-				parsing/parsing_utils.c	\
-				rendering/rendering.c	\
-				rendering/get_rgb.c	\
+C_FILES		=	main.c						\
+				error_exit.c				\
+				rendering/rendering.c		\
+				rendering/camera.c			\
+				rendering/color.c
+				#parsing/parsing.c			\
+				#parsing/check_map.c		\
+				#parsing/parsing_utils.c	\
+				
 					
 SRCS		= $(patsubst %, $(C_DIR)/%, $(C_FILES))
 
@@ -102,5 +104,7 @@ re:			fclean all
 .PHONY: all clean fclean re
 
 -include ./objs/*.d
+-include ./objs/rendering/*.d
+-include ./objs/parsing/*.d
 
 .NOTPARALLEL:fclean

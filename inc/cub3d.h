@@ -6,12 +6,16 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/02/05 15:01:36 by mpignet          ###   ########.fr       */
+=======
+/*   Updated: 2023/02/05 14:36:30 by loumouli         ###   ########.fr       */
+>>>>>>> louis
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
-#define CUB3D_H
+# define CUB3D_H
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -22,7 +26,7 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <math.h>
-#include <time.h>
+# include <time.h>
 # include "libft.h"
 # include "MLX42.h"
 
@@ -38,11 +42,10 @@
 
 typedef struct s_data
 {
-	mlx_t	*mlx;
-
-	int	floor;
-	int	ceiling;
-	mlx_image_t* img[WIDTH];
+	mlx_t		*mlx;
+	int			floor;
+	int			ceiling;
+	mlx_image_t	*img[WIDTH];
 
 	mlx_image_t	*nord;
 	mlx_image_t	*south;
@@ -69,8 +72,16 @@ int		check_walls(t_data *data);
 
 /*----------------------------------RENDRING-------------------------------*/
 
-void	rendering( void* data);
-int get_rgb(int r, int g, int b, int a);
+void	rendering(void *data);
+int		get_rgb(int r, int g, int b);
+void	camera(mlx_key_data_t key, void *ptr);
+
+/*-----------------------------------COLOR---------------------------------*/
+int		get_r(int rgba);
+int		get_g(int rgba);
+int		get_b(int rgba);
+int		get_a(int rgba);
+int		get_rgba(int r, int g, int b, int a);
 
 /*-----------------------------------UTILS---------------------------------*/
 
@@ -82,5 +93,6 @@ int		array_len(void **array);
 void	mlx_err(t_data *data);
 void	cub3d_err(t_data *data, char *err);
 void	free_array(void **array);
+void	close_prog(void *ptr);
 
 #endif
