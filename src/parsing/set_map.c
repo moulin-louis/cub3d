@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 16:40:42 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/05 17:00:59 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/05 19:01:34 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ static int	get_map_len(t_data *data)
 	len = 0;
 	while(data->tmp_map && data->tmp_map[i])
 	{
-		if(data->tmp_map[i] && (data->tmp_map[i][0] == '1' || data->tmp_map[i][0] == ' '))
+		if(data->tmp_map[i] && (data->tmp_map[i][0] == '1'
+			|| data->tmp_map[i][0] == ' '))
 		{
 			data->map_index = i;	
-			while(data->tmp_map[i] && (data->tmp_map[i][0] == '1' || data->tmp_map[i][0] == ' '))
+			while(data->tmp_map[i] && (data->tmp_map[i][0] == '1'
+				|| data->tmp_map[i][0] == ' '))
 			{
 				len++;
 				i++;
@@ -75,50 +77,50 @@ static void	set_player_start_pos(t_data *data, int i, int k, int j)
 		set_player_dir(data, 'E');
 }
 
-static void	set_box_infos(t_data *data, int i, int j, int k)
+static void	set_map_line(t_data *data, int i, int k)
 {
-	if (data->tmp_map[i][j] == 'N' || data->tmp_map[i][j] == 'S'
-		|| data->tmp_map[i][j] == 'W' || data->tmp_map[i][j] == 'E')
-		set_player_start_pos(data, i, k, j);
-	else if (data->tmp_map[i][j] == ' ')
-		data->map[k][j] = SPACE;
-	else
-		data->map[k][j] = data->tmp_map[i][j] - 48;	
+	int	j;
+
+	j = -1;
+	while(data->tmp_map[i][++j])
+	{
+		if (data->tmp_map[i][j] == 'N' || data->tmp_map[i][j] == 'S'
+			|| data->tmp_map[i][j] == 'W' || data->tmp_map[i][j] == 'E')
+			set_player_start_pos(data, i, k, j);
+		else if (data->tmp_map[i][j] == ' ')
+			data->map[k][j] = SPACE;
+		else
+			data->map[k][j] = data->tmp_map[i][j] - 48;
+	}
 }
 
 void	add_map(t_data *data)
 {
 	int		i;
-	int		j;
 	int		k;
 	int		len;
 
-	i = 0;
-	k = 0;
 	len = get_map_len(data);
+	check_map(data);
 	data->map = malloc(sizeof(int *) * (len + 1));
 	if (!data->map)
 		cub3d_err(data, "Malloc error\n");
 	data->map[len] = NULL;
-	while (i < data->map_index)
-		i++;
+	i = data->map_index;
+	k = 0;
 	while (data->tmp_map[i])
 	{
-		j = -1;
 		len = ft_strlen(data->tmp_map[i]);
 		data->map[k] = malloc(sizeof(int) * (len + 1));
 		data->map[k][len] = END;
-		while(data->tmp_map[i][++j])
-			set_box_infos(data, i, j ,k);
+		set_map_line(data, i, k);
 		i++;
 		k++;
 	}
-	// data->map[k] = malloc(sizeof(int));
-	// data->map[k][0] = END;
 	// i = -1;
-	// while(data->map[++i][0] != END)
+	// while(data->map[++i])
 	// {
-	// 	j = -1;
+	// 	int j = -1;
 	// 	printf("data->map[%d] : ", i);
 	// 	while(data->map[i][++j] != END)
 	// 		printf("%d", data->map[i][j]);

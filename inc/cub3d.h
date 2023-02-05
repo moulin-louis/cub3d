@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/05 16:47:58 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/05 17:33:20 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,11 @@ typedef struct s_data
 /*----------------------------------PARSING--------------------------------*/
 
 t_data	parsing(char *path_map);
-int		check_file_name(char *file);
-int		check_walls(t_data *data);
 void	add_map(t_data *data);
 
+int		check_file_name(char *file);
+int		check_map(t_data *data);
+int		check_walls(t_data *data);
 /*----------------------------------RENDRING-------------------------------*/
 
 void	rendering(void *data);

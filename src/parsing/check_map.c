@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 17:39:50 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/05 15:09:27 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/05 19:10:05 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,44 +51,33 @@ int	check_walls(t_data *data)
 	return (0);
 }
 
-/* int	check_exit(t_data *data)
+int	check_char(t_data *data)
 {
 	int	i;
 	int	j;
-	int	exit;
+	int	player;
 
-	i = 0;
-	exit = 0;
-	while (data->map[i])
+	i = data->map_index;
+	player = 0;
+	while (data->tmp_map[i])
 	{
 		j = 0;
-		while (data->map[i][j])
+		while (data->tmp_map[i][j])
 		{
-			if (data->map[i][j] == 'E')
-				exit++;
-			else if (data->map[i][j] != '0' && data->map[i][j] != '1'
-				&& data->map[i][j] != 'C' && data->map[i][j] != 'P')
-				return (ft_putstr_fd("Error\nInvalid char in map\n", 2), 1);
+			if (data->tmp_map[i][j] != ' ' && data->tmp_map[i][j] != '0'
+				&& data->tmp_map[i][j] != '1' && data->tmp_map[i][j] != 'N'
+				&& data->tmp_map[i][j] != 'S' && data->tmp_map[i][j] != 'W'
+				&& data->tmp_map[i][j] != 'E')
+				cub3d_err(data, "Invalid char in map !\n");
+			if(data->tmp_map[i][j] == 'N' || data->tmp_map[i][j] == 'S'
+				|| data->tmp_map[i][j] == 'W' || data->tmp_map[i][j] == 'E')
+				player++;
 			j++;
 		}
 		i++;
 	}
-	if (exit != 1)
-		return (ft_putstr_fd("Error\nWrong number of exits\n", 2), 1);
-	return (0);
-} */
-
-int	check_empty_lines(char *line)
-{
-	int	i;
-
-	i = 1;
-	while (line[i])
-	{
-		if (line[i] == '\n' && line[i - 1] == '\n')
-			return (ft_putstr_fd("Error\nEmpty line in map\n", 2), 1);
-		i++;
-	}
+	if (player != 1)
+		cub3d_err(data, "Wrong number of players !\n");
 	return (0);
 }
 
@@ -105,4 +94,27 @@ int	check_file_name(char *file)
 		&& file[i - 2] == 'u' && file[i - 1] == 'b')
 		return (0);
 	return (1);
+}
+
+int	check_map(t_data *data)
+{
+	int	i;
+	int	j;
+	int	begin;
+
+	i = data->map_index - 1;
+	check_char(data);
+	while(data->tmp_map[++i])
+	{
+		j = 0;
+		while (data->tmp_map[i][j])
+			j++;
+		j--;
+		begin = 0;
+		while (data->tmp_map[i][begin] == ' ')
+			begin++;
+		if (data->tmp_map[i][begin] != '1' || data->tmp_map[i][j] != '1')
+			cub3d_err(data, "Map not properly closed\n");
+	}
+	return (0);
 }
