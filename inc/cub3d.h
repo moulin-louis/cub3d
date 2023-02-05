@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/03 18:26:29 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/05 14:55:27 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@
 # define FOV 80
 # define WIDTH 1280
 # define HEIGHT 720
+# define SPACE 9
+# define END 42
+# define START_N 2
+# define START_S 3
+# define START_W 4
+# define START_E 5
 
 typedef struct s_data
 {
@@ -43,7 +49,9 @@ typedef struct s_data
 	mlx_image_t	*west;
 	mlx_image_t	*east;
 
-	double	**map;
+	int			map_index;
+	char		**tmp_map;
+	int			**map;
 
 }	t_data;
 
@@ -56,7 +64,7 @@ int		check_walls(t_data *data);
 /*----------------------------------RENDRING-------------------------------*/
 
 void	rendering( void* data);
-int 	get_rgb(int r, int g, int b);
+int get_rgb(int r, int g, int b, int a);
 
 /*-----------------------------------UTILS---------------------------------*/
 
