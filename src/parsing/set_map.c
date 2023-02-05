@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 16:40:42 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/05 16:47:11 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/05 17:00:59 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,11 @@ void	add_map(t_data *data)
 
 	i = 0;
 	k = 0;
-	data->map = malloc(sizeof(int *) * (get_map_len(data) + 1));
+	len = get_map_len(data);
+	data->map = malloc(sizeof(int *) * (len + 1));
 	if (!data->map)
 		cub3d_err(data, "Malloc error\n");
+	data->map[len] = NULL;
 	while (i < data->map_index)
 		i++;
 	while (data->tmp_map[i])
@@ -111,8 +113,8 @@ void	add_map(t_data *data)
 		i++;
 		k++;
 	}
-	data->map[k] = malloc(sizeof(int));
-	data->map[k][0] = END;
+	// data->map[k] = malloc(sizeof(int));
+	// data->map[k][0] = END;
 	// i = -1;
 	// while(data->map[++i][0] != END)
 	// {

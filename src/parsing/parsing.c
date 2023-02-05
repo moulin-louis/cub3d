@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:34:07 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/05 16:52:52 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/05 16:57:01 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ char	**parse_file(t_data *data, char *file)
 	i = -1;
 	nbr_lines = get_nbr_lines(fd);
 	buff = malloc(sizeof(char *) * (nbr_lines + 1));
+	buff[nbr_lines] = NULL;
 	if (!buff)
 		cub3d_err(data, "Malloc error\n");
 	close(fd);
@@ -51,7 +52,6 @@ char	**parse_file(t_data *data, char *file)
 		buff[i] = get_next_line(fd);
 		buff[i] = ft_strtrim(buff[i], "\n");
 	}
-	//buff[i] = NULL;
 	return (buff);
 }
 
