@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 12:54:37 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/05 12:59:37 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/05 15:59:10 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,16 @@
 
 void	camera2(mlx_key_data_t key, t_data *data)
 {
-	double	old_dir_x;
-	double	old_plane_x;
 
 	if (key.key == MLX_KEY_D && ((key.action == MLX_REPEAT
 				|| key.action == MLX_PRESS)))
 	{
-		old_dir_x = data->dir_x;
-		data->dir_x = data->dir_x * cos(-1.001) - data->dir_y * sin(-1.001);
-		data->dir_y = old_dir_x * sin(-1.001) + data->dir_y * cos(1);
-		old_plane_x = data->plane_x;
-		data->plane_x = data->plane_x * cos(-1.001)
-			- data->plane_y * sin(-1.001);
-		data->plane_y = old_plane_x * sin(-1.001) + data->plane_y * cos(-1.001);
+		data->pos_y += 1;
 	}
 	if (key.key == MLX_KEY_A && ((key.action == MLX_REPEAT
 				|| key.action == MLX_PRESS)))
 	{
-		old_dir_x = data->dir_x;
-		data->dir_x = data->dir_x * cos(1) - data->dir_y * sin(1);
-		data->dir_y = old_dir_x * sin(1) + data->dir_y * cos(1);
-		old_plane_x = data->plane_x;
-		data->plane_x = data->plane_x * cos(1) - data->plane_y * sin(1);
-		data->plane_y = old_plane_x * sin(1) + data->plane_y * cos(1);
+		data->pos_y -= 1;
 	}
 }
 
@@ -48,14 +35,12 @@ void	camera(mlx_key_data_t key, void *ptr)
 	if (key.key == MLX_KEY_W && (key.action == MLX_REPEAT
 			|| key.action == MLX_PRESS))
 	{
-		data->pos_x += data->dir_x * 1.5;
-		data->pos_y += data->dir_y * 1.5;
+		data->pos_x -= 1;
 	}
 	if (key.key == MLX_KEY_S && (key.action == MLX_REPEAT
 			|| key.action == MLX_PRESS))
 	{
-		data->pos_x -= data->dir_x * 1.5;
-		data->pos_y -= data->dir_y * 1.5;
+		data->pos_x += 1;
 	}
 	camera2(key, data);
 }

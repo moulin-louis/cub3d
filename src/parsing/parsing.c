@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:34:07 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/05 16:47:46 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/05 16:52:52 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	**parse_file(t_data *data, char *file)
 		buff[i] = get_next_line(fd);
 		buff[i] = ft_strtrim(buff[i], "\n");
 	}
-	buff[i] = NULL;
+	//buff[i] = NULL;
 	return (buff);
 }
 
@@ -100,6 +100,30 @@ void	add_textures(t_data *data)
 			data->ceiling = get_color(data, tmp);
 		free_array((void **)tmp);
 	}
+}
+
+int	get_map_len(t_data *data)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	len = 0;
+	while(data->tmp_map && data->tmp_map[i])
+	{
+		if(data->tmp_map[i] && (data->tmp_map[i][0] == '1' || data->tmp_map[i][0] == ' '))
+		{
+			data->map_index = i;	
+			while(data->tmp_map[i] && (data->tmp_map[i][0] == '1' || data->tmp_map[i][0] == ' '))
+			{
+				len++;
+				i++;
+			}
+			return(len);
+		}
+		i++;
+	}
+	return (len);
 }
 
 t_data	parsing(char *path_map)
