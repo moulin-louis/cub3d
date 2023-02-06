@@ -6,11 +6,26 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:56:27 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/05 16:47:49 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/06 13:34:19 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	check_file_name(char *file)
+{
+	size_t	i;
+
+	i = 0;
+	while (file[i])
+		i++;
+	if (i < 4)
+		return (1);
+	else if (file[i - 4] == '.' && file[i - 3] == 'c'
+		&& file[i - 2] == 'u' && file[i - 1] == 'b')
+		return (0);
+	return (1);
+}
 
 int	get_nbr_lines(int fd)
 {

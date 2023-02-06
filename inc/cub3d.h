@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/06 12:45:19 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/06 13:34:02 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	add_map(t_data *data);
 
 int		check_file_name(char *file);
 int		check_map(t_data *data);
-int		check_walls(t_data *data);
+
 /*----------------------------------RENDRING-------------------------------*/
 
 void	rendering(void *data);

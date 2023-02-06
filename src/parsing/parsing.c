@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:34:07 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/05 16:57:01 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/06 13:25:39 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ mlx_image_t *texture_to_img(t_data *data, char **tmp)
         return (free_array((void **)tmp), mlx_err(data), NULL);
 	img = mlx_texture_to_image(data->mlx, texture);
 	if (!img)
-        return (free_array((void **)tmp), mlx_err(data), NULL);
-	return (img);
+        return (mlx_delete_texture(texture), free_array((void **)tmp),
+			mlx_err(data), NULL);
+	return (mlx_delete_texture(texture), img);
 }
 
 char	**parse_file(t_data *data, char *file)
@@ -32,6 +33,7 @@ char	**parse_file(t_data *data, char *file)
 	int		nbr_lines;
 	int		fd;
 	char	**buff;
+	char	*tmp;
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
@@ -50,7 +52,9 @@ char	**parse_file(t_data *data, char *file)
 	while (++i < nbr_lines)
 	{
 		buff[i] = get_next_line(fd);
+		tmp = buff[i];
 		buff[i] = ft_strtrim(buff[i], "\n");
+		free(tmp);
 	}
 	return (buff);
 }
@@ -102,42 +106,18 @@ void	add_textures(t_data *data)
 	}
 }
 
-int	get_map_len(t_data *data)
-{
-	int	i;
-	int	len;
-
-	i = 0;
-	len = 0;
-	while(data->tmp_map && data->tmp_map[i])
-	{
-		if(data->tmp_map[i] && (data->tmp_map[i][0] == '1' || data->tmp_map[i][0] == ' '))
-		{
-			data->map_index = i;	
-			while(data->tmp_map[i] && (data->tmp_map[i][0] == '1' || data->tmp_map[i][0] == ' '))
-			{
-				len++;
-				i++;
-			}
-			return(len);
-		}
-		i++;
-	}
-	return (len);
-}
-
 t_data	parsing(char *path_map)
 {
 	t_data	data;
 
-	memset(&data, 0, sizeof(t_data));
+	ft_memset(&data, 0, sizeof(t_data));
 	if (check_file_name(path_map))
 		cub3d_err(&data, "file given is not .cub type\n");
 	data.tmp_map = parse_file(&data, path_map);
+	add_map(&data);
 	data.mlx = mlx_init(WIDTH, HEIGHT, "cub3d", false);
 	if (!data.mlx)
 		mlx_err(&data);
 	add_textures(&data);
-	add_map(&data);
 	return (data);
 }
