@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 17:39:50 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/06 14:29:48 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/06 14:48:41 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	check_box(t_data *data, int i, size_t j)
 	{
 		if (data->tmp_map[i][j + 1] != '1' && data->tmp_map[i][j + 1] != ' ')
 			cub3d_err(data, "Map not properly closed 4!\n");
-	}	
+	}
 }
 
 static void	check_line(t_data *data, int i)

@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:34:07 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/06 14:38:23 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/06 14:55:26 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	add_textures(t_data *data)
 	}
 }
 
-char	**fill_buffer(t_data *data, char **buff, int nbr_lines, int fd)
+void	fill_buffer(t_data *data, char **buff, int nbr_lines, int fd)
 {
 	int		i;
 	char	*tmp;
@@ -68,8 +68,11 @@ char	**fill_buffer(t_data *data, char **buff, int nbr_lines, int fd)
 		tmp = buff[i];
 		buff[i] = ft_strtrim(buff[i], "\n");
 		if (!buff[i])
-			return (free(tmp), free_array((void **)buff),
-				cub3d_err(data, "Failed opening file\n"), NULL);
+		{			
+			free(tmp);
+			free_array((void **)buff);
+			cub3d_err(data, "Failed opening file\n");
+		}
 		free(tmp);
 	}
 }
