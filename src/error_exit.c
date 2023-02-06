@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:39:48 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/06 11:56:32 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/06 13:20:32 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,14 @@ static	void	clean_exit(t_data *data, int err)
 		// {
 		// 	mlx_delete_image(data->mlx, data->img[x]);
 		// 	x++;
-		// }	
-		mlx_delete_image(data->mlx, data->img);	
+		// }
+		if (data->img)
+			mlx_delete_image(data->mlx, data->img);	
 		//mlx_close_window(data->mlx);
-		mlx_terminate(data->mlx);
+		if (data->mlx)
+			mlx_terminate(data->mlx);
+		if (data->tmp_map)
+			free_array((void **)data->tmp_map);
 		if (data->map)
 			free_array((void **)data->map);
 		//free(data->mlx);

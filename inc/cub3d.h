@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/06 14:02:19 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/06 14:07:54 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	add_map(t_data *data);
 
 int		check_file_name(char *file);
 int		check_map(t_data *data);
-int		check_walls(t_data *data);
+
 /*----------------------------------RENDRING-------------------------------*/
 
 void	rendering(void *data);
