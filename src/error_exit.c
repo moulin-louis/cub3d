@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:39:48 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/05 20:32:47 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/06 11:56:32 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,11 @@ static	void	clean_exit(t_data *data, int err)
 		// 	x++;
 		// }	
 		mlx_delete_image(data->mlx, data->img);	
-		if (data->mlx)
-			mlx_terminate(data->mlx);
+		//mlx_close_window(data->mlx);
+		mlx_terminate(data->mlx);
 		if (data->map)
 			free_array((void **)data->map);
+		//free(data->mlx);
 	}
 	exit(err);
 }

@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/05 20:32:03 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/06 11:23:44 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	add_map(t_data *data);
 
 void	rendering(void *data);
 int		get_rgb(int r, int g, int b);
-void	camera(mlx_key_data_t key, void *ptr);
+void	camera(void *ptr);
 
 /*-----------------------------------COLOR---------------------------------*/
 int		get_r(int rgba);
