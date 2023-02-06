@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 16:40:42 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/05 19:01:34 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/06 14:03:03 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,12 @@ static int	get_map_len(t_data *data)
 				len++;
 				i++;
 			}
+			data->end_index = data->map_index + len;
 			return(len);
 		}
 		i++;
 	}
+	data->end_index = len;
 	return (len);
 }
 
