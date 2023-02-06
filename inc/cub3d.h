@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/06 13:34:02 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/06 13:51:18 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_data
 	mlx_image_t	*east;
 
 	int			map_index;
+	int			end_index;
 	char		**tmp_map;
 	int			**map;
 

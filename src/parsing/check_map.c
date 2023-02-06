@@ -6,42 +6,34 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 17:39:50 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/06 13:41:44 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/06 14:26:11 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	ft_first_line(t_data *data, int i, size_t j)
+static void	check_box(t_data *data, int i, size_t j)
 {
-	if (data->tmp_map[i + 1][j] != '1' && data->tmp_map[i + 1][j] != ' ')
-		cub3d_err(data, "Map not properly closed !\n");
+	if (data->tmp_map[i + 1] && data->tmp_map[i + 1][j])
+	{		
+		if (data->tmp_map[i + 1][j] != '1' && data->tmp_map[i + 1][j] != ' ')
+			cub3d_err(data, "Map not properly closed 1!\n");
+	}
+	if (i > data->map_index && data->tmp_map[i - 1][j])
+	{	
+		if (data->tmp_map[i - 1][j] != '1' && data->tmp_map[i - 1][j] != ' ')
+			cub3d_err(data, "Map not properly closed 2!\n");
+	}
 	if (j > 0)
 	{				
 		if (data->tmp_map[i][j - 1] != '1' && data->tmp_map[i][j - 1] != ' ')
-			cub3d_err(data, "Map not properly closed !\n");
+			cub3d_err(data, "Map not properly closed 3!\n");
 	}
 	if (j < ft_strlen(data->tmp_map[i]))
 	{
 		if (data->tmp_map[i][j + 1] != '1' && data->tmp_map[i][j + 1] != ' ')
-			cub3d_err(data, "Map not properly closed !\n");
+			cub3d_err(data, "Map not properly closed 4!\n");
 	}	
-}
-
-static void	ft_last_line(t_data *data, int i, size_t j)
-{
-	if (data->tmp_map[i - 1][j] != '1' && data->tmp_map[i - 1][j] != ' ')
-		cub3d_err(data, "Map not properly closed !\n");
-	if (j > 0)
-	{				
-		if (data->tmp_map[i][j - 1] != '1' && data->tmp_map[i][j - 1] != ' ')
-			cub3d_err(data, "Map not properly closed !\n");
-	}
-	if (j < ft_strlen(data->tmp_map[i]))
-	{
-		if (data->tmp_map[i][j + 1] != '1' && data->tmp_map[i][j + 1] != ' ')
-			cub3d_err(data, "Map not properly closed !\n");
-	}
 }
 
 static void	check_line(t_data *data, int i)
@@ -52,14 +44,10 @@ static void	check_line(t_data *data, int i)
 	while (data->tmp_map[i][j])
 	{
 		if (data->tmp_map[i][j] == ' ')
-		{
-			if (i == data->map_index)
-				ft_first_line(data, i, j);
-			else
-				ft_last_line(data, i, j);
-		}
-		else if (data->tmp_map[i][j] != '1' && data->tmp_map[i][j] != ' ')
-			cub3d_err(data, "Map not properly closed !\n");
+			check_box(data, i, j);
+		if (i == data->map_index || i == data->end_index - 1)
+			if (data->tmp_map[i][j] != '1' && data->tmp_map[i][j] != ' ')
+				cub3d_err(data, "Map not properly closed !\n");
 		j++;
 	}
 }
@@ -103,6 +91,7 @@ int	check_map(t_data *data)
 	check_char(data);
 	while(data->tmp_map[++i])
 	{
+		check_line(data, i);
 		end = ft_strlen(data->tmp_map[i]) - 1;
 		begin = 0;
 		while (data->tmp_map[i][begin] == ' ')
@@ -110,7 +99,5 @@ int	check_map(t_data *data)
 		if (data->tmp_map[i][begin] != '1' || data->tmp_map[i][end] != '1')
 			cub3d_err(data, "Map not properly closed\n");
 	}
-	check_line(data, data->map_index);
-	check_line(data, (i - 1));
 	return (0);
 }
