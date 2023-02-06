@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:39:48 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/06 13:20:32 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/06 15:00:39 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,13 @@ void	free_array(void **array)
 	i = -1;
 	if (!array)
 		return ;
-	while(array[++i])
+	while (array[++i])
 		free(array[i]);
 	free(array);
 }
 
 static	void	clean_exit(t_data *data, int err)
 {
-	//int	x;
-
 	if (data)
 	{
 		if (data->nord)
@@ -38,26 +36,17 @@ static	void	clean_exit(t_data *data, int err)
 			mlx_delete_image(data->mlx, data->west);
 		if (data->east)
 			mlx_delete_image(data->mlx, data->east);
-		// x = 0;
-		// while (x < WIDTH)
-		// {
-		// 	mlx_delete_image(data->mlx, data->img[x]);
-		// 	x++;
-		// }
 		if (data->img)
-			mlx_delete_image(data->mlx, data->img);	
-		//mlx_close_window(data->mlx);
+			mlx_delete_image(data->mlx, data->img);
 		if (data->mlx)
 			mlx_terminate(data->mlx);
 		if (data->tmp_map)
 			free_array((void **)data->tmp_map);
 		if (data->map)
 			free_array((void **)data->map);
-		//free(data->mlx);
 	}
 	exit(err);
 }
-
 
 void	close_prog(void *ptr)
 {

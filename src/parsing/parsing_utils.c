@@ -6,29 +6,11 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:56:27 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/06 14:36:48 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/06 15:05:36 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	get_color(t_data *data, char **tmp)
-{
-	int		color;
-	char	**buff;
-
-	buff = ft_split(tmp[1], ',');
-	if (!buff)
-		cub3d_err(data, "Malloc error\n");
-	else if (array_len((void **)buff) != 3)
-	{
-		free_array((void **)tmp);
-		free_array((void **)buff);
-		cub3d_err(data, "Color description error : format needed: r, g, b\n");
-	}
-	color = get_rgba(ft_atoi(buff[0]), ft_atoi(buff[1]), ft_atoi(buff[2]), 255);
-	return (free_array((void **)buff), color);
-}
 
 int	check_file_name(char *file)
 {

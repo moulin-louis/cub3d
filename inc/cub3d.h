@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/06 14:37:25 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/06 15:44:09 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,9 @@ typedef struct s_math
 
 t_data	parsing(char *path_map);
 void	add_map(t_data *data);
-
-int		get_color(t_data *data, char **tmp);
 int		check_map(t_data *data);
+void	add_textures(t_data *data);
+void	check_texture_color_error(t_data *data);
 
 /*----------------------------------RENDRING-------------------------------*/
 

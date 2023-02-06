@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+         #
+#    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/13 13:30:11 by loumouli          #+#    #+#              #
-#    Updated: 2023/02/06 14:02:36 by loumouli         ###   ########.fr        #
+#    Updated: 2023/02/06 15:04:15 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ C_FILES		=	main.c						\
 				parsing/parsing.c			\
 				parsing/check_map.c			\
 				parsing/set_map.c			\
+				parsing/set_textures.c		\
 				parsing/parsing_utils.c		\
 				
 					

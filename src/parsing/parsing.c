@@ -6,57 +6,13 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:34:07 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/06 14:55:26 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/06 15:43:16 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-mlx_image_t	*texture_to_img(t_data *data, char **tmp)
-{
-	mlx_image_t		*img;
-	mlx_texture_t	*texture;
-
-	texture = mlx_load_png(tmp[1]);
-	if (!texture)
-		return (free_array((void **)tmp), mlx_err(data), NULL);
-	img = mlx_texture_to_image(data->mlx, texture);
-	if (!img)
-		return (mlx_delete_texture(texture), free_array((void **)tmp),
-			mlx_err(data), NULL);
-	return (mlx_delete_texture(texture), img);
-}
-
-void	add_textures(t_data *data)
-{
-	int		i;
-	char	**tmp;
-
-	i = -1;
-	while (data->tmp_map[++i])
-	{
-		if (data->tmp_map[i] == NULL)
-			continue ;
-		tmp = ft_split(data->tmp_map[i], ' ');
-		if (!tmp)
-			cub3d_err(data, "Malloc error\n");
-		if (!ft_strcmp(tmp[0], "NO"))
-			data->nord = texture_to_img(data, tmp);
-		else if (!ft_strcmp(tmp[0], "SO"))
-			data->south = texture_to_img(data, tmp);
-		else if (!ft_strcmp(tmp[0], "WE"))
-			data->west = texture_to_img(data, tmp);
-		else if (!ft_strcmp(tmp[0], "EA"))
-			data->east = texture_to_img(data, tmp);
-		else if (!ft_strcmp(tmp[0], "F"))
-			data->floor = get_color(data, tmp);
-		else if (!ft_strcmp(tmp[0], "C"))
-			data->ceiling = get_color(data, tmp);
-		free_array((void **)tmp);
-	}
-}
-
-void	fill_buffer(t_data *data, char **buff, int nbr_lines, int fd)
+static void	fill_buffer(t_data *data, char **buff, int nbr_lines, int fd)
 {
 	int		i;
 	char	*tmp;
@@ -77,7 +33,7 @@ void	fill_buffer(t_data *data, char **buff, int nbr_lines, int fd)
 	}
 }
 
-char	**parse_file(t_data *data, char *file)
+static char	**parse_file(t_data *data, char *file)
 {
 	int		nbr_lines;
 	int		fd;
@@ -113,5 +69,6 @@ t_data	parsing(char *path_map)
 	if (!data.mlx)
 		mlx_err(&data);
 	add_textures(&data);
+	check_texture_color_error(&data);
 	return (data);
 }

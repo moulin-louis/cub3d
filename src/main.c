@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:38 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/06 11:23:08 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/06 14:59:38 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	init_data(t_data *data)
 	data->plane_x = 0;
 	data->plane_y = 0.66;
 	data->ceiling = get_rgba(0, 0, 0, 255);
-	data->floor  = get_rgba(255, 255, 255, 255);
+	data->floor = get_rgba(255, 255, 255, 255);
 }
 
 int	main(int ac, char **av)
