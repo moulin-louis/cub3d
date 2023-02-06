@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 16:40:42 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/06 14:03:03 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/06 14:30:50 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,20 @@ static int	get_map_len(t_data *data)
 
 	i = 0;
 	len = 0;
-	while(data->tmp_map && data->tmp_map[i])
+	while (data->tmp_map && data->tmp_map[i])
 	{
-		if(data->tmp_map[i] && (data->tmp_map[i][0] == '1'
+		if (data->tmp_map[i] && (data->tmp_map[i][0] == '1'
 			|| data->tmp_map[i][0] == ' '))
 		{
-			data->map_index = i;	
-			while(data->tmp_map[i] && (data->tmp_map[i][0] == '1'
+			data->map_index = i;
+			while (data->tmp_map[i] && (data->tmp_map[i][0] == '1'
 				|| data->tmp_map[i][0] == ' '))
 			{
 				len++;
 				i++;
 			}
 			data->end_index = data->map_index + len;
-			return(len);
+			return (len);
 		}
 		i++;
 	}
@@ -55,7 +55,7 @@ static void	set_player_dir(t_data *data, char dir)
 	else if (dir == 'W')
 	{
 		data->dir_x = 0;
-		data->dir_y = 1;			
+		data->dir_y = 1;
 	}
 	else if (dir == 'E')
 	{
@@ -84,7 +84,7 @@ static void	set_map_line(t_data *data, int i, int k)
 	int	j;
 
 	j = -1;
-	while(data->tmp_map[i][++j])
+	while (data->tmp_map[i][++j])
 	{
 		if (data->tmp_map[i][j] == 'N' || data->tmp_map[i][j] == 'S'
 			|| data->tmp_map[i][j] == 'W' || data->tmp_map[i][j] == 'E')
@@ -119,13 +119,4 @@ void	add_map(t_data *data)
 		i++;
 		k++;
 	}
-	// i = -1;
-	// while(data->map[++i])
-	// {
-	// 	int j = -1;
-	// 	printf("data->map[%d] : ", i);
-	// 	while(data->map[i][++j] != END)
-	// 		printf("%d", data->map[i][j]);
-	// 	printf("\n");
-	// }
 }

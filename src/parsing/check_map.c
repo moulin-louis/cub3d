@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 17:39:50 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/06 14:26:11 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/06 14:29:48 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void	check_char(t_data *data)
 				&& data->tmp_map[i][j] != 'S' && data->tmp_map[i][j] != 'W'
 				&& data->tmp_map[i][j] != 'E')
 				cub3d_err(data, "Invalid char in map !\n");
-			if(data->tmp_map[i][j] == 'N' || data->tmp_map[i][j] == 'S'
+			if (data->tmp_map[i][j] == 'N' || data->tmp_map[i][j] == 'S'
 				|| data->tmp_map[i][j] == 'W' || data->tmp_map[i][j] == 'E')
 				player++;
 			j++;
@@ -89,7 +89,7 @@ int	check_map(t_data *data)
 
 	i = data->map_index - 1;
 	check_char(data);
-	while(data->tmp_map[++i])
+	while (data->tmp_map[++i])
 	{
 		check_line(data, i);
 		end = ft_strlen(data->tmp_map[i]) - 1;

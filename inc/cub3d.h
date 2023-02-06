@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/06 14:27:52 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/06 14:37:25 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ typedef struct s_math
 t_data	parsing(char *path_map);
 void	add_map(t_data *data);
 
-int		check_file_name(char *file);
+int		get_color(t_data *data, char **tmp);
 int		check_map(t_data *data);
 
 /*----------------------------------RENDRING-------------------------------*/
@@ -116,6 +116,7 @@ int		get_rgba(int r, int g, int b, int a);
 int		ft_strcmp(const char *s1, const char *s2);
 int		array_len(void **array);
 int		get_nbr_lines(int fd);
+int		check_file_name(char *file);
 
 /*-----------------------------------ERROR---------------------------------*/
 
