@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:38 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/05 20:37:35 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/06 11:23:08 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@
 
 void	init_data(t_data *data)
 {
-	data->pos_x = 11;
-	data->pos_y = 25;
+	data->pos_x = 11.5;
+	data->pos_y = 25.5;
 	data->dir_x = -1;
 	data->dir_y = 0;
 	data->plane_x = 0;
@@ -63,7 +63,7 @@ int	main(int ac, char **av)
 	//init_image(&data);
 	init_data(&data);
 	mlx_loop_hook(data.mlx, rendering, (void *)&data);
-	mlx_key_hook(data.mlx, camera, (void *)&data);
+	mlx_loop_hook(data.mlx, camera, (void *)&data);
 	mlx_loop(data.mlx);
 	if (data.mlx)
 		mlx_terminate(data.mlx);
