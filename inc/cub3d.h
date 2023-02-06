@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/06 12:45:19 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/06 14:02:19 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,27 @@ typedef struct s_data
 
 }	t_data;
 
+typedef struct s_math
+{
+	double			camera_x;
+	double			ray_dirx;
+	double			ray_diry;
+	int				map_x;
+	int				map_y;
+	double			side_dist_x;
+	double			side_dist_y;
+	double			delta_dist_x;
+	double			delta_dist_y;
+	double			perp_wall_dist;
+	int				step_x;
+	int				step_y;
+	int				hit;
+	int				side;
+	int				line_height;
+	unsigned int	draw_start;
+	unsigned int	draw_end;
+}	t_math;
+
 /*----------------------------------PARSING--------------------------------*/
 
 t_data	parsing(char *path_map);
@@ -76,6 +97,11 @@ int		check_walls(t_data *data);
 void	rendering(void *data);
 int		get_rgb(int r, int g, int b);
 void	camera(void *ptr);
+void	draw_line(t_math *math, t_data *data, int x);
+void	calculate_draw_start_end(t_math *math);
+void	perform_dda(t_math *math, t_data *data);
+void	calculate_step(t_math *math, t_data *data);
+void	calculate_init(t_math *math, t_data *data, int x);
 
 /*-----------------------------------COLOR---------------------------------*/
 int		get_r(int rgba);
