@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/06 14:07:54 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/06 14:41:26 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@
 typedef struct s_data
 {
 	mlx_t		*mlx;
-	int			floor;
-	int			ceiling;
 	mlx_image_t	*img;
 
 	mlx_image_t	*nord;
@@ -51,6 +49,8 @@ typedef struct s_data
 	mlx_image_t	*east;
 
 	int			map_index;
+	int			ceiling;
+	int			floor;
 	char		**tmp_map;
 	int			**map;
 

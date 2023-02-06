@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:19:27 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/06 14:07:59 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/06 14:33:04 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	rendering(void *ptr)
 	}
 	old_time = time;
 	time = gettime();
-	(void)old_time;
+	printf("%ld fps\n", 1000/(time - old_time));
 	data->img->enabled = true;
 	return ;
 }

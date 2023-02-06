@@ -6,7 +6,7 @@
 #    By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/13 13:30:11 by loumouli          #+#    #+#              #
-#    Updated: 2023/02/06 14:02:36 by loumouli         ###   ########.fr        #
+#    Updated: 2023/02/06 14:23:42 by loumouli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,7 +85,7 @@ $(LIBFT):
 
 
 $(NAME): $(MLX) $(LIBFT) $(O_DIR) $(OBJS)
-			$(CC) $(OBJS) $(CFLAGS) $(MLX) $(LIBFT) -ldl -lglfw -lm -o $@
+			$(CC) $(OBJS) $(CFLAGS) $(MLX) $(LIBFT) -I ./MLX42/includes -lX11 -lXext -ldl -lglfw -pthread -lm -o $@
 
 # ################################## #
 #                CLEAN               #
