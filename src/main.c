@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:38 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/06 14:59:38 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/07 20:49:14 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,12 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (ft_putstr_fd("Error\ncub3d: wrong number of args !\n", 2), 1);
 	data = parsing(av[1]);
-	mlx_close_hook(data.mlx, close_prog, (void *)&data);
 	data.img = mlx_new_image(data.mlx, WIDTH, HEIGHT);
-	mlx_image_to_window(data.mlx, data.img, 0, 0);
-	//init_image(&data);
 	init_data(&data);
-	mlx_loop_hook(data.mlx, rendering, (void *)&data);
-	mlx_loop_hook(data.mlx, camera, (void *)&data);
+	mlx_hook(data.win, KeyPress, KeyPressMask, &camera, &data);
+	mlx_hook(data.win, KeyRelease, KeyReleaseMask, &camera, &data);
+	mlx_hook(data.win, ClientMessage, NoEventMask, &close_prog, &data);
+	mlx_loop_hook(data.mlx, rendering, &data);
 	mlx_loop(data.mlx);
-	if (data.mlx)
-		mlx_terminate(data.mlx);
 	return (0);
 }

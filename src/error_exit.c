@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:39:48 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/06 15:00:39 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/07 20:30:54 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,41 +24,42 @@ void	free_array(void **array)
 	free(array);
 }
 
-static	void	clean_exit(t_data *data, int err)
+void	clean_exit(t_data *data, int err)
 {
 	if (data)
 	{
 		if (data->nord)
-			mlx_delete_image(data->mlx, data->nord);
+			mlx_destroy_image(data->mlx, data->nord);
 		if (data->south)
-			mlx_delete_image(data->mlx, data->south);
+			mlx_destroy_image(data->mlx, data->south);
 		if (data->west)
-			mlx_delete_image(data->mlx, data->west);
+			mlx_destroy_image(data->mlx, data->west);
 		if (data->east)
-			mlx_delete_image(data->mlx, data->east);
+			mlx_destroy_image(data->mlx, data->east);
 		if (data->img)
-			mlx_delete_image(data->mlx, data->img);
-		if (data->mlx)
-			mlx_terminate(data->mlx);
+			mlx_destroy_image(data->mlx, data->img);
 		if (data->tmp_map)
 			free_array((void **)data->tmp_map);
 		if (data->map)
 			free_array((void **)data->map);
+		mlx_destroy_window(data->mlx, data->win);
+		mlx_destroy_display(data->mlx);
+		free(data->mlx);
 	}
 	exit(err);
 }
 
-void	close_prog(void *ptr)
+int	close_prog(void *ptr)
 {
 	clean_exit((t_data *)ptr, 0);
-	exit(1);
+	return (0);
 }
 
 void	mlx_err(t_data *data)
 {
 	ft_putstr_fd("Error\n", 2);
-	ft_putstr_fd(strerror(mlx_errno), 2);
-	clean_exit(data, mlx_errno);
+	//ft_putstr_fd(strerror(mlx_errno), 2);
+	clean_exit(data, 1);
 }
 
 void	cub3d_err(t_data *data, char *err)

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
+#    By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/13 13:30:11 by loumouli          #+#    #+#              #
-#    Updated: 2023/02/06 15:04:15 by mpignet          ###   ########.fr        #
+#    Updated: 2023/02/07 20:40:07 by loumouli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,8 +35,8 @@ C_FILES		=	main.c						\
 				parsing/parsing.c			\
 				parsing/check_map.c			\
 				parsing/set_map.c			\
-				parsing/set_textures.c		\
 				parsing/parsing_utils.c		\
+				#parsing/set_textures.c		\
 				
 					
 SRCS		= $(patsubst %, $(C_DIR)/%, $(C_FILES))
@@ -56,8 +56,8 @@ CFLAGS		= -Wall -Wextra -Werror -g -MMD
 # ################################## #
 #                INCLUDES            #
 # ################################## #
-CINCLUDES	=	-I ./inc -I ./libft/inc -I ./MLX42/include/MLX42
-MLX			= 	./MLX42/build/libmlx42.a
+CINCLUDES	=	-I ./inc -I ./libft/inc -I ./minilibx-linux
+MLX			= 	./minilibx-linux/libmlx.a
 LIBFT 		= 	./libft/libft.a
 
 # ################################## #
@@ -72,21 +72,19 @@ $(O_DIR):
 			$(MKDIR) $(O_DIR)/rendering
 
 $(O_DIR)/%.o: $(C_DIR)/%.c
-			$(CC) $(CFLAGS) $(CINCLUDES) -c $< -o $@
+			$(CC) $(CFLAGS) $(CINCLUDES) -O2 -c $< -o $@
 
 
 $(MLX):
 		@echo "Compiling MLX from source :"
-		@echo
-		cmake ./MLX42 -B ./MLX42/build
-		cmake --build ./MLX42/build
+		make -C ./minilibx-linux
 
 $(LIBFT):
 		make -C ./libft
 
 
 $(NAME): $(MLX) $(LIBFT) $(O_DIR) $(OBJS)
-			$(CC) $(OBJS) $(CFLAGS) $(MLX) $(LIBFT) -ldl -lglfw -lm -o $@
+			$(CC) $(OBJS) $(CFLAGS) $(MLX) $(LIBFT) -O2 -lX11 -lXext -o $@
 
 # ################################## #
 #                CLEAN               #
