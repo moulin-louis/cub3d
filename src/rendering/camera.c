@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 12:54:37 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/06 17:16:48 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/07 21:05:15 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,7 @@ int	camera(int key, void *ptr)
 
 	data = (t_data *)ptr;
 	if (key == XK_Escape)
-	{
-		printf("here");
-		mlx_err(data);
-	}
+		close_prog(ptr);
 	if (key == XK_W)
 	{
 		if (data->map[(int)(data->pos_x + data->dir_x * MOVSPEED)][(int)data->pos_y] == 0)
