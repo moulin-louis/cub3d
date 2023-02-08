@@ -30,7 +30,7 @@
 #include <X11/X.h>
 #include <X11/keysym.h>
 
-# define FOV 80
+# define FOV 0.66
 # define WIDTH 1280
 # define HEIGHT 720
 # define SPACE 9
@@ -86,6 +86,7 @@ typedef struct s_math
 	int				line_height;
 	unsigned int	draw_start;
 	unsigned int	draw_end;
+	int				color;
 }	t_math;
 
 /*----------------------------------PARSING--------------------------------*/
@@ -99,7 +100,6 @@ void	check_texture_color_error(t_data *data);
 /*----------------------------------RENDRING-------------------------------*/
 
 int		rendering(void *data);
-int		get_rgb(int r, int g, int b);
 int		camera(int key, void *ptr);
 void	draw_line(t_math *math, t_data *data, int x);
 void	calculate_draw_start_end(t_math *math);
@@ -108,11 +108,8 @@ void	calculate_step(t_math *math, t_data *data);
 void	calculate_init(t_math *math, t_data *data, int x);
 
 /*-----------------------------------COLOR---------------------------------*/
-int		get_r(int rgba);
-int		get_g(int rgba);
-int		get_b(int rgba);
-int		get_a(int rgba);
 int		get_rgb(int red, int green, int blue);
+int		check_side(t_data *data);
 
 /*-----------------------------------UTILS---------------------------------*/
 

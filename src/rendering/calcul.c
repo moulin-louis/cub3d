@@ -95,18 +95,18 @@ void	calculate_draw_start_end(t_math *math)
 
 void	draw_line(t_math *math, t_data *data, int x)
 {
-	int	color;
 	int	it;
 
-	color = get_rgb(255, 0, 0);
-	if (math->side == 1)
-		color = color / 2;
+
 	it = -1;
+	if (data->dir_x < 0 && math->hit == 0)
+		math->color = get_rgb(255, 0, 0 );
+	printf("dir_x = %f dir_y = %f\n", data->dir_x, data->dir_y);
 	while (++it < (int)math->draw_start)
 		mlx_pixel_put(data->mlx, data->win, x, it, data->ceiling);
 	it = math->draw_start - 1;
 	while (++it < (int)math->draw_end)
-		mlx_pixel_put(data->mlx, data->win, x, it, color);
+		mlx_pixel_put(data->mlx, data->win, x, it, math->color);
 	it = math->draw_end - 1;
 	while (++it < HEIGHT)
 		mlx_pixel_put(data->mlx, data->win, x, it, data->floor);

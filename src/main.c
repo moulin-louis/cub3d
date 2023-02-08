@@ -19,7 +19,7 @@ void	init_data(t_data *data)
 	data->dir_x = -1;
 	data->dir_y = 0;
 	data->plane_x = 0;
-	data->plane_y = 0.66;
+	data->plane_y = FOV;
 	data->ceiling = get_rgb(0, 0, 0);
 	data->floor = get_rgb(255, 255, 255);
 }

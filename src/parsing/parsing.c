@@ -72,7 +72,7 @@ t_data	parsing(char *path_map)
 	data.win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "CUB3D");
 	if (!data.win)
 		mlx_err(&data);
-	add_textures(&data);
-	check_texture_color_error(&data);
+	//add_textures(&data);
+	//check_texture_color_error(&data);
 	return (data);
 }
