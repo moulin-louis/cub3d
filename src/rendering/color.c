@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rendering.c                                        :+:      :+:    :+:   */
+/*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/02 14:19:27 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/07 21:04:11 by loumouli         ###   ########.fr       */
+/*   Created: 2023/02/08 14:46:44 by loumouli          #+#    #+#             */
+/*   Updated: 2023/02/08 15:04:31 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	rendering(void *ptr)
+int	get_rgb(int red, int green, int blue)
 {
-	t_data	*data;
-	t_math	math;
-	int		x;
+	return (red << 16 | green << 8 | blue);
+}
 
-	data = (t_data *)ptr;
-	x = -1;
-	while (++x < WIDTH)
-	{
-		ft_memset(&math, 0, sizeof(math));
-		calculate_init(&math, data, x);
-		calculate_step(&math, data);
-		perform_dda(&math, data);
-		calculate_draw_start_end(&math);
-		draw_line(&math, data, x);
-	}
-	return (0);
+int	check_side(t_data *data)
+{
+	int result;
+
+	(void)data;
+	//printf("data->dir_x = %f data->dir_y = %f\n", data->dir_x, data->dir_y);
+	result = 0;
+	return (result);
 }
