@@ -1,34 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rendering.c                                        :+:      :+:    :+:   */
+/*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/02 14:19:27 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/07 21:04:11 by loumouli         ###   ########.fr       */
+/*   Created: 2023/02/08 18:17:35 by loumouli          #+#    #+#             */
+/*   Updated: 2023/02/08 18:17:35 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	rendering(void *ptr)
+void	draw_minimap(t_data *data)
 {
-	t_data	*data;
-	t_math	math;
-	int		x;
-
-	data = (t_data *)ptr;
-	x = -1;
-	while (++x < WIDTH)
-	{
-		ft_memset(&math, 0, sizeof(math));
-		calculate_init(&math, data, x);
-		calculate_step(&math, data);
-		perform_dda(&math, data);
-		calculate_draw_start_end(&math);
-		draw_line(&math, data, x);
-	}
-    draw_minimap(data);
-	return (0);
+	(void)data;
+	return ;
 }

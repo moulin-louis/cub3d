@@ -32,6 +32,7 @@ C_FILES		=	main.c						\
 				rendering/camera.c			\
 				rendering/calcul.c			\
 				rendering/color.c			\
+				rendering/minimap.c			\
 				parsing/parsing.c			\
 				parsing/check_map.c			\
 				parsing/set_map.c			\

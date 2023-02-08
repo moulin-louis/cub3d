@@ -105,6 +105,7 @@ void	calculate_draw_start_end(t_math *math);
 void	perform_dda(t_math *math, t_data *data);
 void	calculate_step(t_math *math, t_data *data);
 void	calculate_init(t_math *math, t_data *data, int x);
+void	draw_minimap(t_data *data);
 
 /*-----------------------------------COLOR---------------------------------*/
 int		get_rgb(int red, int green, int blue);
