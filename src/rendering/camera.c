@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 12:54:37 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/07 21:05:15 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/08 15:34:10 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,8 @@
 #define ROTSPEED 0.05
 #define MOVSPEED 0.05
 
-void	camera2(int key, t_data *data)
+void	camera_sides(int key, t_data *data, double old_var)
 {
-	double	old_var;
-
-	// if (key.key == MLX_KEY_D && ((key.action == MLX_REPEAT
-	// 			|| key.action == MLX_PRESS)))
-	// {
-	// 	data->pos_x -= data->dir_x * MOVSPEED;
-	// 	data->pos_y += data->dir_y * MOVSPEED;
-	// }
-	// if (key.key == MLX_KEY_A && ((key.action == MLX_REPEAT
-	// 			|| key.action == MLX_PRESS)))
-	// {
-	// 	data->pos_x -= data->dir_x * MOVSPEED;
-	// 	data->pos_y -= data->dir_y * MOVSPEED;
-	// }
 	if (key == XK_Right)
 	{
 		old_var = data->dir_x;
@@ -43,30 +29,6 @@ void	camera2(int key, t_data *data)
 		data->plane_y = old_var * sin(-ROTSPEED) + data->plane_y
 			* cos(-ROTSPEED);
 	}
-}
-
-int	camera(int key, void *ptr)
-{
-	t_data	*data;
-	double	old_var;
-
-	data = (t_data *)ptr;
-	if (key == XK_Escape)
-		close_prog(ptr);
-	if (key == XK_w)
-	{
-		if (data->map[(int)(data->pos_x + data->dir_x * MOVSPEED)][(int)data->pos_y] == 0)
-			data->pos_x += data->dir_x * MOVSPEED;
-		if (data->map[(int)data->pos_x][(int)(data->pos_y + data->dir_y * MOVSPEED)] == 0)
-			data->pos_y += data->dir_y * MOVSPEED;
-	}
-	if (key == XK_s)
-	{
-		if (data->map[(int)(data->pos_x - data->dir_x * MOVSPEED)][(int)data->pos_y] == 0)
-			data->pos_x -= data->dir_x * MOVSPEED;
-		if (data->map[(int)data->pos_x][(int)(data->pos_y - data->dir_y * MOVSPEED)] == 0)
-			data->pos_y -= data->dir_y * MOVSPEED;
-	}
 	if (key == XK_Left)
 	{
 		old_var = data->dir_x;
@@ -78,6 +40,69 @@ int	camera(int key, void *ptr)
 		data->plane_y = old_var * sin(ROTSPEED) + data->plane_y
 			* cos(ROTSPEED);
 	}
-	camera2(key, data);
+}
+
+void	camera_strafe(int key, t_data *data)
+{
+	int		diff_x;
+	int		diff_y;
+
+	if (key == XK_a)
+	{
+		diff_x = (int)(data->pos_x - data->dir_y * MOVSPEED);
+		diff_y = (int)(data->pos_y + data->dir_x * MOVSPEED);
+		if (data->map[diff_x][(int)data->pos_y] == 0)
+			data->pos_x -= data->dir_y * MOVSPEED;
+		if (data->map[(int)data->pos_x][diff_y] == 0)
+			data->pos_y += data->dir_x * MOVSPEED;
+	}
+	if (key == XK_d)
+	{
+		diff_x = (int)(data->pos_x + data->dir_y * MOVSPEED);
+		diff_y = (int)(data->pos_y - data->dir_x * MOVSPEED);
+		if (data->map[diff_x][(int)data->pos_y] == 0)
+			data->pos_x += data->dir_y * MOVSPEED;
+		if (data->map[(int)data->pos_x][diff_y] == 0)
+			data->pos_y -= data->dir_x * MOVSPEED;
+	}
+}
+
+void	camera_forw_backw(int key, t_data *data)
+{
+	int		diff_x;
+	int		diff_y;
+
+	if (key == XK_w)
+	{
+		diff_x = (int)(data->pos_x + data->dir_x * MOVSPEED);
+		diff_y = (int)(data->pos_y + data->dir_y * MOVSPEED);
+		if (data->map[diff_x][(int)data->pos_y] == 0)
+			data->pos_x += data->dir_x * MOVSPEED;
+		if (data->map[(int)data->pos_x][diff_y] == 0)
+			data->pos_y += data->dir_y * MOVSPEED;
+	}
+	if (key == XK_s)
+	{
+		diff_x = (int)(data->pos_x - data->dir_x * MOVSPEED);
+		diff_y = (int)(data->pos_y - data->dir_y * MOVSPEED);
+		if (data->map[diff_x][(int)data->pos_y] == 0)
+			data->pos_x -= data->dir_x * MOVSPEED;
+		if (data->map[(int)data->pos_x][diff_y] == 0)
+			data->pos_y -= data->dir_y * MOVSPEED;
+	}
+}
+
+int	camera(int key, void *ptr)
+{
+	t_data	*data;
+	double	old_var;
+
+	data = (t_data *)ptr;
+	old_var = 0;
+	if (key == XK_Escape)
+		close_prog(ptr);
+	camera_forw_backw(key, data);
+	camera_sides(key, data, old_var);
+	camera_strafe(key, data);
 	return (0);
 }

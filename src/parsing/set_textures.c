@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:03:51 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/06 15:50:52 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/08 15:41:34 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,32 +30,41 @@ static int	get_color(t_data *data, char **tmp)
 	return (free_array((void **)buff), color);
 }
 
-static void	check_and_add_texture(t_data *data, char **tmp)
+static void	add_we_ea(t_data *data, char **tmp)
 {
-	if (!ft_strcmp(tmp[0], "NO"))
-	{
-		if (data->nord)
-			cub3d_err(data, "Mutiple path definitions for North walls\n");
-		data->nord = mlx_xpm_file_to_image(data->mlx, tmp[1], NULL, NULL);
-	}
-	else if (!ft_strcmp(tmp[0], "SO"))
-	{
-		if (data->south)
-			cub3d_err(data, "Mutiple path definitions for South walls\n");
-		data->south = mlx_xpm_file_to_image(data->mlx, tmp[1], NULL, NULL);
-	}
-	else if (!ft_strcmp(tmp[0], "WE"))
+	int	n;
+
+	if (!ft_strcmp(tmp[0], "WE"))
 	{
 		if (data->west)
 			cub3d_err(data, "Mutiple path definitions for West walls\n");
-		data->west = mlx_xpm_file_to_image(data->mlx, tmp[1], NULL, NULL);
+		data->west = mlx_xpm_file_to_image(data->mlx, tmp[1], &n, &n);
 	}
 	else if (!ft_strcmp(tmp[0], "EA"))
 	{
 		if (data->east)
 			cub3d_err(data, "Mutiple path definitions for East walls\n");
-		data->east = mlx_xpm_file_to_image(data->mlx, tmp[1], NULL, NULL);
+		data->east = mlx_xpm_file_to_image(data->mlx, tmp[1], &n, &n);
+	}	
+}
+
+static void	check_and_add_texture(t_data *data, char **tmp)
+{
+	int	n;
+
+	if (!ft_strcmp(tmp[0], "NO"))
+	{
+		if (data->nord)
+			cub3d_err(data, "Mutiple path definitions for North walls\n");
+		data->nord = mlx_xpm_file_to_image(data->mlx, tmp[1], &n, &n);
 	}
+	else if (!ft_strcmp(tmp[0], "SO"))
+	{
+		if (data->south)
+			cub3d_err(data, "Mutiple path definitions for South walls\n");
+		data->south = mlx_xpm_file_to_image(data->mlx, tmp[1], &n, &n);
+	}
+	add_we_ea(data, tmp);
 }
 
 void	check_texture_color_error(t_data *data)
@@ -74,7 +83,7 @@ void	check_texture_color_error(t_data *data)
 		cub3d_err(data, "Missing color for Ceiling\n");
 }
 
-void	add_textures(t_data *data)
+void	add_textures_and_colors(t_data *data)
 {
 	int		i;
 	char	**tmp;
@@ -82,8 +91,6 @@ void	add_textures(t_data *data)
 	i = -1;
 	while (data->tmp_map[++i])
 	{
-		if (data->tmp_map[i] == NULL)
-			continue ;
 		tmp = ft_split(data->tmp_map[i], ' ');
 		if (!tmp)
 			cub3d_err(data, "Malloc error\n");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:38 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/07 20:49:14 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/08 14:31:02 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	init_data(t_data *data)
 	data->dir_x = -1;
 	data->dir_y = 0;
 	data->plane_x = 0;
-	data->plane_y = 0.66;
+	data->plane_y = FOV;
 	data->ceiling = get_rgb(0, 0, 0);
 	data->floor = get_rgb(255, 255, 255);
 }

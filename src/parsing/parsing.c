@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:34:07 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/07 20:34:25 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/08 15:41:30 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_data	parsing(char *path_map)
 	data.win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "CUB3D");
 	if (!data.win)
 		mlx_err(&data);
-	add_textures(&data);
+	add_textures_and_colors(&data);
 	check_texture_color_error(&data);
 	return (data);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/07 20:26:44 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/08 15:41:22 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@
 # include <time.h>
 # include "../lib/libft/inc/libft.h"
 # include "../lib/minilibx-linux/mlx.h"
-#include <X11/X.h>
-#include <X11/keysym.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
 
-# define FOV 80
+# define FOV 0.66
 # define WIDTH 1280
 # define HEIGHT 720
 # define SPACE 9
@@ -93,7 +93,7 @@ typedef struct s_math
 t_data	parsing(char *path_map);
 void	add_map(t_data *data);
 int		check_map(t_data *data);
-void	add_textures(t_data *data);
+void	add_textures_and_colors(t_data *data);
 void	check_texture_color_error(t_data *data);
 
 /*----------------------------------RENDRING-------------------------------*/

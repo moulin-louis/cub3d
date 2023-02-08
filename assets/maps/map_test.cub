@@ -1,10 +1,13 @@
-NO /mnt/nfs/homes/loumouli/cub3d/assets/textures/BRICK_1A.png
-SO /mnt/nfs/homes/loumouli/cub3d/assets/textures/BRICK_2A.png
-WE /mnt/nfs/homes/loumouli/cub3d/assets/textures/BRICK_3D.png
-EA /mnt/nfs/homes/loumouli/cub3d/assets/textures/BRICK_4A.png
+NO ./assets/textures/BRICK_1A.xpm
+SO ./assets/textures/BRICK_2A.xpm
+WE ./assets/textures/BRICK_3D.xpm
+EA ./assets/textures/BRICK_4A.xpm
 
 F 220,100,0
 C 225,30,0
+
+
+
 
         1111111111111111111111111
         1000000000110000100000001

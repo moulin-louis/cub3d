@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calcul.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:01:34 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/07 20:50:16 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/08 13:53:41 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	perform_dda(t_math *math, t_data *data)
 			math->map_y += math->step_y;
 			math->side = 1;
 		}
-		if (data->map[math->map_x][math->map_y] > 0)
+		if (data->map[math->map_x][math->map_y] == 1)
 			math->hit = 1;
 	}
 }
