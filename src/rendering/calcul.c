@@ -98,7 +98,7 @@ void	draw_line(t_math *math, t_data *data, int x)
 	int	color;
 	int	it;
 
-	color = get_rgba(255, 0, 0);
+	color = get_rgb(255, 0, 0);
 	if (math->side == 1)
 		color = color / 2;
 	it = -1;

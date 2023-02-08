@@ -12,20 +12,19 @@
 
 #include "cub3d.h"
 
-int	get_rgba(int red, int green, int blue)
+int	get_rgb(int red, int green, int blue)
 {
-	return (red << 16 | green << 8 | blue );
+	return (red << 16 | green << 8 | blue);
 }
 
 int	rendering(void *ptr)
 {
-	t_data			*data;
-	t_math			math;
-	int				x;
+	t_data	*data;
+	t_math	math;
+	int		x;
 
 	data = (t_data *)ptr;
 	x = -1;
-	//mlx_clear_window(data->mlx, data->win);
 	while (++x < WIDTH)
 	{
 		ft_memset(&math, 0, sizeof(math));
@@ -35,6 +34,5 @@ int	rendering(void *ptr)
 		calculate_draw_start_end(&math);
 		draw_line(&math, data, x);
 	}
-	//mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	return (0);
 }

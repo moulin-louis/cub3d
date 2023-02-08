@@ -12,32 +12,6 @@
 
 #include "cub3d.h"
 
-// void	init_image(t_data *data)
-// {
-// 	int	x;
-
-// 	x = 0;
-// 	while (x < WIDTH)
-// 	{
-// 		data->img[x] = mlx_new_image(data->mlx, 1, HEIGHT);
-// 		memset(data->img[x]->pixels, 255, data->img[x]->width * data->img[x]->height * sizeof(int32_t));
-// 		if (!data->img[x])
-// 			break ;
-// 		mlx_image_to_window(data->mlx, data->img[x], x, 0);
-// 		x++;
-// 	}
-// 	if (x < WIDTH)
-// 	{
-// 		while (x)
-// 		{
-// 			mlx_delete_image(data->mlx, data->img[x]);
-// 			x--;
-// 		}
-// 		mlx_err(data);
-// 	}
-// 	return ;
-// }
-
 void	init_data(t_data *data)
 {
 	data->pos_x = 11.5;
@@ -46,8 +20,8 @@ void	init_data(t_data *data)
 	data->dir_y = 0;
 	data->plane_x = 0;
 	data->plane_y = 0.66;
-	data->ceiling = get_rgba(0, 0, 0);
-	data->floor = get_rgba(255, 255, 255);
+	data->ceiling = get_rgb(0, 0, 0);
+	data->floor = get_rgb(255, 255, 255);
 }
 
 int	main(int ac, char **av)

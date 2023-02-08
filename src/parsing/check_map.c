@@ -83,9 +83,9 @@ static void	check_char(t_data *data)
 
 int	check_map(t_data *data)
 {
-	int	i;
-	int	end;
-	int	begin;
+	int				i;
+	unsigned int	end;
+	int				begin;
 
 	i = data->map_index - 1;
 	check_char(data);

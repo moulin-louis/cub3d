@@ -47,7 +47,7 @@ static char	**parse_file(t_data *data, char *file)
 	buff = malloc(sizeof(char *) * (nbr_lines + 1));
 	if (!buff)
 		cub3d_err(data, "Malloc error\n");
-    buff[nbr_lines] = NULL;
+	buff[nbr_lines] = NULL;
 	close(fd);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
@@ -73,6 +73,6 @@ t_data	parsing(char *path_map)
 	if (!data.win)
 		mlx_err(&data);
 	add_textures(&data);
-	//check_texture_color_error(&data);
+	check_texture_color_error(&data);
 	return (data);
 }

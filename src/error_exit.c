@@ -42,13 +42,13 @@ void	clean_exit(t_data *data, int err)
 			free_array((void **)data->tmp_map);
 		if (data->map)
 			free_array((void **)data->map);
-        if (data->win)
-		    mlx_destroy_window(data->mlx, data->win);
-        if (data->mlx)
-        {
-		    mlx_destroy_display(data->mlx);
-		    free(data->mlx);
-        }
+		if (data->win)
+			mlx_destroy_window(data->mlx, data->win);
+		if (data->mlx)
+		{
+			mlx_destroy_display(data->mlx);
+			free(data->mlx);
+		}
 	}
 	exit(err);
 }
@@ -62,7 +62,6 @@ int	close_prog(void *ptr)
 void	mlx_err(t_data *data)
 {
 	ft_putstr_fd("Error\n", 2);
-	//ft_putstr_fd(strerror(mlx_errno), 2);
 	clean_exit(data, 1);
 }
 
