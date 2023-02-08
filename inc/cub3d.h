@@ -25,8 +25,10 @@
 # include <errno.h>
 # include <math.h>
 # include <time.h>
-# include "libft.h"
-# include "MLX42.h"
+# include "../lib/libft/inc/libft.h"
+# include "../lib/minilibx-linux/mlx.h"
+#include <X11/X.h>
+#include <X11/keysym.h>
 
 # define FOV 80
 # define WIDTH 1280
@@ -40,17 +42,19 @@
 
 typedef struct s_data
 {
-	mlx_t		*mlx;
-	mlx_image_t	*img;
+	void		*mlx;
+	void		*img;
+	void		*win;
+	int			floor;
+	int			ceiling;
 
-	mlx_image_t	*nord;
-	mlx_image_t	*south;
-	mlx_image_t	*west;
-	mlx_image_t	*east;
+	void		*nord;
+	void		*south;
+	void		*west;
+	void		*east;
 
 	int			map_index;
-	int			ceiling;
-	int			floor;
+	int			end_index;
 	char		**tmp_map;
 	int			**map;
 
@@ -88,15 +92,15 @@ typedef struct s_math
 
 t_data	parsing(char *path_map);
 void	add_map(t_data *data);
-
-int		check_file_name(char *file);
 int		check_map(t_data *data);
+void	add_textures(t_data *data);
+void	check_texture_color_error(t_data *data);
 
 /*----------------------------------RENDRING-------------------------------*/
 
-void	rendering(void *data);
+int		rendering(void *data);
 int		get_rgb(int r, int g, int b);
-void	camera(void *ptr);
+int		camera(int key, void *ptr);
 void	draw_line(t_math *math, t_data *data, int x);
 void	calculate_draw_start_end(t_math *math);
 void	perform_dda(t_math *math, t_data *data);
@@ -108,19 +112,20 @@ int		get_r(int rgba);
 int		get_g(int rgba);
 int		get_b(int rgba);
 int		get_a(int rgba);
-int		get_rgba(int r, int g, int b, int a);
+int		get_rgb(int red, int green, int blue);
 
 /*-----------------------------------UTILS---------------------------------*/
 
 int		ft_strcmp(const char *s1, const char *s2);
 int		array_len(void **array);
 int		get_nbr_lines(int fd);
+int		check_file_name(char *file);
 
 /*-----------------------------------ERROR---------------------------------*/
 
 void	mlx_err(t_data *data);
 void	cub3d_err(t_data *data, char *err);
 void	free_array(void **array);
-void	close_prog(void *ptr);
+int		close_prog(void *ptr);
 
 #endif

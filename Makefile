@@ -30,12 +30,12 @@ C_FILES		=	main.c						\
 				error_exit.c				\
 				rendering/rendering.c		\
 				rendering/camera.c			\
-				rendering/color.c			\
 				rendering/calcul.c			\
 				parsing/parsing.c			\
 				parsing/check_map.c			\
 				parsing/set_map.c			\
 				parsing/parsing_utils.c		\
+				parsing/set_textures.c		\
 				
 					
 SRCS		= $(patsubst %, $(C_DIR)/%, $(C_FILES))
@@ -55,9 +55,9 @@ CFLAGS		= -Wall -Wextra -Werror -g -MMD
 # ################################## #
 #                INCLUDES            #
 # ################################## #
-CINCLUDES	=	-I ./inc -I ./libft/inc -I ./MLX42/include/MLX42
-MLX			= 	./MLX42/build/libmlx42.a
-LIBFT 		= 	./libft/libft.a
+CINCLUDES	=	-I ./inc -I ./lib/libft/inc -I ./lib/minilibx-linux
+MLX			= 	./lib/minilibx-linux/libmlx.a
+LIBFT 		= 	./lib/libft/libft.a
 
 # ################################## #
 #                RULES               #
@@ -76,28 +76,27 @@ $(O_DIR)/%.o: $(C_DIR)/%.c
 
 $(MLX):
 		@echo "Compiling MLX from source :"
-		@echo
-		cmake ./MLX42 -B ./MLX42/build
-		cmake --build ./MLX42/build
+		make -C ./lib/minilibx-linux
 
 $(LIBFT):
-		make -C ./libft
+		make -C ./lib/libft
 
 
 $(NAME): $(MLX) $(LIBFT) $(O_DIR) $(OBJS)
-			$(CC) $(OBJS) $(CFLAGS) $(MLX) $(LIBFT) -I ./MLX42/includes -lX11 -lXext -ldl -lglfw -pthread -lm -o $@
+			$(CC) $(OBJS) $(CFLAGS) $(MLX) $(LIBFT) -lX11 -lXext -lm -o $@
 
 # ################################## #
 #                CLEAN               #
 # ################################## #
 
 clean:
-			make -C ./libft clean
+			make -C ./lib/libft clean
 			$(RM) $(O_DIR)
 
-fclean:		clean
-			${RM} ./MLX42/build
-			make -C ./libft fclean
+fclean:
+			$(RM) $(O_DIR)
+			make -C ./lib/minilibx-linux clean
+			make -C ./lib/libft fclean
 			$(RM) $(NAME)
 
 

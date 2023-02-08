@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:01:34 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/06 14:05:25 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/07 20:50:16 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,20 +95,19 @@ void	calculate_draw_start_end(t_math *math)
 
 void	draw_line(t_math *math, t_data *data, int x)
 {
-	int				color;
-	unsigned int	it;
+	int	color;
+	int	it;
 
-	if (data->map[math->map_x][math->map_y] == 1)
-		color = get_rgba(255, 0, 0, 255);
+	color = get_rgb(255, 0, 0);
 	if (math->side == 1)
 		color = color / 2;
 	it = -1;
-	while (++it < math->draw_start)
-		mlx_put_pixel(data->img, x, it, data->ceiling);
+	while (++it < (int)math->draw_start)
+		mlx_pixel_put(data->mlx, data->win, x, it, data->ceiling);
 	it = math->draw_start - 1;
-	while (++it < math->draw_end)
-		mlx_put_pixel(data->img, x, it, color);
+	while (++it < (int)math->draw_end)
+		mlx_pixel_put(data->mlx, data->win, x, it, color);
 	it = math->draw_end - 1;
 	while (++it < HEIGHT)
-		mlx_put_pixel(data->img, x, it, data->floor);
+		mlx_pixel_put(data->mlx, data->win, x, it, data->floor);
 }

@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:56:27 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/06 13:34:19 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/06 15:05:36 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	array_len(void **array)
 	if (!array)
 		return (0);
 	i = 0;
-	while(array[i])
+	while (array[i])
 		i++;
 	return (i);
 }
