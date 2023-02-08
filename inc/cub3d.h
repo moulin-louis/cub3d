@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/08 15:41:22 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/08 16:46:06 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@
 typedef struct s_data
 {
 	void		*mlx;
-	void		*img;
 	void		*win;
 	int			floor;
 	int			ceiling;

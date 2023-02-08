@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 16:40:42 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/06 15:41:44 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/08 16:43:43 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,29 +45,38 @@ static void	set_player_dir(t_data *data, char dir)
 	{
 		data->dir_x = -1;
 		data->dir_y = 0;
+		data->plane_x = 0;
+		data->plane_y = FOV;
 	}
 	else if (dir == 'S')
 	{
-		data->dir_x = 0;
+		data->dir_x = 1;
 		data->dir_y = 0;
+		data->plane_x = 0;
+		data->plane_y = -FOV;
 	}
 	else if (dir == 'W')
 	{
 		data->dir_x = 0;
-		data->dir_y = 1;
+		data->dir_y = -1;
+		data->plane_x = -FOV;
+		data->plane_y = 0;
 	}
 	else if (dir == 'E')
 	{
 		data->dir_x = 0;
-		data->dir_y = -1;
+		data->dir_y = 1;
+		data->plane_x = FOV;
+		data->plane_y = 0;
 	}
 }
 
 static void	set_player_start_pos(t_data *data, int i, int k, int j)
 {
 	data->map[k][j] = 0;
-	data->pos_y = (double)k;
-	data->pos_x = (double)j;
+	data->pos_x = (double)k + 0.5;
+	data->pos_y = (double)j + 0.5;
+	printf("data->pos_x : %f // data->pos_y : %f\n", data->pos_x, data->pos_y);
 	if (data->tmp_map[i][j] == 'N')
 		set_player_dir(data, 'N');
 	else if (data->tmp_map[i][j] == 'S')
