@@ -98,18 +98,16 @@ void	draw_line(t_math *math, t_data *data, int x)
 	int				color;
 	unsigned int	it;
 
-	color = 0;
-	if (data->map[math->map_x][math->map_y] == 1)
-		color = get_rgba(255, 0, 0, 255);
+    color = get_rgba(255, 0, 0, 255);
 	if (math->side == 1)
 		color = color / 2;
 	it = -1;
 	while (++it < math->draw_start)
-		mlx_pixel_put(data->mlx, data->win, x, it, data->ceiling);
+		mlx_pixel_put(data->mlx, data->win, x, (int)it, data->ceiling);
 	it = math->draw_start - 1;
 	while (++it < math->draw_end)
-		mlx_pixel_put(data->mlx, data->win, x, it, color);
+		mlx_pixel_put(data->mlx, data->win, x, (int)it, color);
 	it = math->draw_end - 1;
 	while (++it < HEIGHT)
-		mlx_pixel_put(data->mlx, data->win, x, it, data->floor);
+		mlx_pixel_put(data->mlx, data->win, x, (int)it, data->floor);
 }

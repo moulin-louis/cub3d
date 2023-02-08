@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-int	get_rgba(int r, int g, int b, int a)
+int	get_rgba(int red, int green, int blue, int alpha)
 {
-	return (r << 24 | g << 16 | b << 8 | a);
+	return (red << 24 | green << 16 | blue << 8 | alpha);
 }

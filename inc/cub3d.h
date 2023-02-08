@@ -25,8 +25,8 @@
 # include <errno.h>
 # include <math.h>
 # include <time.h>
-# include "libft.h"
-# include "mlx.h"
+# include "../lib/libft/inc/libft.h"
+# include "../lib/minilibx-linux/mlx.h"
 #include <X11/X.h>
 #include <X11/keysym.h>
 

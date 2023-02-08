@@ -36,7 +36,7 @@ C_FILES		=	main.c						\
 				parsing/check_map.c			\
 				parsing/set_map.c			\
 				parsing/parsing_utils.c		\
-				#parsing/set_textures.c		\
+				parsing/set_textures.c		\
 				
 					
 SRCS		= $(patsubst %, $(C_DIR)/%, $(C_FILES))
@@ -56,9 +56,9 @@ CFLAGS		= -Wall -Wextra -Werror -g -MMD
 # ################################## #
 #                INCLUDES            #
 # ################################## #
-CINCLUDES	=	-I ./inc -I ./libft/inc -I ./minilibx-linux
-MLX			= 	./minilibx-linux/libmlx.a
-LIBFT 		= 	./libft/libft.a
+CINCLUDES	=	-I ./inc -I ./lib/libft/inc -I ./lib/minilibx-linux
+MLX			= 	./lib/minilibx-linux/libmlx.a
+LIBFT 		= 	./lib/libft/libft.a
 
 # ################################## #
 #                RULES               #
@@ -72,31 +72,31 @@ $(O_DIR):
 			$(MKDIR) $(O_DIR)/rendering
 
 $(O_DIR)/%.o: $(C_DIR)/%.c
-			$(CC) $(CFLAGS) $(CINCLUDES) -O2 -c $< -o $@
+			$(CC) $(CFLAGS) $(CINCLUDES) -c $< -o $@
 
 
 $(MLX):
 		@echo "Compiling MLX from source :"
-		make -C ./minilibx-linux
+		make -C ./lib/minilibx-linux
 
 $(LIBFT):
-		make -C ./libft
+		make -C ./lib/libft
 
 
 $(NAME): $(MLX) $(LIBFT) $(O_DIR) $(OBJS)
-			$(CC) $(OBJS) $(CFLAGS) $(MLX) $(LIBFT) -O2 -lX11 -lXext -o $@
+			$(CC) $(OBJS) $(CFLAGS) $(MLX) $(LIBFT) -lX11 -lXext -o $@
 
 # ################################## #
 #                CLEAN               #
 # ################################## #
 
 clean:
-			make -C ./libft clean
+			make -C ./lib/libft clean
 			$(RM) $(O_DIR)
 
 fclean:		clean
-			${RM} ./MLX42/build
-			make -C ./libft fclean
+			${RM} ./lib/MLX42/build
+			make -C ./lib/libft fclean
 			$(RM) $(NAME)
 
 
