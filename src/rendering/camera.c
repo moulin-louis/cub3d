@@ -53,14 +53,14 @@ int	camera(int key, void *ptr)
 	data = (t_data *)ptr;
 	if (key == XK_Escape)
 		close_prog(ptr);
-	if (key == XK_W)
+	if (key == XK_w)
 	{
 		if (data->map[(int)(data->pos_x + data->dir_x * MOVSPEED)][(int)data->pos_y] == 0)
 			data->pos_x += data->dir_x * MOVSPEED;
 		if (data->map[(int)data->pos_x][(int)(data->pos_y + data->dir_y * MOVSPEED)] == 0)
 			data->pos_y += data->dir_y * MOVSPEED;
 	}
-	if (key == XK_S)
+	if (key == XK_s)
 	{
 		if (data->map[(int)(data->pos_x - data->dir_x * MOVSPEED)][(int)data->pos_y] == 0)
 			data->pos_x -= data->dir_x * MOVSPEED;

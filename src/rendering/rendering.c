@@ -11,45 +11,10 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <sys/time.h>
 
-time_t	gettime(void)
+int	get_rgba(int red, int green, int blue)
 {
-	struct timeval	tv;
-
-	gettimeofday(&tv, NULL);
-	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
-}
-
-void	print_map_n_pos(t_data *data)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	printf("\033[2J");
-	while (data->map[x])
-	{
-		y = 0;
-		while (data->map[x][y] != END)
-		{
-			if (x == (int)data->pos_x && y == (int)data->pos_y)
-				printf("\x1B[31mJ \x1B[37m");
-			else
-				printf("%d ", data->map[x][y]);
-			y++;
-		}
-		printf("\n");
-		x++;
-	}
-}
-
-void	get_ms( long int old_time )
-{
-
-	long int time = gettime();
-	printf("%ld ms\n", time - old_time);
-	return ;
+	return (red << 16 | green << 8 | blue );
 }
 
 int	rendering(void *ptr)
@@ -60,6 +25,7 @@ int	rendering(void *ptr)
 
 	data = (t_data *)ptr;
 	x = -1;
+	//mlx_clear_window(data->mlx, data->win);
 	while (++x < WIDTH)
 	{
 		ft_memset(&math, 0, sizeof(math));
@@ -69,6 +35,6 @@ int	rendering(void *ptr)
 		calculate_draw_start_end(&math);
 		draw_line(&math, data, x);
 	}
-	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+	//mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	return (0);
 }

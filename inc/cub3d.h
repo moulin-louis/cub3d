@@ -112,7 +112,7 @@ int		get_r(int rgba);
 int		get_g(int rgba);
 int		get_b(int rgba);
 int		get_a(int rgba);
-int		get_rgba(int r, int g, int b, int a);
+int		get_rgba(int red, int green, int blue);
 
 /*-----------------------------------UTILS---------------------------------*/
 

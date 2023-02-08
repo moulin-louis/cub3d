@@ -29,7 +29,8 @@ static void	fill_buffer(t_data *data, char **buff, int nbr_lines, int fd)
 			free_array((void **)buff);
 			cub3d_err(data, "Failed opening file\n");
 		}
-		free(tmp);
+		else
+			free(tmp);
 	}
 }
 
@@ -71,7 +72,7 @@ t_data	parsing(char *path_map)
 	data.win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "CUB3D");
 	if (!data.win)
 		mlx_err(&data);
-	//add_textures(&data);
-	check_texture_color_error(&data);
+	add_textures(&data);
+	//check_texture_color_error(&data);
 	return (data);
 }

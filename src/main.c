@@ -46,8 +46,8 @@ void	init_data(t_data *data)
 	data->dir_y = 0;
 	data->plane_x = 0;
 	data->plane_y = 0.66;
-	data->ceiling = get_rgba(0, 0, 0, 255);
-	data->floor = get_rgba(255, 255, 255, 255);
+	data->ceiling = get_rgba(0, 0, 0);
+	data->floor = get_rgba(255, 255, 255);
 }
 
 int	main(int ac, char **av)

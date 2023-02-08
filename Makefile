@@ -30,7 +30,6 @@ C_FILES		=	main.c						\
 				error_exit.c				\
 				rendering/rendering.c		\
 				rendering/camera.c			\
-				rendering/color.c			\
 				rendering/calcul.c			\
 				parsing/parsing.c			\
 				parsing/check_map.c			\
@@ -84,7 +83,7 @@ $(LIBFT):
 
 
 $(NAME): $(MLX) $(LIBFT) $(O_DIR) $(OBJS)
-			$(CC) $(OBJS) $(CFLAGS) $(MLX) $(LIBFT) -lX11 -lXext -o $@
+			$(CC) $(OBJS) $(CFLAGS) $(MLX) $(LIBFT) -lX11 -lXext -lm -o $@
 
 # ################################## #
 #                CLEAN               #
@@ -94,8 +93,9 @@ clean:
 			make -C ./lib/libft clean
 			$(RM) $(O_DIR)
 
-fclean:		clean
-			${RM} ./lib/MLX42/build
+fclean:
+			$(RM) $(O_DIR)
+			make -C ./lib/minilibx-linux clean
 			make -C ./lib/libft fclean
 			$(RM) $(NAME)
 

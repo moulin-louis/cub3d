@@ -26,50 +26,44 @@ static int	get_color(t_data *data, char **tmp)
 		free_array((void **)buff);
 		cub3d_err(data, "Color description error : format needed: r, g, b\n");
 	}
-	color = get_rgba(ft_atoi(buff[0]), ft_atoi(buff[1]), ft_atoi(buff[2]), 255);
+	color = get_rgba(ft_atoi(buff[0]), ft_atoi(buff[1]), ft_atoi(buff[2]));
 	return (free_array((void **)buff), color);
-}
-
-static mlx_image_t	*texture_to_img(t_data *data, char **tmp)
-{
-	mlx_image_t		*img;
-	mlx_texture_t	*texture;
-
-	texture = mlx_load_png(tmp[1]);
-	if (!texture)
-		return (free_array((void **)tmp), mlx_err(data), NULL);
-	img = mlx_texture_to_image(data->mlx, texture);
-	if (!img)
-		return (mlx_delete_texture(texture), free_array((void **)tmp),
-			mlx_err(data), NULL);
-	return (mlx_delete_texture(texture), img);
 }
 
 static void	check_and_add_texture(t_data *data, char **tmp)
 {
+    int x;
 	if (!ft_strcmp(tmp[0], "NO"))
 	{
 		if (data->nord)
 			cub3d_err(data, "Mutiple path definitions for North walls\n");
-		data->nord = texture_to_img(data, tmp);
+		data->nord = mlx_xpm_file_to_image(data->mlx, tmp[1], &x, &x);
+        if (!data->nord)
+                printf("xpm open failed\n");
 	}
 	else if (!ft_strcmp(tmp[0], "SO"))
 	{
 		if (data->south)
 			cub3d_err(data, "Mutiple path definitions for South walls\n");
-		data->south = texture_to_img(data, tmp);
+		data->south = mlx_xpm_file_to_image(data->mlx, tmp[1], &x, &x);
+        if (!data->south)
+            printf("xpm open failed\n");
 	}
 	else if (!ft_strcmp(tmp[0], "WE"))
 	{
 		if (data->west)
 			cub3d_err(data, "Mutiple path definitions for West walls\n");
-		data->west = texture_to_img(data, tmp);
+		data->west = mlx_xpm_file_to_image(data->mlx, tmp[1], &x, &x);
+        if (!data->west)
+            printf("xpm open failed\n");
 	}
 	else if (!ft_strcmp(tmp[0], "EA"))
 	{
 		if (data->east)
 			cub3d_err(data, "Mutiple path definitions for East walls\n");
-		data->east = texture_to_img(data, tmp);
+		data->east = mlx_xpm_file_to_image(data->mlx, tmp[1], &x, &x);
+        if (!data->east)
+            printf("xpm open failed\n");
 	}
 }
 
