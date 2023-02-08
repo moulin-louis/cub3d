@@ -17,12 +17,26 @@ int	get_rgb(int red, int green, int blue)
 	return (red << 16 | green << 8 | blue);
 }
 
-int	check_side(t_data *data)
+void	hit_in_y(t_data *data, t_math *math)
 {
-	int result;
-
 	(void)data;
-	//printf("data->dir_x = %f data->dir_y = %f\n", data->dir_x, data->dir_y);
-	result = 0;
-	return (result);
+	math->color = get_rgb(0, 0, 255);
+	if (math->step_y == -1)
+			math->color /= 2;
+}
+
+void	hit_in_x(t_data *data, t_math *math)
+{
+	(void)data;
+	math->color = get_rgb(255, 0, 0);
+	if (math->step_x == -1)
+		math->color /= 2;
+}
+
+void	check_side(t_data *data, t_math *math)
+{
+	if (math->side == 1)
+		hit_in_y(data, math);
+	else
+		hit_in_x(data, math);
 }

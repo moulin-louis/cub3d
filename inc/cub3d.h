@@ -15,6 +15,8 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include "../lib/libft/inc/libft.h"
+# include "../lib/minilibx-linux/mlx.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
@@ -24,9 +26,7 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <math.h>
-# include <time.h>
-# include "../lib/libft/inc/libft.h"
-# include "../lib/minilibx-linux/mlx.h"
+
 # include <X11/X.h>
 # include <X11/keysym.h>
 
@@ -109,7 +109,7 @@ void	calculate_init(t_math *math, t_data *data, int x);
 
 /*-----------------------------------COLOR---------------------------------*/
 int		get_rgb(int red, int green, int blue);
-int		check_side(t_data *data);
+void		check_side(t_data *data, t_math *math);
 
 /*-----------------------------------UTILS---------------------------------*/
 

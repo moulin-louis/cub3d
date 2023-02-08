@@ -97,11 +97,8 @@ void	draw_line(t_math *math, t_data *data, int x)
 {
 	int	it;
 
-
 	it = -1;
-	if (data->dir_x < 0 && math->hit == 0)
-		math->color = get_rgb(255, 0, 0 );
-	printf("dir_x = %f dir_y = %f\n", data->dir_x, data->dir_y);
+	check_side(data, math);
 	while (++it < (int)math->draw_start)
 		mlx_pixel_put(data->mlx, data->win, x, it, data->ceiling);
 	it = math->draw_start - 1;
