@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/08 15:41:22 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/08 16:47:23 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@
 typedef struct s_data
 {
 	void		*mlx;
-	void		*img;
 	void		*win;
 	int			floor;
 	int			ceiling;
@@ -109,7 +108,7 @@ void	calculate_init(t_math *math, t_data *data, int x);
 
 /*-----------------------------------COLOR---------------------------------*/
 int		get_rgb(int red, int green, int blue);
-void		check_side(t_data *data, t_math *math);
+void	check_side(t_data *data, t_math *math);
 
 /*-----------------------------------UTILS---------------------------------*/
 

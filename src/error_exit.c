@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:39:48 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/06 14:40:05 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/08 16:47:31 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ void	clean_exit(t_data *data, int err)
 			mlx_destroy_image(data->mlx, data->west);
 		if (data->east)
 			mlx_destroy_image(data->mlx, data->east);
-		if (data->img)
-			mlx_destroy_image(data->mlx, data->img);
 		if (data->tmp_map)
 			free_array((void **)data->tmp_map);
 		if (data->map)
