@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:34:07 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/08 15:41:30 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/08 17:07:32 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ t_data	parsing(char *path_map)
 	t_data	data;
 
 	ft_memset(&data, 0, sizeof(t_data));
+	data.floor = -1;
+	data.ceiling = -1;
 	if (check_file_name(path_map))
 		cub3d_err(&data, "file given is not .cub type\n");
 	data.tmp_map = parse_file(&data, path_map);

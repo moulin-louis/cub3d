@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:03:51 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/08 15:41:34 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/08 17:06:54 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ void	check_texture_color_error(t_data *data)
 		cub3d_err(data, "Missing path for West walls\n");
 	if (!data->east)
 		cub3d_err(data, "Missing path for East walls\n");
-	if (!data->floor)
+	if (data->floor == -1)
 		cub3d_err(data, "Missing color for Floor\n");
-	if (!data->ceiling)
+	if (data->ceiling == -1)
 		cub3d_err(data, "Missing color for Ceiling\n");
 }
 
@@ -97,13 +97,13 @@ void	add_textures_and_colors(t_data *data)
 		check_and_add_texture(data, tmp);
 		if (!ft_strcmp(tmp[0], "F"))
 		{
-			if (data->floor)
+			if (data->floor != -1)
 				cub3d_err(data, "Mutiple color definitions for Floor\n");
 			data->floor = get_color(data, tmp);
 		}
 		else if (!ft_strcmp(tmp[0], "C"))
 		{
-			if (data->ceiling)
+			if (data->ceiling != -1)
 				cub3d_err(data, "Mutiple color definitions for Ceiling\n");
 			data->ceiling = get_color(data, tmp);
 		}
