@@ -12,10 +12,20 @@
 
 #include "cub3d.h"
 
+time_t	gettime(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+}
+
 int	rendering(void *ptr)
 {
-	t_data	*data;
-	t_math	math;
+	t_data			*data;
+	t_math			math;
+	//static	long	time;
+	//long 			old_time;
 	int		x;
 
 	data = (t_data *)ptr;
@@ -29,6 +39,8 @@ int	rendering(void *ptr)
 		calculate_draw_start_end(&math);
 		draw_line(&math, data, x);
 	}
-    draw_minimap(data);
+	//old_time = time;
+	//time = gettime();
+	//printf("%ld\n", time - old_time);
 	return (0);
 }

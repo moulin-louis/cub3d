@@ -26,9 +26,9 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <math.h>
-
 # include <X11/X.h>
 # include <X11/keysym.h>
+#include <sys/time.h>
 
 # define FOV 0.66
 # define WIDTH 1280
@@ -86,6 +86,7 @@ typedef struct s_math
 	unsigned int	draw_start;
 	unsigned int	draw_end;
 	int				color;
+	long 			frametime;
 }	t_math;
 
 /*----------------------------------PARSING--------------------------------*/

@@ -73,7 +73,7 @@ $(O_DIR):
 			$(MKDIR) $(O_DIR)/rendering
 
 $(O_DIR)/%.o: $(C_DIR)/%.c
-			$(CC) $(CFLAGS) $(CINCLUDES) -c $< -o $@
+			$(CC)  $(CFLAGS) $(CINCLUDES) -c $< -o $@
 
 
 $(MLX):
@@ -85,7 +85,7 @@ $(LIBFT):
 
 
 $(NAME): $(MLX) $(LIBFT) $(O_DIR) $(OBJS)
-			$(CC) $(OBJS) $(CFLAGS) $(MLX) $(LIBFT) -lX11 -lXext -lm -o $@
+			$(CC)  $(OBJS) $(CFLAGS) $(MLX) $(LIBFT) -lX11 -lXext -lm -o $@
 
 # ################################## #
 #                CLEAN               #
@@ -103,6 +103,9 @@ fclean:
 
 
 re:			fclean all
+
+malloc_test: $(MLX) $(LIBFT) $(O_DIR) $(OBJS)
+	$(CC) $(CFLAGS) -fsanitize=undefined -rdynamic -o $@ ${OBJS} $(MLX) $(LIBFT) -lX11 -lXext -lm -L. -lmallocator
 
 .PHONY: all clean fclean re
 

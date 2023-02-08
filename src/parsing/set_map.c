@@ -122,6 +122,8 @@ void	add_map(t_data *data)
 	{
 		len = ft_strlen(data->tmp_map[i]);
 		data->map[k] = malloc(sizeof(int) * (len + 1));
+		if (!data->map[k])
+			cub3d_err(data, "malloc failed\n");
 		data->map[k][len] = END;
 		set_map_line(data, i, k);
 		i++;

@@ -99,6 +99,8 @@ void	draw_line(t_math *math, t_data *data, int x)
 
 	it = -1;
 	check_side(data, math);
+	if (x < 10)
+		it += 10;
 	while (++it < (int)math->draw_start)
 		mlx_pixel_put(data->mlx, data->win, x, it, data->ceiling);
 	it = math->draw_start - 1;

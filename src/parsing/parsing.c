@@ -21,6 +21,8 @@ static void	fill_buffer(t_data *data, char **buff, int nbr_lines, int fd)
 	while (++i < nbr_lines)
 	{
 		buff[i] = get_next_line(fd);
+		if (!buff[i])
+			return ;
 		tmp = buff[i];
 		buff[i] = ft_strtrim(buff[i], "\n");
 		if (!buff[i])

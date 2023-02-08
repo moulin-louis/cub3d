@@ -19,7 +19,10 @@ static int	get_color(t_data *data, char **tmp)
 
 	buff = ft_split(tmp[1], ',');
 	if (!buff)
+	{
+		free_array((void **)tmp);
 		cub3d_err(data, "Malloc error\n");
+	}
 	else if (array_len((void **)buff) != 3)
 	{
 		free_array((void **)tmp);
