@@ -17,6 +17,7 @@
 
 # include "../lib/libft/inc/libft.h"
 # include "../lib/minilibx-linux/mlx.h"
+# include "../lib/minilibx-linux/mlx_int.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
@@ -28,7 +29,7 @@
 # include <math.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
-#include <sys/time.h>
+# include <sys/time.h>
 
 # define FOV 0.66
 # define WIDTH 1280
@@ -42,27 +43,28 @@
 
 typedef struct s_data
 {
-	void		*mlx;
-	void		*win;
-	int			floor;
-	int			ceiling;
+	void	*mlx;
+	void	*win;
+	void	*img;
+	int		floor;
+	int		ceiling;
 
-	void		*nord;
-	void		*south;
-	void		*west;
-	void		*east;
+	void	*nord;
+	void	*south;
+	void	*west;
+	void	*east;
 
-	int			map_index;
-	int			end_index;
-	char		**tmp_map;
-	int			**map;
+	int		map_index;
+	int		end_index;
+	char	**tmp_map;
+	int		**map;
 
-	double		pos_x;
-	double		pos_y;
-	double		dir_x;
-	double		dir_y;
-	double		plane_x;
-	double		plane_y;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
 
 }	t_data;
 
@@ -86,7 +88,7 @@ typedef struct s_math
 	unsigned int	draw_start;
 	unsigned int	draw_end;
 	int				color;
-	long 			frametime;
+	long			frametime;
 }	t_math;
 
 /*----------------------------------PARSING--------------------------------*/
@@ -111,6 +113,7 @@ void	draw_minimap(t_data *data);
 /*-----------------------------------COLOR---------------------------------*/
 int		get_rgb(int red, int green, int blue);
 void	check_side(t_data *data, t_math *math);
+void	img_pix_put(char *raw_data, const int val[3], int color);
 
 /*-----------------------------------UTILS---------------------------------*/
 

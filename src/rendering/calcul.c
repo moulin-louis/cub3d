@@ -95,18 +95,20 @@ void	calculate_draw_start_end(t_math *math)
 
 void	draw_line(t_math *math, t_data *data, int x)
 {
-	int	it;
+	t_img	*img;
+	int		val[5];
 
-	it = -1;
+	val[4] = -1;
+	img = (t_img *)data->img;
+	mlx_get_data_addr(data->img, &val[0], &val[1], &val[2]);
 	check_side(data, math);
-	if (x < 10)
-		it += 10;
-	while (++it < (int)math->draw_start)
-		mlx_pixel_put(data->mlx, data->win, x, it, data->ceiling);
-	it = math->draw_start - 1;
-	while (++it < (int)math->draw_end)
-		mlx_pixel_put(data->mlx, data->win, x, it, math->color);
-	it = math->draw_end - 1;
-	while (++it < HEIGHT)
-		mlx_pixel_put(data->mlx, data->win, x, it, data->floor);
+	val[3] = x;
+	while (++val[4] < (int)math->draw_start)
+		img_pix_put(img->data, val, data->ceiling);
+	val[4] = math->draw_start - 1;
+	while (++val[4] < (int)math->draw_end)
+		img_pix_put(img->data, val, math->color);
+	val[4] = math->draw_end - 1;
+	while (++val[4] < HEIGHT)
+		img_pix_put(img->data, val, data->floor);
 }

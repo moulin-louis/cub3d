@@ -12,6 +12,14 @@
 
 #include "cub3d.h"
 
+void	img_pix_put(char *raw_data, const int val[3], int color)
+{
+	char	*pixel;
+
+	pixel = raw_data + (val[4] * val[1] + val[3] * (val[0] / 8));
+	*(int *)pixel = color;
+}
+
 int	get_rgb(int red, int green, int blue)
 {
 	return (red << 16 | green << 8 | blue);

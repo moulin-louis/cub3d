@@ -14,7 +14,7 @@
 
 void	draw_index(int *arr, t_data *data, int x)
 {
-	int y;
+	int	y;
 
 	y = -1;
 	while (arr[++y] != END)
@@ -31,30 +31,6 @@ void	draw_index(int *arr, t_data *data, int x)
 			mlx_pixel_put(data->mlx, data->win, x + 1, y, get_rgb(255, 0, 0));
 		else
 			mlx_pixel_put(data->mlx, data->win, x + 1, y, get_rgb(0, 255, 0));
-	}
-	y = -1;
-	while (arr[++y] != END)
-	{
-		if (arr[y] == 1)
-			mlx_pixel_put(data->mlx, data->win, x + 2, y, get_rgb(255, 0, 0));
-		else
-			mlx_pixel_put(data->mlx, data->win, x + 2, y, get_rgb(0, 255, 0));
-	}
-	y = -1;
-	while (arr[++y] != END)
-	{
-		if (arr[y] == 1)
-			mlx_pixel_put(data->mlx, data->win, x + 3, y, get_rgb(255, 0, 0));
-		else
-			mlx_pixel_put(data->mlx, data->win, x + 3, y, get_rgb(0, 255, 0));
-	}
-	y = -1;
-	while (arr[++y] != END)
-	{
-		if (arr[y] == 1)
-			mlx_pixel_put(data->mlx, data->win, x + 3, y, get_rgb(255, 0, 0));
-		else
-			mlx_pixel_put(data->mlx, data->win, x + 3, y, get_rgb(0, 255, 0));
 	}
 }
 

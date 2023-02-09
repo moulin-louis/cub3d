@@ -39,7 +39,7 @@ static int	get_map_len(t_data *data)
 	return (cub3d_err(data, "No map in file\n"), 0);
 }
 
-static void	set_player_dir(t_data *data, char dir)
+static int	set_player_dir(t_data *data, char dir)
 {
 	if (dir == 'N')
 	{
@@ -47,6 +47,7 @@ static void	set_player_dir(t_data *data, char dir)
 		data->dir_y = 0;
 		data->plane_x = 0;
 		data->plane_y = FOV;
+		return (0);
 	}
 	else if (dir == 'S')
 	{
@@ -54,21 +55,17 @@ static void	set_player_dir(t_data *data, char dir)
 		data->dir_y = 0;
 		data->plane_x = 0;
 		data->plane_y = -FOV;
+		return (0);
 	}
 	else if (dir == 'W')
 	{
 		data->dir_x = 0;
 		data->dir_y = -1;
 		data->plane_x = -FOV;
-		data->plane_y = 0;
+		return (data->plane_y = 0, 0);
 	}
-	else if (dir == 'E')
-	{
-		data->dir_x = 0;
-		data->dir_y = 1;
-		data->plane_x = FOV;
-		data->plane_y = 0;
-	}
+	return (data->dir_x = 0, data->dir_y = 1, data->plane_x = FOV,
+		data->plane_y = 0, 0);
 }
 
 static void	set_player_start_pos(t_data *data, int i, int k, int j)
@@ -76,7 +73,6 @@ static void	set_player_start_pos(t_data *data, int i, int k, int j)
 	data->map[k][j] = 0;
 	data->pos_x = (double)k + 0.5;
 	data->pos_y = (double)j + 0.5;
-	printf("data->pos_x : %f // data->pos_y : %f\n", data->pos_x, data->pos_y);
 	if (data->tmp_map[i][j] == 'N')
 		set_player_dir(data, 'N');
 	else if (data->tmp_map[i][j] == 'S')

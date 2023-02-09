@@ -20,27 +20,36 @@ time_t	gettime(void)
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
-int	rendering(void *ptr)
+void	call_mlx_fn(t_data *data)
 {
-	t_data			*data;
-	t_math			math;
-	//static	long	time;
-	//long 			old_time;
-	int		x;
+	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+}
 
-	data = (t_data *)ptr;
+int	rendering(void *data)
+{
+	t_math		math;
+	static long	time_1;
+	long		time_2;
+	int			x;
+
 	x = -1;
 	while (++x < WIDTH)
 	{
 		ft_memset(&math, 0, sizeof(math));
-		calculate_init(&math, data, x);
-		calculate_step(&math, data);
-		perform_dda(&math, data);
+		calculate_init(&math, (t_data *)data, x);
+		calculate_step(&math, (t_data *)data);
+		perform_dda(&math, (t_data *)data);
 		calculate_draw_start_end(&math);
-		draw_line(&math, data, x);
+		draw_line(&math, (t_data *)data, x);
 	}
-	//old_time = time;
-	//time = gettime();
-	//printf("%ld\n", time - old_time);
-	return (0);
+	if (time_1 == 0)
+		time_1 = gettime();
+	time_2 = time_1;
+	time_1 = gettime();
+	while (time_1 - time_2 < 33)
+	{
+		time_1 = gettime();
+		usleep(10);
+	}
+	return (call_mlx_fn((t_data *)data), 0);
 }
