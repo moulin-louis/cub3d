@@ -109,6 +109,6 @@ void	draw_line(t_math *math, t_data *data, int x)
 	while (++val[4] < (int)math->draw_end)
 		img_pix_put(img->data, val, math->color);
 	val[4] = math->draw_end - 1;
-	while (++val[4] < HEIGHT)
+	while (++val[4] < HEIGHT + 1)
 		img_pix_put(img->data, val, data->floor);
 }

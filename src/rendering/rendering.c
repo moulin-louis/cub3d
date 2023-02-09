@@ -28,8 +28,6 @@ void	call_mlx_fn(t_data *data)
 int	rendering(void *data)
 {
 	t_math		math;
-	static long	time_1;
-	long		time_2;
 	int			x;
 
 	x = -1;
@@ -41,15 +39,6 @@ int	rendering(void *data)
 		perform_dda(&math, (t_data *)data);
 		calculate_draw_start_end(&math);
 		draw_line(&math, (t_data *)data, x);
-	}
-	if (time_1 == 0)
-		time_1 = gettime();
-	time_2 = time_1;
-	time_1 = gettime();
-	while (time_1 - time_2 < 33)
-	{
-		time_1 = gettime();
-		usleep(10);
 	}
 	return (call_mlx_fn((t_data *)data), 0);
 }

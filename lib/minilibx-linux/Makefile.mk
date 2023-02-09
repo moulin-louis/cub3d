@@ -42,7 +42,7 @@ all	: $(NAME)
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(IFLAGS) -g -c  $< -o $@
+	$(CC) $(CFLAGS) $(IFLAGS) -pg -c  $< -o $@
 
 $(NAME)	: $(OBJ)
 	ar -r $(NAME) $(OBJ)

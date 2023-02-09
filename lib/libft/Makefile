@@ -6,7 +6,7 @@
 #    By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/03 16:11:03 by mpignet           #+#    #+#              #
-#    Updated: 2023/02/02 14:13:57 by loumouli         ###   ########.fr        #
+#    Updated: 2023/02/09 11:34:16 by loumouli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,7 +77,7 @@ INC			= inc/libft.h
 # **************************************************************************** #
 
 CC		= gcc
-CFLAGS	= -g -Wall -Wextra -Werror
+CFLAGS	= -pg -Wall -Wextra -Werror
 NAME	= libft.a
 RM		= rm -fd
 
