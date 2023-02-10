@@ -28,7 +28,12 @@ void	print_map_n_pos(t_data *data)
 	{
 		y = -1;
 		while (data->map[x][++y] != END)
-			printf("%d ", data->map[x][y]);
+		{
+			if (x == (int) data->pos_x && y == (int) data->pos_y)
+				printf("\x1B[31mJ \x1B[37m");
+			else
+				printf("%d ", data->map[x][y]);
+		}
 		printf("\n");
 	}
 }
@@ -50,6 +55,6 @@ int	rendering(void *data)
 	}
 	draw_minimap(data);
 	call_mlx_fn((t_data *)data);
-
+	//print_map_n_pos(data);
 	return ( 0);
 }

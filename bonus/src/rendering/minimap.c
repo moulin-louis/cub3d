@@ -12,50 +12,49 @@
 
 #include "cub3d_bonus.h"
 
+/*Use to draw the area for the map*/
+
 void	draw_square(t_data *data)
 {
-	int	val[5];
+	t_img_data	img_data;
+	int			x;
+	int 		y;
 
-	val[3] = -1;
-	mlx_get_data_addr(data->img, &val[0], &val[1], &val[2]);
-	while (++val[3] < data->len_map_x * 4)
-	{
-		val[4] = -1;
-		while (++val[4] < data->len_map_y * 4)
-			img_pix_put(((t_img *)(data->img))->data, val, BLACK);
-	}
-}
-
-void	draw_this_line(t_data *data, int x, int val[5])
-{
-	int	y;
-	int	offset;
-
-	offset = 0;
-	while (offset < 40)
+	x = -1;
+	memset(&img_data, 0, sizeof img_data);
+	img_data.img = data->img;
+	img_data.raw_data = mlx_get_data_addr(img_data.img, &img_data.bpp, &img_data.size_line, &img_data.endian);
+	while (++x < data->len_map_y * 10)
 	{
 		y = -1;
-		val[3] = x + offset;
-		while (data->map[x][++y] != END)
-		{
-			val[4] = y;
-			if (data->map[x][y] == 1)
-				img_pix_put(((t_img *)(data->img))->data, val, RED);
-			else if (data->map[x][y] == 0)
-				img_pix_put(((t_img *)(data->img))->data, val, GREEN);
-		}
-		offset++;
+		while (++y < data->len_map_x * 10)
+			img_pix_put(&img_data, x, y, BLACK);
 	}
 }
 
+
+/*draw a minimap on the screen*/
 void	draw_minimap(t_data *data)
 {
-	int	x;
-	int	val[5];
+	t_img_data	img_data;
+	int x;
+	int y;
 
 	draw_square(data);
-	mlx_get_data_addr(data->img, &val[0], &val[1], &val[2]);
 	x = -1;
-	while (data->map[++x])
-		draw_this_line(data, x, val);
+	memset(&img_data, 0, sizeof img_data);
+	img_data.img = data->img;
+	img_data.raw_data = mlx_get_data_addr(img_data.img, &img_data.bpp, &img_data.size_line, &img_data.endian);
+	img_pix_put(&img_data, 0, 10, get_rgb(0, 0, 255));
+	while (++x < data->len_map_y)
+	{
+		y = -1;
+		while (++y < data->len_map_x)
+		{
+			if (data->map[y][x] == 1)
+				img_pix_put(&img_data, x, y + 10, RED);
+			else
+				img_pix_put(&img_data, x, y + 10	, GREEN);
+		}
+	}
 }

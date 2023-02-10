@@ -12,19 +12,30 @@
 
 #include "cub3d_bonus.h"
 
+int	ft_strlen_custom(int *line)
+{
+	int result;
+
+	result = 0;
+	while (line[result] != END)
+			result++;
+	return (result);
+}
+
 void	set_len_map(t_data *data)
 {
-	int x;
-	int y;
+	int it;
 
-	x = 0;
-	while (data->map[x])
-		x++;
-	data->len_map_y = x;
-	y = 0;
-	while (data->map[0][y] != END)
-			y++;
-	data->len_map_x = y;
+	while (data->map[data->len_map_x])
+		data->len_map_x++;
+	it = 0;
+	while (data->map[it])
+	{
+		if (ft_strlen_custom(data->map[it]) > data->len_map_y)
+				data->len_map_y = ft_strlen_custom(data->map[it]);
+		else
+			it++;
+	}
 }
 
 int	main(int ac, char **av)

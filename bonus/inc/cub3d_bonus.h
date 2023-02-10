@@ -21,7 +21,7 @@
 # include <math.h>
 # include <sys/time.h>
 
-# define FOV 1
+# define FOV 0.66
 # define WIDTH 1280
 # define HEIGHT 720
 # define SPACE 9
@@ -32,8 +32,8 @@
 # define START_E 5
 # define RED get_rgb(255, 0, 0)
 # define GREEN get_rgb(0, 255, 0)
-# define BLACK get_rgb(255, 255, 255)
-# define WHITE get_rgb(0, 0, 0)
+# define BLACK get_rgb(0, 0, 0)
+# define WHITE get_rgb(255, 255, 255)
 
 typedef struct s_data
 {
@@ -63,6 +63,15 @@ typedef struct s_data
 	double	plane_y;
 
 }	t_data;
+
+typedef struct	s_img_data
+{
+	t_img	*img;
+	char	*raw_data;
+	int 	size_line;
+	int 	bpp;
+	int 	endian;
+}	t_img_data;
 
 typedef struct s_math
 {
@@ -108,7 +117,7 @@ void	draw_minimap(t_data *data);
 /*-----------------------------------COLOR---------------------------------*/
 int		get_rgb(int red, int green, int blue);
 void	check_side(t_data *data, t_math *math);
-void	img_pix_put(char *raw_data, const int val[5], int color);
+void	img_pix_put(t_img_data *img_data, int x, int y, int color);
 
 /*-----------------------------------UTILS---------------------------------*/
 

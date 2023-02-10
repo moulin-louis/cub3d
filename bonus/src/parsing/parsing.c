@@ -33,7 +33,6 @@ static void	fill_buffer(t_data *data, char **buff, int nbr_lines, int fd)
 		}
 		else
 			free(tmp);
-		printf("%s\n", buff[i]);
 	}
 }
 
@@ -87,7 +86,6 @@ t_data	parsing(char *path_map)
 		cub3d_err(&data, "file given is not .cub type\n");
 	data.tmp_map = parse_file(&data, path_map);
 	add_map(&data);
-	print_map(&data);
 	data.mlx = mlx_init();
 	if (!data.mlx)
 		mlx_err(&data);
@@ -99,6 +97,5 @@ t_data	parsing(char *path_map)
 		cub3d_err(&data, "mlx_new_image failed\n");
 	add_textures_and_colors(&data);
 	check_texture_color_error(&data);
-	print_map(&data);
 	return (data);
 }
