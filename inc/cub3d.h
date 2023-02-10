@@ -18,22 +18,12 @@
 # include "../lib/libft/inc/libft.h"
 # include "../lib/minilibx-linux/mlx.h"
 # include "../lib/minilibx-linux/mlx_int.h"
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <string.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-# include <errno.h>
 # include <math.h>
-# include <X11/X.h>
-# include <X11/keysym.h>
 # include <sys/time.h>
 
-# define FOV 0.66
-# define WIDTH 1280
-# define HEIGHT 720
+# define FOV 1
+# define WIDTH 2560
+# define HEIGHT 1440
 # define SPACE 9
 # define END 42
 # define START_N 2
@@ -88,7 +78,6 @@ typedef struct s_math
 	unsigned int	draw_start;
 	unsigned int	draw_end;
 	int				color;
-	long			frametime;
 }	t_math;
 
 /*----------------------------------PARSING--------------------------------*/

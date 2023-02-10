@@ -20,11 +20,11 @@ void	calculate_init(t_math *math, t_data *data, int x)
 	math->map_x = (int)data->pos_x;
 	math->map_y = (int)data->pos_y;
 	if (math->ray_dirx == 0)
-			math->delta_dist_x = 0.0001;
+			math->delta_dist_x = 1e30;
 	else
 		math->delta_dist_x = fabs(1 / math->ray_dirx);
 	if (math->ray_diry == 0)
-		math->delta_dist_y = 0.0001;
+		math->delta_dist_y = 1e30;
 	else
 		math->delta_dist_y = fabs(1 / math->ray_diry);
 }
