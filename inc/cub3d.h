@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/08 16:47:23 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/10 14:56:42 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,19 @@
 # define START_S 3
 # define START_W 4
 # define START_E 5
+# define TEX_WIDTH 64
+# define TEX_HEIGHT 64
+
+typedef struct s_tex
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		size_line;
+	int		endian;
+	int		width;
+	int		height;
+}	t_tex;
 
 typedef struct s_data
 {
@@ -39,10 +52,10 @@ typedef struct s_data
 	int		floor;
 	int		ceiling;
 
-	void	*nord;
-	void	*south;
-	void	*west;
-	void	*east;
+	t_tex	nord;
+	t_tex	south;
+	t_tex	west;
+	t_tex	east;
 
 	int		map_index;
 	int		end_index;

@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:03:51 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/08 17:06:54 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/10 14:59:16 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,50 +35,62 @@ static int	get_color(t_data *data, char **tmp)
 
 static void	add_we_ea(t_data *data, char **tmp)
 {
-	int	n;
-
 	if (!ft_strcmp(tmp[0], "WE"))
 	{
-		if (data->west)
+		if (data->west.img)
 			cub3d_err(data, "Mutiple path definitions for West walls\n");
-		data->west = mlx_xpm_file_to_image(data->mlx, tmp[1], &n, &n);
+		data->west.img = mlx_xpm_file_to_image(data->mlx, tmp[1],
+				&data->west.width, &data->west.height);
+		data->west.addr = mlx_get_data_addr(data->west.img,
+				&data->west.bits_per_pixel, &data->west.size_line,
+				&data->west.endian);
 	}
 	else if (!ft_strcmp(tmp[0], "EA"))
 	{
-		if (data->east)
+		if (data->east.img)
 			cub3d_err(data, "Mutiple path definitions for East walls\n");
-		data->east = mlx_xpm_file_to_image(data->mlx, tmp[1], &n, &n);
+		data->east.img = mlx_xpm_file_to_image(data->mlx, tmp[1],
+				&data->east.width, &data->east.height);
+		data->east.addr = mlx_get_data_addr(data->east.img,
+				&data->east.bits_per_pixel, &data->east.size_line,
+				&data->east.endian);
 	}	
 }
 
 static void	check_and_add_texture(t_data *data, char **tmp)
 {
-	int	n;
-
 	if (!ft_strcmp(tmp[0], "NO"))
 	{
-		if (data->nord)
+		if (data->nord.img)
 			cub3d_err(data, "Mutiple path definitions for North walls\n");
-		data->nord = mlx_xpm_file_to_image(data->mlx, tmp[1], &n, &n);
+		data->nord.img = mlx_xpm_file_to_image(data->mlx, tmp[1],
+				&data->nord.width, &data->nord.height);
+		data->nord.addr = mlx_get_data_addr(data->nord.img,
+				&data->nord.bits_per_pixel, &data->nord.size_line,
+				&data->nord.endian);
 	}
 	else if (!ft_strcmp(tmp[0], "SO"))
 	{
-		if (data->south)
+		if (data->south.img)
 			cub3d_err(data, "Mutiple path definitions for South walls\n");
-		data->south = mlx_xpm_file_to_image(data->mlx, tmp[1], &n, &n);
+		data->south.img = mlx_xpm_file_to_image(data->mlx, tmp[1],
+				&data->south.width, &data->south.height);
+		data->south.addr = mlx_get_data_addr(data->south.img,
+				&data->south.bits_per_pixel, &data->south.size_line,
+				&data->south.endian);
 	}
 	add_we_ea(data, tmp);
 }
 
 void	check_texture_color_error(t_data *data)
 {
-	if (!data->nord)
+	if (!data->nord.img)
 		cub3d_err(data, "Missing path for North walls\n");
-	if (!data->south)
+	if (!data->south.img)
 		cub3d_err(data, "Missing path for South walls\n");
-	if (!data->west)
+	if (!data->west.img)
 		cub3d_err(data, "Missing path for West walls\n");
-	if (!data->east)
+	if (!data->east.img)
 		cub3d_err(data, "Missing path for East walls\n");
 	if (data->floor == -1)
 		cub3d_err(data, "Missing color for Floor\n");
