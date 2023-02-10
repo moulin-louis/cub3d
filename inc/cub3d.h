@@ -22,14 +22,11 @@
 # include <sys/time.h>
 
 # define FOV 1
-# define WIDTH 2560
-# define HEIGHT 1440
+# define WIDTH 1920
+# define HEIGHT 1080
 # define SPACE 9
 # define END 42
-# define START_N 2
-# define START_S 3
-# define START_W 4
-# define START_E 5
+# define BLACK get_rgb(255, 255, 255)
 
 typedef struct s_data
 {
@@ -97,12 +94,11 @@ void	calculate_draw_start_end(t_math *math);
 void	perform_dda(t_math *math, t_data *data);
 void	calculate_step(t_math *math, t_data *data);
 void	calculate_init(t_math *math, t_data *data, int x);
-void	draw_minimap(t_data *data);
 
 /*-----------------------------------COLOR---------------------------------*/
 int		get_rgb(int red, int green, int blue);
 void	check_side(t_data *data, t_math *math);
-void	img_pix_put(char *raw_data, const int val[3], int color);
+void	img_pix_put(char *raw_data, const int val[5], int color);
 
 /*-----------------------------------UTILS---------------------------------*/
 

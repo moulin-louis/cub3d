@@ -59,6 +59,22 @@ static char	**parse_file(t_data *data, char *file)
 	return (buff);
 }
 
+void	print_map(t_data *data)
+{
+	int	x;
+	int	y;
+
+	x = -1;
+	printf("\n\n\n");
+	while (data->map[++x])
+	{
+		y = -1;
+		while (data->map[x][++y] != END)
+			printf("%d ", data->map[x][y]);
+		printf("\n");
+	}
+}
+
 t_data	parsing(char *path_map)
 {
 	t_data	data;

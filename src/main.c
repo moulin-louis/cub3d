@@ -16,6 +16,10 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 
+	if (WIDTH > 1920 || HEIGHT > 1080)
+		return (printf("window is too big\n"), 1);
+	if (WIDTH / 16 != HEIGHT / 9 || (WIDTH % 16 != HEIGHT % 9))
+		return (printf("Wrong ratio for the window\n"), 1);
 	if (ac != 2)
 		return (ft_putstr_fd("Error\ncub3d: wrong number of args !\n", 2), 1);
 	data = parsing(av[1]);

@@ -12,11 +12,19 @@
 
 #include "cub3d.h"
 
-void	img_pix_put(char *raw_data, const int val[3], int color)
+void	img_pix_put(char *raw_data, const int val[5], int color)
 {
 	char	*pixel;
+	int		x;
+	int		y;
+	int		bpp;
+	int		size_line;
 
-	pixel = raw_data + (val[4] * val[1] + val[3] * (val[0] / 8));
+	x = val[3];
+	bpp = val[0];
+	y = val[4];
+	size_line = val[1];
+	pixel = raw_data + (y * size_line + x * (bpp / 8));
 	*(int *)pixel = color;
 }
 
