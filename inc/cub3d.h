@@ -26,6 +26,7 @@
 # define HEIGHT 1080
 # define SPACE 9
 # define END 42
+# define BLACK get_rgb(255, 255, 255)
 
 typedef struct s_data
 {

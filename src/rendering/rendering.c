@@ -38,6 +38,7 @@ void	print_map_n_pos(t_data *data)
 	}
 }
 
+
 int	rendering(void *data)
 {
 	t_math		math;
@@ -53,6 +54,6 @@ int	rendering(void *data)
 		calculate_draw_start_end(&math);
 		draw_line(&math, (t_data *)data, x);
 	}
-	print_map_n_pos(data);
-	return (call_mlx_fn((t_data *)data), 0);
+	call_mlx_fn((t_data *)data);
+	return (0);
 }
