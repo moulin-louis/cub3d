@@ -12,8 +12,8 @@
 
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 # include "../lib/libft/inc/libft.h"
 # include "../lib/minilibx-linux/mlx.h"
@@ -22,10 +22,18 @@
 # include <sys/time.h>
 
 # define FOV 1
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 1280
+# define HEIGHT 720
 # define SPACE 9
 # define END 42
+# define START_N 2
+# define START_S 3
+# define START_W 4
+# define START_E 5
+# define RED get_rgb(255, 0, 0)
+# define GREEN get_rgb(0, 255, 0)
+# define BLACK get_rgb(255, 255, 255)
+# define WHITE get_rgb(0, 0, 0)
 
 typedef struct s_data
 {
@@ -44,6 +52,8 @@ typedef struct s_data
 	int		end_index;
 	char	**tmp_map;
 	int		**map;
+	int 	len_map_x;
+	int 	len_map_y;
 
 	double	pos_x;
 	double	pos_y;
@@ -93,6 +103,7 @@ void	calculate_draw_start_end(t_math *math);
 void	perform_dda(t_math *math, t_data *data);
 void	calculate_step(t_math *math, t_data *data);
 void	calculate_init(t_math *math, t_data *data, int x);
+void	draw_minimap(t_data *data);
 
 /*-----------------------------------COLOR---------------------------------*/
 int		get_rgb(int red, int green, int blue);

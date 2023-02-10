@@ -20,7 +20,7 @@ RM			= rm -rf
 # ################################## #
 #              EXEC NAME             #
 # ################################## #
-NAME		= cub3d
+NAME		= cub3d_bonus
 
 # ################################## #
 #               SOURCES              #
@@ -32,13 +32,14 @@ C_FILES		=	main.c						\
 				rendering/camera.c			\
 				rendering/calcul.c			\
 				rendering/color.c			\
+				rendering/minimap.c			\
 				parsing/parsing.c			\
 				parsing/check_map.c			\
 				parsing/set_map.c			\
 				parsing/parsing_utils.c		\
 				parsing/set_textures.c		\
-				
-					
+
+
 SRCS		= $(patsubst %, $(C_DIR)/%, $(C_FILES))
 
 # ################################## #

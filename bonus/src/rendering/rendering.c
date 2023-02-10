@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	call_mlx_fn(t_data *data)
 {
@@ -19,8 +19,8 @@ void	call_mlx_fn(t_data *data)
 
 void	print_map_n_pos(t_data *data)
 {
-	int	x;
-	int	y;
+	int x;
+	int y;
 
 	x = -1;
 	printf("\033[2J");
@@ -28,12 +28,7 @@ void	print_map_n_pos(t_data *data)
 	{
 		y = -1;
 		while (data->map[x][++y] != END)
-		{
-			if (x == (int)data->pos_x && y == (int)data->pos_y)
-				printf("\x1B[31mJ \x1B[37m");
-			else
-				printf("%d ", data->map[x][y]);
-		}
+			printf("%d ", data->map[x][y]);
 		printf("\n");
 	}
 }
@@ -53,6 +48,8 @@ int	rendering(void *data)
 		calculate_draw_start_end(&math);
 		draw_line(&math, (t_data *)data, x);
 	}
-	print_map_n_pos(data);
-	return (call_mlx_fn((t_data *)data), 0);
+	draw_minimap(data);
+	call_mlx_fn((t_data *)data);
+
+	return ( 0);
 }
