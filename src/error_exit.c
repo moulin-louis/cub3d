@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:39:48 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/08 16:47:31 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/10 14:27:05 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ void	clean_exit(t_data *data, int err)
 {
 	if (data)
 	{
-		if (data->nord)
-			mlx_destroy_image(data->mlx, data->nord);
-		if (data->south)
-			mlx_destroy_image(data->mlx, data->south);
-		if (data->west)
-			mlx_destroy_image(data->mlx, data->west);
-		if (data->east)
-			mlx_destroy_image(data->mlx, data->east);
+		if (data->nord.img)
+			mlx_destroy_image(data->mlx, data->nord.img);
+		if (data->south.img)
+			mlx_destroy_image(data->mlx, data->south.img);
+		if (data->west.img)
+			mlx_destroy_image(data->mlx, data->west.img);
+		if (data->east.img)
+			mlx_destroy_image(data->mlx, data->east.img);
 		if (data->tmp_map)
 			free_array((void **)data->tmp_map);
 		if (data->map)
