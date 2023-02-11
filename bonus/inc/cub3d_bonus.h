@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/11 10:26:54 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/11 10:27:38 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,6 @@
 # define HEIGHT 720
 # define SPACE 9
 # define END 42
-# define START_N 2
-# define START_S 3
-# define START_W 4
-# define START_E 5
 
 typedef struct s_data
 {
