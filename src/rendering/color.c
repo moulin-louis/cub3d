@@ -33,7 +33,7 @@ int	get_rgb(int red, int green, int blue)
 	return (red << 16 | green << 8 | blue);
 }
 
-int	hit_in_y(t_data *data, t_math *math)
+/* int	hit_in_y(t_data *data, t_math *math)
 {
 	double	wall_hit;
 
@@ -83,12 +83,13 @@ int	hit_in_x(t_data *data, t_math *math)
 	// if (math->step_y == -1)
 	// 		math->color /= 2;
 	return (0);
-}
+} */
 
-int	check_side(t_data *data, t_math *math)
+/* int	check_side(t_data *data, t_math *math)
 {
 	if (math->side == 1)
 		return (hit_in_y(data, math));
 	else
 		return (hit_in_x(data, math));
 }
+ */

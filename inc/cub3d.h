@@ -43,8 +43,6 @@ typedef struct s_tex
 	int		endian;
 	int		width;
 	int		height;
-	int		hit_x;
-
 }	t_tex;
 
 typedef struct s_data
