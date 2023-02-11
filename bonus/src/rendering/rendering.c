@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:19:27 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/11 10:19:25 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/11 10:22:51 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,5 @@ int	rendering(void *data)
 	}
 	draw_minimap(data);
 	call_mlx_fn((t_data *)data);
-	//print_map_n_pos(data);
-	return ( 0);
+	return (0);
 }

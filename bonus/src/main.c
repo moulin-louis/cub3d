@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:38 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/11 10:18:52 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/11 10:22:37 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_strlen_custom(const int *line)
 {
-	int result;
+	int	result;
 
 	result = 0;
 	while (line[result] != END)
@@ -24,7 +24,7 @@ int	ft_strlen_custom(const int *line)
 
 void	set_len_map(t_data *data)
 {
-	int it;
+	int	it;
 
 	while (data->map[data->len_map_x])
 		data->len_map_x++;
@@ -43,9 +43,9 @@ int	main(int ac, char **av)
 	t_data	data;
 
 	if (WIDTH > 1920 || HEIGHT > 1080)
-			return (printf("window is too big\n"), 1);
+		return (printf("window is too big\n"), 1);
 	if (WIDTH / 16 != HEIGHT / 9 || (WIDTH % 16 != HEIGHT % 9))
-			return (printf("Wrong ratio for the window\n"), 1);
+		return (printf("Wrong ratio for the window\n"), 1);
 	if (ac != 2)
 		return (ft_putstr_fd("Error\ncub3d: wrong number of args !\n", 2), 1);
 	data = parsing(av[1]);

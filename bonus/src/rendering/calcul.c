@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:01:34 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/11 10:16:35 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/11 10:23:51 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,15 +93,15 @@ void	calculate_draw_start_end(t_math *math)
 		math->draw_end = HEIGHT - 1;
 }
 
-
 void	draw_line(t_math *math, t_data *data, int x)
 {
 	t_img_data	img_data;
-	int 		y;
+	int			y;
 
 	memset(&img_data, 0, sizeof img_data);
 	img_data.img = data->img;
-	img_data.raw_data = mlx_get_data_addr(img_data.img, &img_data.bpp, &img_data.size_line, &img_data.endian);
+	img_data.raw_data = mlx_get_data_addr(img_data.img, &img_data.bpp,
+			&img_data.size_line, &img_data.endian);
 	check_side(data, math);
 	y = -1;
 	while (++y < (int)math->draw_start)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/08 16:47:23 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/11 10:26:54 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,6 @@
 # define START_S 3
 # define START_W 4
 # define START_E 5
-# define RED get_rgb(255, 0, 0)
-# define GREEN get_rgb(0, 255, 0)
-# define BLACK get_rgb(0, 0, 0)
-# define WHITE get_rgb(255, 255, 255)
 
 typedef struct s_data
 {
@@ -52,8 +48,8 @@ typedef struct s_data
 	int		end_index;
 	char	**tmp_map;
 	int		**map;
-	int 	len_map_x;
-	int 	len_map_y;
+	int		len_map_x;
+	int		len_map_y;
 
 	double	pos_x;
 	double	pos_y;
@@ -64,13 +60,13 @@ typedef struct s_data
 
 }	t_data;
 
-typedef struct	s_img_data
+typedef struct s_img_data
 {
 	t_img	*img;
 	char	*raw_data;
-	int 	size_line;
-	int 	bpp;
-	int 	endian;
+	int		size_line;
+	int		bpp;
+	int		endian;
 }	t_img_data;
 
 typedef struct s_math
