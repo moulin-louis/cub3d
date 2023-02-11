@@ -42,7 +42,7 @@ static void	add_we_ea(t_data *data, char **tmp)
 		data->west.img = mlx_xpm_file_to_image(data->mlx, tmp[1],
 				&data->west.width, &data->west.height);
 		data->west.addr = mlx_get_data_addr(data->west.img,
-				&data->west.bits_per_pixel, &data->west.size_line,
+				&data->west.bpp, &data->west.size_line,
 				&data->west.endian);
 	}
 	else if (!ft_strcmp(tmp[0], "EA"))
@@ -52,7 +52,7 @@ static void	add_we_ea(t_data *data, char **tmp)
 		data->east.img = mlx_xpm_file_to_image(data->mlx, tmp[1],
 				&data->east.width, &data->east.height);
 		data->east.addr = mlx_get_data_addr(data->east.img,
-				&data->east.bits_per_pixel, &data->east.size_line,
+				&data->east.bpp, &data->east.size_line,
 				&data->east.endian);
 	}	
 }
@@ -66,7 +66,7 @@ static void	check_and_add_texture(t_data *data, char **tmp)
 		data->nord.img = mlx_xpm_file_to_image(data->mlx, tmp[1],
 				&data->nord.width, &data->nord.height);
 		data->nord.addr = mlx_get_data_addr(data->nord.img,
-				&data->nord.bits_per_pixel, &data->nord.size_line,
+				&data->nord.bpp, &data->nord.size_line,
 				&data->nord.endian);
 	}
 	else if (!ft_strcmp(tmp[0], "SO"))
@@ -76,7 +76,7 @@ static void	check_and_add_texture(t_data *data, char **tmp)
 		data->south.img = mlx_xpm_file_to_image(data->mlx, tmp[1],
 				&data->south.width, &data->south.height);
 		data->south.addr = mlx_get_data_addr(data->south.img,
-				&data->south.bits_per_pixel, &data->south.size_line,
+				&data->south.bpp, &data->south.size_line,
 				&data->south.endian);
 	}
 	add_we_ea(data, tmp);

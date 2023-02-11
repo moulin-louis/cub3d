@@ -38,11 +38,13 @@ typedef struct s_tex
 {
 	void	*img;
 	char	*addr;
-	int		bits_per_pixel;
+	int		bpp;
 	int		size_line;
 	int		endian;
 	int		width;
 	int		height;
+	int		hit_x;
+
 }	t_tex;
 
 typedef struct s_data
@@ -114,7 +116,7 @@ void	calculate_init(t_math *math, t_data *data, int x);
 
 /*-----------------------------------COLOR---------------------------------*/
 int		get_rgb(int red, int green, int blue);
-void	check_side(t_data *data, t_math *math);
+int		check_side(t_data *data, t_math *math);
 void	img_pix_put(char *raw_data, const int val[5], int color);
 
 /*-----------------------------------UTILS---------------------------------*/

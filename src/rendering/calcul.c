@@ -93,7 +93,52 @@ void	calculate_draw_start_end(t_math *math)
 		math->draw_end = HEIGHT - 1;
 }
 
+void	tex_pix_put(t_tex tex, t_math *math, int *val, t_img *img)
+{
+	int	tex_y;
+	double	step;
+	double tex_pos;
+
+	step = 1.0 * tex.height / math->line_height;
+	tex_pos = (math->draw_start - HEIGHT / 2 + math->line_height / 2) * step;
+	while (++val[4] < (int)math->draw_end)
+	{
+		tex_y = (int)tex_pos;
+		tex_pos += step;
+		math->color = (int)tex.addr[tex.height * tex_y + tex.hit_x];
+		img_pix_put(img->data, val, math->color);
+	}
+	//pixel = tex.addr + (y * tex.size_line + tex.hit_x * (tex.bpp / 8));
+}
+
 void	draw_line(t_math *math, t_data *data, int x)
+{
+	t_img	*img;
+	int		tex_id;
+	int		val[5];
+
+	val[4] = -1;
+	img = (t_img *)data->img;
+	mlx_get_data_addr(data->img, &val[0], &val[1], &val[2]);
+	tex_id = check_side(data, math);
+	val[3] = x;
+	while (++val[4] < (int)math->draw_start)
+		img_pix_put(img->data, val, data->ceiling);
+	val[4] = math->draw_start - 1;
+	if (tex_id == 1)
+		tex_pix_put(data->nord, math, val, img);
+	else if (tex_id == 2)
+		tex_pix_put(data->south, math, val, img);
+	else if (tex_id == 3)
+		tex_pix_put(data->east, math, val, img);
+	else if (tex_id == 4)
+		tex_pix_put(data->west, math, val, img);
+	val[4] = math->draw_end - 1;
+	while (++val[4] < HEIGHT + 1)
+		img_pix_put(img->data, val, data->floor);
+}
+
+/* void	draw_line(t_math *math, t_data *data, int x)
 {
 	t_img	*img;
 	int		val[5];
@@ -111,4 +156,4 @@ void	draw_line(t_math *math, t_data *data, int x)
 	val[4] = math->draw_end - 1;
 	while (++val[4] < HEIGHT + 1)
 		img_pix_put(img->data, val, data->floor);
-}
+} */

@@ -33,44 +33,62 @@ int	get_rgb(int red, int green, int blue)
 	return (red << 16 | green << 8 | blue);
 }
 
-void	hit_in_y(t_data *data, t_math *math)
+int	hit_in_y(t_data *data, t_math *math)
 {
 	double	wall_hit;
-	int		tex_point;
 
 	wall_hit = data->pos_x + math->perp_wall_dist * math->ray_dirx;
 	wall_hit -= floor(wall_hit);
 	if (math->step_y != -1)
-		tex_point = wall_hit * data->west.width;
+	{
+		data->west.hit_x = wall_hit * data->west.width;
+		if (math->ray_diry < 0)
+			data->west.hit_x = data->west.width - data->west.hit_x - 1;
+		return (3);
+	}
 	if (math->step_y == -1)
-		tex_point = wall_hit * data->east.width;
-	math->color = tex_point;
+	{
+		data->east.hit_x = wall_hit * data->east.width;
+		if (math->ray_diry < 0)
+			data->east.hit_x = data->east.width - data->east.hit_x - 1;
+		return (4);
+	}
 	// math->color = get_rgb(0, 0, 255);
 	// if (math->step_y == -1)
 	// 		math->color /= 2;
+	return (0);
 }
 
-void	hit_in_x(t_data *data, t_math *math)
+int	hit_in_x(t_data *data, t_math *math)
 {
 	double	wall_hit;
-	int		tex_point;
 
 	wall_hit = data->pos_y + math->perp_wall_dist * math->ray_diry;
 	wall_hit -= floor(wall_hit);
-	if (math->step_x != -1)	
-		tex_point = wall_hit * data->south.width;
+	if (math->step_x != -1)
+	{
+		data->south.hit_x = wall_hit * data->south.width;
+		if (math->ray_dirx > 0)
+			data->south.hit_x = data->south.width - data->south.hit_x - 1;
+		return (1);
+	}
 	if (math->step_x == -1)
-		tex_point = wall_hit * data->nord.width;
-	math->color = tex_point;
+	{
+		data->nord.hit_x = wall_hit * data->nord.width;
+		if (math->ray_dirx > 0)
+			data->nord.hit_x = data->nord.width - data->nord.hit_x - 1;
+		return (2);
+	}
 	// math->color = get_rgb(255, 0, 0);
 	// if (math->step_y == -1)
 	// 		math->color /= 2;
+	return (0);
 }
 
-void	check_side(t_data *data, t_math *math)
+int	check_side(t_data *data, t_math *math)
 {
 	if (math->side == 1)
-		hit_in_y(data, math);
+		return (hit_in_y(data, math));
 	else
-		hit_in_x(data, math);
+		return (hit_in_x(data, math));
 }
