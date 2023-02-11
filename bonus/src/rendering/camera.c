@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 12:54:37 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/08 15:34:10 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/11 11:58:41 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,24 @@ void	camera_forw_backw(int key, t_data *data)
 		if (data->map[(int)data->pos_x][diff_y] == 0)
 			data->pos_y -= data->dir_y * MOVSPEED;
 	}
+}
+
+int	camera_mouse(int key, int x, int y, void *ptr)
+{
+	t_data	*data;
+
+	data = (t_data *)ptr;
+	(void)x;
+	(void)y;
+	if (key == 3)
+		camera(XK_Right, data);
+	if (key == 1)
+		camera(XK_Left, data);
+	if (key == 4)
+		camera(XK_w, data);
+	if (key == 5)
+		camera(XK_s, data);
+	return (0);
 }
 
 int	camera(int key, void *ptr)

@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/11 10:27:38 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/11 12:02:50 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <sys/time.h>
 
 # define FOV 0.66
-# define WIDTH 1280
-# define HEIGHT 720
+# define WIDTH 1920
+# define HEIGHT 1080
 # define SPACE 9
 # define END 42
 
@@ -98,13 +98,17 @@ void	check_texture_color_error(t_data *data);
 /*----------------------------------RENDRING-------------------------------*/
 
 int		rendering(void *data);
-int		camera(int key, void *ptr);
 void	draw_line(t_math *math, t_data *data, int x);
 void	calculate_draw_start_end(t_math *math);
 void	perform_dda(t_math *math, t_data *data);
 void	calculate_step(t_math *math, t_data *data);
 void	calculate_init(t_math *math, t_data *data, int x);
 void	draw_minimap(t_data *data);
+
+/*-----------------------------------CAMERA--------------------------------*/
+
+int		camera_mouse(int key, int x, int y, void *ptr);
+int		camera(int key, void *ptr);
 
 /*-----------------------------------COLOR---------------------------------*/
 int		get_rgb(int red, int green, int blue);

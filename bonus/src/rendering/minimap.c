@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 10:53:07 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/11 10:26:05 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/11 11:24:23 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void	draw_square(t_data *data)
 	img_data.img = data->img;
 	img_data.raw_data = mlx_get_data_addr(img_data.img, &img_data.bpp,
 			&img_data.size_line, &img_data.endian);
-	while (++x < data->len_map_y * 10)
+	while (++x < data->len_map_y * 4)
 	{
 		y = -1;
-		while (++y < data->len_map_x * 10)
+		while (++y < data->len_map_x * 4)
 			img_pix_put(&img_data, x, y, get_rgb(0, 0, 0));
 	}
 }

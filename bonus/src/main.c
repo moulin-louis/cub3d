@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:38 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/11 10:22:37 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/11 12:04:02 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,16 @@ void	set_len_map(t_data *data)
 	}
 }
 
+void	setup_hook(t_data *data)
+{
+	mlx_hook(data->win, ButtonPress, ButtonPressMask, &camera_mouse, data);
+	mlx_hook(data->win, ButtonRelease, ButtonReleaseMask, &camera_mouse, data);
+	mlx_hook(data->win, KeyPress, KeyPressMask, &camera, data);
+	mlx_hook(data->win, KeyRelease, KeyReleaseMask, &camera, data);
+	mlx_hook(data->win, ClientMessage, NoEventMask, &close_prog, data);
+	mlx_loop_hook(data->mlx, rendering, data);
+}
+
 int	main(int ac, char **av)
 {
 	t_data	data;
@@ -49,11 +59,8 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (ft_putstr_fd("Error\ncub3d: wrong number of args !\n", 2), 1);
 	data = parsing(av[1]);
-	set_len_map(&data);
-	mlx_hook(data.win, KeyPress, KeyPressMask, &camera, &data);
-	mlx_hook(data.win, KeyRelease, KeyReleaseMask, &camera, &data);
-	mlx_hook(data.win, ClientMessage, NoEventMask, &close_prog, &data);
-	mlx_loop_hook(data.mlx, rendering, &data);
+	//set_len_map(&data);
+	setup_hook(&data);
 	mlx_loop(data.mlx);
 	return (0);
 }
