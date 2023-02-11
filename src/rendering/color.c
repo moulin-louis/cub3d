@@ -21,8 +21,8 @@ void	img_pix_put(char *raw_data, const int val[5], int color)
 	int		size_line;
 
 	x = val[3];
-	bpp = val[0];
 	y = val[4];
+	bpp = val[0];
 	size_line = val[1];
 	pixel = raw_data + (y * size_line + x * (bpp / 8));
 	*(int *)pixel = color;

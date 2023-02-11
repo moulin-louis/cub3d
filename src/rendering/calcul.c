@@ -114,8 +114,8 @@ void	get_tex_line(t_data *data, t_tex tex, t_math *math, int *val, t_img *img)
 	wall_hit = data->pos_y + math->perp_wall_dist * math->ray_diry;
 	wall_hit -= floor(wall_hit);
 	x = wall_hit * data->west.width;
-	// if ((math->side == 1 && math->ray_diry > 0)
-	// 	|| (math->side == 0 && math->ray_dirx < 0))
+	// if ((math->side == 1 && math->ray_diry < 0)
+	// 	|| (math->side == 0 && math->ray_dirx > 0))
 	// 	x = tex.width - x - 1;
 	step = 1.0 * tex.height / math->line_height;
 	tex_pos = (math->draw_start - HEIGHT / 2 + math->line_height / 2) * step;
@@ -143,38 +143,18 @@ void	draw_line(t_math *math, t_data *data, int x)
 	if (math->side == 1)
 	{
 		if (math->step_y == -1)
-			get_tex_line(data, data->nord, math, val, img);
+			get_tex_line(data, data->east, math, val, img);
 		else
-			get_tex_line(data, data->south, math, val, img);
+			get_tex_line(data, data->west, math, val, img);
 	}
 	else
 	{
 		if (math->step_x == -1)
-			get_tex_line(data, data->east, math, val, img);
+			get_tex_line(data, data->nord, math, val, img);
 		else
-			get_tex_line(data, data->west, math, val, img);
+			get_tex_line(data, data->south, math, val, img);
 	}
 	val[4] = math->draw_end - 1;
 	while (++val[4] < HEIGHT + 1)
 		img_pix_put(img->data, val, data->floor);
 }
-
-/* void	draw_line(t_math *math, t_data *data, int x)
-{
-	t_img	*img;
-	int		val[5];
-
-	val[4] = -1;
-	img = (t_img *)data->img;
-	mlx_get_data_addr(data->img, &val[0], &val[1], &val[2]);
-	check_side(data, math);
-	val[3] = x;
-	while (++val[4] < (int)math->draw_start)
-		img_pix_put(img->data, val, data->ceiling);
-	val[4] = math->draw_start - 1;
-	while (++val[4] < (int)math->draw_end)
-		img_pix_put(img->data, val, math->color);
-	val[4] = math->draw_end - 1;
-	while (++val[4] < HEIGHT + 1)
-		img_pix_put(img->data, val, data->floor);
-} */
