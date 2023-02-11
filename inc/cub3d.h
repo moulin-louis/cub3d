@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/10 15:18:55 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/11 16:13:03 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,15 @@ typedef struct s_tex
 	int		hit_x;
 
 }	t_tex;
+
+typedef struct s_img_data
+{
+	t_img	*img;
+	char	*raw_data;
+	int		size_line;
+	int		bpp;
+	int		endian;
+}	t_img_data;
 
 typedef struct s_data
 {
@@ -115,10 +124,18 @@ void	calculate_step(t_math *math, t_data *data);
 void	calculate_init(t_math *math, t_data *data, int x);
 
 /*-----------------------------------COLOR---------------------------------*/
-int		get_rgb(int red, int green, int blue);
-int		check_side(t_data *data, t_math *math);
-void	img_pix_put(char *raw_data, const int val[5], int color);
 
+int		get_rgb(int red, int green, int blue);
+void	grab_pixel(t_data *data, t_math *math, int x);
+void	img_pix_put(t_img_data *img_data, int x, int y, int color);
+
+
+/*----------------------------------TEXTURE---------------------------------*/
+
+void	grab_pixel_north(t_data *data, t_math *math, int y);
+void	grab_pixel_south(t_data *data, t_math *math, int y);
+void	grab_pixel_west(t_data *data, t_math *math, int y);
+void	grab_pixel_est(t_data *data, t_math *math, int y);
 /*-----------------------------------UTILS---------------------------------*/
 
 int		ft_strcmp(const char *s1, const char *s2);

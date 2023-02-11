@@ -6,7 +6,7 @@
 #    By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/13 13:30:11 by loumouli          #+#    #+#              #
-#    Updated: 2023/02/09 11:34:12 by loumouli         ###   ########.fr        #
+#    Updated: 2023/02/11 16:28:23 by loumouli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ C_FILES		=	main.c						\
 				rendering/camera.c			\
 				rendering/calcul.c			\
 				rendering/color.c			\
+				rendering/texture.c			\
 				parsing/parsing.c			\
 				parsing/check_map.c			\
 				parsing/set_map.c			\
@@ -51,7 +52,7 @@ OBJS		= $(patsubst %, $(O_DIR)/%, $(O_FILES))
 # ################################## #
 #                FLAGS               #
 # ################################## #
-CFLAGS		= -Wall -Wextra -Werror -g -MMD
+CFLAGS		= -Wall -Wextra -Werror -pg -MMD
 
 # ################################## #
 #                INCLUDES            #
