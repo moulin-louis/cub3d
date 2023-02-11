@@ -111,12 +111,17 @@ void	get_tex_line(t_data *data, t_tex tex, t_math *math, int *val, t_img *img)
 	double	tex_pos;
 	double	wall_hit;
 
-	wall_hit = data->pos_y + math->perp_wall_dist * math->ray_diry;
-	wall_hit -= floor(wall_hit);
+	if (math->side == 1)
+	{
+		wall_hit = data->pos_x + math->perp_wall_dist * math->ray_dirx;
+		wall_hit -= floor(wall_hit);
+	}
+	else
+	{
+		wall_hit = data->pos_y + math->perp_wall_dist * math->ray_diry;
+		wall_hit -= floor(wall_hit);
+	}
 	x = wall_hit * data->west.width;
-	// if ((math->side == 1 && math->ray_diry < 0)
-	// 	|| (math->side == 0 && math->ray_dirx > 0))
-	// 	x = tex.width - x - 1;
 	step = 1.0 * tex.height / math->line_height;
 	tex_pos = (math->draw_start - HEIGHT / 2 + math->line_height / 2) * step;
 	while (++val[4] < (int)math->draw_end)
