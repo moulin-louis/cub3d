@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calcul.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:01:34 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/08 13:53:41 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/11 10:16:35 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,13 +103,13 @@ void	draw_line(t_math *math, t_data *data, int x)
 	img_data.img = data->img;
 	img_data.raw_data = mlx_get_data_addr(img_data.img, &img_data.bpp, &img_data.size_line, &img_data.endian);
 	check_side(data, math);
-	y = 0;
+	y = -1;
 	while (++y < (int)math->draw_start)
 		img_pix_put(&img_data, x, y, data->ceiling);
 	y = math->draw_start - 1;
 	while (++y < (int)math->draw_end)
 		img_pix_put(&img_data, x, y, math->color);
 	y = math->draw_end - 1;
-	while (++y < HEIGHT + 1)
+	while (++y < HEIGHT + 10)
 		img_pix_put(&img_data, x, y, data->floor);
 }

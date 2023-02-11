@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:38 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/08 16:45:58 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/11 10:18:52 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-int	ft_strlen_custom(int *line)
+int	ft_strlen_custom(const int *line)
 {
 	int result;
 

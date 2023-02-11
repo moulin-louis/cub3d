@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:34:07 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/08 17:07:32 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/11 10:21:03 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static char	**parse_file(t_data *data, char *file)
 	nbr_lines = get_nbr_lines(fd);
 	buff = malloc(sizeof(char *) * (nbr_lines + 1));
 	if (!buff)
-		cub3d_err(data, "Malloc error\n");
+		return (cub3d_err(data, "Malloc error\n"), NULL);
 	buff[nbr_lines] = NULL;
 	close(fd);
 	fd = open(file, O_RDONLY);
@@ -57,22 +57,6 @@ static char	**parse_file(t_data *data, char *file)
 			cub3d_err(data, "Failed opening file\n"), NULL);
 	fill_buffer(data, buff, nbr_lines, fd);
 	return (buff);
-}
-
-void	print_map(t_data *data)
-{
-	int x;
-	int y;
-
-	x = -1;
-	printf("\n\n\n");
-	while (data->map[++x])
-	{
-		y = -1;
-		while (data->map[x][++y] != END)
-			printf("%d ", data->map[x][y]);
-		printf("\n");
-	}
 }
 
 t_data	parsing(char *path_map)
