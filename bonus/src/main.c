@@ -59,7 +59,6 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (ft_putstr_fd("Error\ncub3d: wrong number of args !\n", 2), 1);
 	data = parsing(av[1]);
-	//set_len_map(&data);
 	setup_hook(&data);
 	mlx_loop(data.mlx);
 	return (0);

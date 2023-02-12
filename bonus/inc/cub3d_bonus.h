@@ -27,6 +27,17 @@
 # define SPACE 9
 # define END 42
 
+typedef struct s_tex
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		size_line;
+	int		endian;
+	int		width;
+	int		height;
+}	t_tex;
+
 typedef struct s_data
 {
 	void	*mlx;
@@ -35,17 +46,15 @@ typedef struct s_data
 	int		floor;
 	int		ceiling;
 
-	void	*nord;
-	void	*south;
-	void	*west;
-	void	*east;
+	t_tex	nord;
+	t_tex	south;
+	t_tex	west;
+	t_tex	east;
 
 	int		map_index;
 	int		end_index;
 	char	**tmp_map;
 	int		**map;
-	int		len_map_x;
-	int		len_map_y;
 
 	double	pos_x;
 	double	pos_y;
@@ -53,7 +62,8 @@ typedef struct s_data
 	double	dir_y;
 	double	plane_x;
 	double	plane_y;
-
+	int		len_map_x;
+	int		len_map_y;
 }	t_data;
 
 typedef struct s_img_data
@@ -84,6 +94,7 @@ typedef struct s_math
 	int				line_height;
 	unsigned int	draw_start;
 	unsigned int	draw_end;
+	int				current_x;
 	int				color;
 }	t_math;
 
@@ -104,6 +115,12 @@ void	perform_dda(t_math *math, t_data *data);
 void	calculate_step(t_math *math, t_data *data);
 void	calculate_init(t_math *math, t_data *data, int x);
 void	draw_minimap(t_data *data);
+
+/*----------------------------------TEXTURE---------------------------------*/
+
+int		get_pixel(t_tex tex, int x, int y);
+void	get_tex_line(t_data *data, t_tex tex, t_math *math, t_img_data *img_d);
+void	draw_text_line(t_data *data, t_math *math, t_img_data *img_data);
 
 /*-----------------------------------CAMERA--------------------------------*/
 

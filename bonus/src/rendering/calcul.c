@@ -20,7 +20,7 @@ void	calculate_init(t_math *math, t_data *data, int x)
 	math->map_x = (int)data->pos_x;
 	math->map_y = (int)data->pos_y;
 	if (math->ray_dirx == 0)
-			math->delta_dist_x = 1e30;
+		math->delta_dist_x = 1e30;
 	else
 		math->delta_dist_x = fabs(1 / math->ray_dirx);
 	if (math->ray_diry == 0)
@@ -102,14 +102,12 @@ void	draw_line(t_math *math, t_data *data, int x)
 	img_data.img = data->img;
 	img_data.raw_data = mlx_get_data_addr(img_data.img, &img_data.bpp,
 			&img_data.size_line, &img_data.endian);
-	check_side(data, math);
 	y = -1;
 	while (++y < (int)math->draw_start)
 		img_pix_put(&img_data, x, y, data->ceiling);
-	y = math->draw_start - 1;
-	while (++y < (int)math->draw_end)
-		img_pix_put(&img_data, x, y, math->color);
+	math->current_x = x;
+	draw_text_line(data, math, &img_data);
 	y = math->draw_end - 1;
-	while (++y < HEIGHT + 10)
+	while (++y < HEIGHT)
 		img_pix_put(&img_data, x, y, data->floor);
 }

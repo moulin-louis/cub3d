@@ -102,7 +102,7 @@ fclean:
 			$(RM) $(NAME)
 
 bonus:
-	make -C ./bonus/Makefile
+	make -C ./bonus/ all
 
 re:			fclean all
 
