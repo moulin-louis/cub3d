@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/11 16:13:03 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/12 11:26:23 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ typedef struct s_tex
 	int		endian;
 	int		width;
 	int		height;
-	int		hit_x;
-
 }	t_tex;
 
 typedef struct s_img_data
@@ -127,7 +125,7 @@ void	calculate_init(t_math *math, t_data *data, int x);
 
 int		get_rgb(int red, int green, int blue);
 void	grab_pixel(t_data *data, t_math *math, int x);
-void	img_pix_put(t_img_data *img_data, int x, int y, int color);
+void	img_pix_put(char *raw_data, const int val[5], int color);
 
 
 /*----------------------------------TEXTURE---------------------------------*/
