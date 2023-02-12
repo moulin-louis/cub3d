@@ -129,7 +129,6 @@ int		camera(int key, void *ptr);
 
 /*-----------------------------------COLOR---------------------------------*/
 int		get_rgb(int red, int green, int blue);
-void	check_side(t_data *data, t_math *math);
 void	img_pix_put(t_img_data *img_data, int x, int y, int color);
 
 /*-----------------------------------UTILS---------------------------------*/
@@ -138,6 +137,8 @@ int		ft_strcmp(const char *s1, const char *s2);
 int		array_len(void **array);
 int		get_nbr_lines(int fd);
 int		check_file_name(char *file);
+float	calculate_buffer_zone_x(t_data *data);
+float	calculate_buffer_zone_y(t_data *data);
 
 /*-----------------------------------ERROR---------------------------------*/
 
