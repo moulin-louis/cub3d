@@ -77,7 +77,7 @@ INC			= inc/libft.h
 # **************************************************************************** #
 
 CC		= gcc
-CFLAGS	= -pg -Wall -Wextra -Werror
+CFLAGS	= -g -Wall -Wextra -Werror
 NAME	= libft.a
 RM		= rm -fd
 
