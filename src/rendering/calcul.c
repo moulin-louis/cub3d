@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:01:34 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/12 11:28:14 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/12 11:34:43 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,73 +93,21 @@ void	calculate_draw_start_end(t_math *math)
 		math->draw_end = HEIGHT - 1;
 }
 
-int	get_pixel(t_tex tex, int x, int y)
-{
-	char	*pixel;
-	int		result;
-
-	pixel = tex.addr + (y * tex.size_line + x * (tex.bpp / 8));
-	result = *(int *)pixel;
-	return (result);
-}
-
-void	get_tex_line(t_data *data, t_tex tex, t_math *math, int *val, t_img *img)
-{
-	int		tex_y;
-	int		x;
-	double	step;
-	double	tex_pos;
-	double	wall_hit;
-
-	if (math->side == 1)
-	{
-		wall_hit = data->pos_x + math->perp_wall_dist * math->ray_dirx;
-		wall_hit -= floor(wall_hit);
-	}
-	else
-	{
-		wall_hit = data->pos_y + math->perp_wall_dist * math->ray_diry;
-		wall_hit -= floor(wall_hit);
-	}
-	x = wall_hit * data->west.width;
-	step = 1.0 * tex.height / math->line_height;
-	tex_pos = (math->draw_start - HEIGHT / 2 + math->line_height / 2) * step;
-	while (++val[4] < (int)math->draw_end)
-	{
-		tex_y = (int)tex_pos;
-		tex_pos += step;
-		math->color = get_pixel(tex, x, tex_y);
-		img_pix_put(img->data, val, math->color);
-	}
-}
-
 void	draw_line(t_math *math, t_data *data, int x)
 {
-	t_img	*img;
-	int		val[5];
+	t_img_data	img_data;
+	int			y;
 
-	val[4] = -1;
-	img = (t_img *)data->img;
-	mlx_get_data_addr(data->img, &val[0], &val[1], &val[2]);
-	val[3] = x;
-	while (++val[4] < (int)math->draw_start)
-		img_pix_put(img->data, val, data->ceiling);
-	val[4] = math->draw_start - 1;
-	if (math->side == 1)
-	{
-		if (math->step_y == -1)
-			get_tex_line(data, data->east, math, val, img);
-		else
-			get_tex_line(data, data->west, math, val, img);
-	}
-	else
-	{
-		if (math->step_x == -1)
-			get_tex_line(data, data->nord, math, val, img);
-		else
-			get_tex_line(data, data->south, math, val, img);
-	}
-	val[4] = math->draw_end - 1;
-	while (++val[4] < HEIGHT + 1)
-		img_pix_put(img->data, val, data->floor);
+	memset(&img_data, 0, sizeof img_data);
+	img_data.img = data->img;
+	img_data.raw_data = mlx_get_data_addr(img_data.img, &img_data.bpp,
+			&img_data.size_line, &img_data.endian);
+	y = -1;
+	while (++y < (int)math->draw_start)
+		img_pix_put(&img_data, x, y, data->ceiling);
+	math->current_x = x;
+	draw_text_line(data, math, &img_data);
+	y = math->draw_end - 1;
+	while (++y < HEIGHT)
+		img_pix_put(&img_data, x, y, data->floor);
 }

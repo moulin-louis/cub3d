@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/12 11:26:23 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/12 11:33:28 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 # define HEIGHT 1080
 # define SPACE 9
 # define END 42
-# define BLACK get_rgb(255, 255, 255)
 # define START_N 2
 # define START_S 3
 # define START_W 4
@@ -100,6 +99,7 @@ typedef struct s_math
 	int				line_height;
 	unsigned int	draw_start;
 	unsigned int	draw_end;
+	int				current_x;
 	int				color;
 }	t_math;
 
@@ -125,15 +125,14 @@ void	calculate_init(t_math *math, t_data *data, int x);
 
 int		get_rgb(int red, int green, int blue);
 void	grab_pixel(t_data *data, t_math *math, int x);
-void	img_pix_put(char *raw_data, const int val[5], int color);
-
+void	img_pix_put(t_img_data *img_data, int x, int y, int color);
 
 /*----------------------------------TEXTURE---------------------------------*/
 
-void	grab_pixel_north(t_data *data, t_math *math, int y);
-void	grab_pixel_south(t_data *data, t_math *math, int y);
-void	grab_pixel_west(t_data *data, t_math *math, int y);
-void	grab_pixel_est(t_data *data, t_math *math, int y);
+int		get_pixel(t_tex tex, int x, int y);
+void	get_tex_line(t_data *data, t_tex tex, t_math *math, t_img_data *img_d);
+void	draw_text_line(t_data *data, t_math *math, t_img_data *img_data);
+
 /*-----------------------------------UTILS---------------------------------*/
 
 int		ft_strcmp(const char *s1, const char *s2);

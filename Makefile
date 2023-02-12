@@ -6,7 +6,7 @@
 #    By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/13 13:30:11 by loumouli          #+#    #+#              #
-#    Updated: 2023/02/12 11:25:54 by loumouli         ###   ########.fr        #
+#    Updated: 2023/02/12 11:30:19 by loumouli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ C_FILES		=	main.c						\
 				rendering/camera.c			\
 				rendering/calcul.c			\
 				rendering/color.c			\
+				rendering/textures.c		\
 				parsing/parsing.c			\
 				parsing/check_map.c			\
 				parsing/set_map.c			\
