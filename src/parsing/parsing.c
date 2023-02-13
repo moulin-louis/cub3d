@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:34:07 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/08 17:07:32 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/13 14:58:51 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,13 @@ t_data	parsing(char *path_map)
 	data.mlx = mlx_init();
 	if (!data.mlx)
 		mlx_err(&data);
+	add_textures_and_colors(&data);
+	check_texture_color_error(&data);
 	data.win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "CUB3D");
 	if (!data.win)
 		mlx_err(&data);
 	data.img = mlx_new_image(data.mlx, WIDTH, HEIGHT);
 	if (!data.img)
 		cub3d_err(&data, "mlx_new_image failed\n");
-	add_textures_and_colors(&data);
-	check_texture_color_error(&data);
 	return (data);
 }

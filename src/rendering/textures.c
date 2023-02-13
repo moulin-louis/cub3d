@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 11:29:21 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/13 12:49:19 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/13 14:20:20 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ void	draw_text_line(t_data *data, t_math *math, t_img_data *img_data)
 	else
 	{
 		if (math->step_x == -1)
-			get_tex_line(data, data->nord, math, img_data);
-		else
 			get_tex_line(data, data->south, math, img_data);
+		else
+			get_tex_line(data, data->nord, math, img_data);
 	}
 }
