@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:56:27 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/13 14:49:58 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/13 15:50:59 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	free_array(void **array)
+{
+	int	i;
+
+	i = -1;
+	if (!array)
+		return ;
+	while (array[++i])
+		free(array[i]);
+	free(array);
+}
 
 int	check_file_name(char *file)
 {
