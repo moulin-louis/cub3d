@@ -6,7 +6,7 @@
 #    By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/13 13:30:11 by loumouli          #+#    #+#              #
-#    Updated: 2023/02/12 11:30:19 by loumouli         ###   ########.fr        #
+#    Updated: 2023/02/13 11:58:35 by loumouli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,7 @@ LIBFT 		= 	./lib/libft/libft.a
 #                RULES               #
 # ################################## #
 
+
 all:	$(NAME)
 
 $(O_DIR):
@@ -101,15 +102,22 @@ fclean:
 			make -C ./lib/libft fclean
 			$(RM) $(NAME)
 
+re:			fclean all
+
 bonus:
 	make -C ./bonus/ all
 
-re:			fclean all
+bonus_re:
+	make -C ./bonus/ re
 
-malloc_test: $(MLX) $(LIBFT) $(O_DIR) $(OBJS)
-	$(CC) $(CFLAGS) -fsanitize=undefined -rdynamic -o $@ ${OBJS} $(MLX) $(LIBFT) -lX11 -lXext -lm -L. -lmallocator
+bonus_fclean:
+	make -C ./bonus/ fclean
 
-.PHONY: all clean fclean re
+bonus_clean:
+	make -C ./bonus/ clean
+
+
+.PHONY: all clean fclean re bonus bonus_re bonus_fclean bonus_clean
 
 -include ./objs/*.d
 -include ./objs/rendering/*.d

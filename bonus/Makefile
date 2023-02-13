@@ -6,7 +6,7 @@
 #    By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/13 13:30:11 by loumouli          #+#    #+#              #
-#    Updated: 2023/02/13 09:49:26 by loumouli         ###   ########.fr        #
+#    Updated: 2023/02/13 11:58:11 by loumouli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -102,13 +102,7 @@ fclean:
 			make -C ./lib/libft fclean
 			$(RM) $(NAME)
 
-bonus:
-	make -C ./bonus/Makefile
-
 re:			fclean all
-
-malloc_test: $(MLX) $(LIBFT) $(O_DIR) $(OBJS)
-	$(CC) $(CFLAGS) -fsanitize=undefined -rdynamic -o $@ ${OBJS} $(MLX) $(LIBFT) -lX11 -lXext -lm -L. -lmallocator
 
 .PHONY: all clean fclean re
 
