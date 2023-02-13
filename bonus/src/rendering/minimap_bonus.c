@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 10:53:07 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/13 15:40:37 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/13 15:41:59 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	draw_square(t_data *data)
 void	display_pixel(t_data *data, int x, int y, int offset)
 {
 	t_img_data	img_data;
-	int	color;
+	int			color;
 
 	memset(&img_data, 0, sizeof img_data);
 	img_data.img = data->img;
@@ -53,7 +53,6 @@ void	display_pixel(t_data *data, int x, int y, int offset)
 	img_pix_put(&img_data, (x * 2) + offset, (y * 2) + 1, color);
 	img_pix_put(&img_data, (x * 2) + offset, (y * 2) + 2, color);
 	img_pix_put(&img_data, (x * 2) + offset, (y * 2) + 3, color);
-
 }
 
 /*draw a minimap on the screen*/
@@ -62,7 +61,6 @@ void	draw_minimap(t_data *data)
 	int			x;
 	int			y;
 
-	
 	if (data->len_map_x > HEIGHT || data->len_map_y > WIDTH)
 		return ;
 	y = -1;
@@ -71,10 +69,10 @@ void	draw_minimap(t_data *data)
 		x = -1;
 		while (data->map[y][++x] != END)
 		{
-			display_pixel(data, x , y, 0);
-			display_pixel(data, x , y, 1);
-			display_pixel(data, x , y, 2);
-			display_pixel(data, x , y, 3);
+			display_pixel(data, x, y, 0);
+			display_pixel(data, x, y, 1);
+			display_pixel(data, x, y, 2);
+			display_pixel(data, x, y, 3);
 		}
 	}
 }

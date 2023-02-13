@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/13 14:49:32 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/13 15:42:50 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "../lib/libft/inc/libft.h"
 # include "../lib/minilibx-linux/mlx.h"
 # include "../lib/minilibx-linux/mlx_int.h"
-#include <stdbool.h>
+# include <stdbool.h>
 # include <math.h>
 # include <sys/time.h>
 
