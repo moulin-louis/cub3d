@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 12:54:37 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/11 11:58:41 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/13 09:46:54 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ void	camera_forw_backw(int key, t_data *data)
 	}
 	if (key == XK_s)
 	{
-		diff_x = (int)(data->pos_x - data->dir_x * MOVSPEED  - buff_x);
-		diff_y = (int)(data->pos_y - data->dir_y * MOVSPEED  - buff_y);
+		diff_x = (int)(data->pos_x - data->dir_x * MOVSPEED - buff_x);
+		diff_y = (int)(data->pos_y - data->dir_y * MOVSPEED - buff_y);
 		if (data->map[diff_x][(int)data->pos_y] == 0)
 			data->pos_x -= data->dir_x * MOVSPEED;
 		if (data->map[(int)data->pos_x][diff_y] == 0)

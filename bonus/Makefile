@@ -6,7 +6,7 @@
 #    By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/13 13:30:11 by loumouli          #+#    #+#              #
-#    Updated: 2023/02/09 11:34:12 by loumouli         ###   ########.fr        #
+#    Updated: 2023/02/13 09:49:26 by loumouli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,19 +26,19 @@ NAME		= cub3d_bonus
 #               SOURCES              #
 # ################################## #
 C_DIR		= src
-C_FILES		=	main.c						\
-				error_exit.c				\
-				rendering/rendering.c		\
-				rendering/camera.c			\
-				rendering/calcul.c			\
-				rendering/color.c			\
-				rendering/minimap.c			\
-				rendering/textures.c		\
-				parsing/parsing.c			\
-				parsing/check_map.c			\
-				parsing/set_map.c			\
-				parsing/parsing_utils.c		\
-				parsing/set_textures.c		\
+C_FILES		=	main_bonus.c						\
+				error_exit_bonus.c					\
+				rendering/rendering_bonus.c			\
+				rendering/camera_bonus.c			\
+				rendering/calcul_bonus.c			\
+				rendering/color_bonus.c				\
+				rendering/minimap_bonus.c			\
+				rendering/textures_bonus.c			\
+				parsing/parsing_bonus.c				\
+				parsing/check_map_bonus.c			\
+				parsing/set_map_bonus.c				\
+				parsing/parsing_utils_bonus.c		\
+				parsing/set_textures_bonus.c		\
 
 
 SRCS		= $(patsubst %, $(C_DIR)/%, $(C_FILES))
