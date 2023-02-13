@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/13 12:59:03 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/13 14:23:53 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "../lib/libft/inc/libft.h"
 # include "../lib/minilibx-linux/mlx.h"
 # include "../lib/minilibx-linux/mlx_int.h"
+#include <stdbool.h>
 # include <math.h>
 # include <sys/time.h>
 
@@ -141,6 +142,7 @@ int		get_nbr_lines(int fd);
 int		check_file_name(char *file);
 float	calculate_buffer_zone_x(t_data *data);
 float	calculate_buffer_zone_y(t_data *data);
+bool	ut_atoi(int *nbr, const char *str);
 
 /*-----------------------------------ERROR---------------------------------*/
 
