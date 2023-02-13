@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   textures.c                                         :+:      :+:    :+:   */
+/*   textures_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 11:29:21 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/12 11:31:16 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/13 12:56:44 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,18 @@ int	get_pixel(t_tex tex, int x, int y)
 	return (result);
 }
 
+int	calculate_texture_coordinate(t_tex tex, t_math *math, double wall_hit)
+{
+	int	x;
+
+	x = wall_hit * tex.width;
+	if (math->side == 0 && math->ray_dirx > 0)
+		x = tex.width - x - 1;
+	if (math->side == 1 && math->ray_diry < 0)
+		x = tex.width - x - 1;
+	return (x);
+}
+
 void	get_tex_line(t_data *data, t_tex tex, t_math *math, t_img_data *img_d)
 {
 	int		tex_y;
@@ -35,7 +47,7 @@ void	get_tex_line(t_data *data, t_tex tex, t_math *math, t_img_data *img_d)
 	else
 		wall_hit = data->pos_y + math->perp_wall_dist * math->ray_diry;
 	wall_hit -= floor(wall_hit);
-	x_y[0] = wall_hit * data->west.width;
+	x_y[0] = calculate_texture_coordinate(tex, math, wall_hit);
 	step = 1.0 * tex.height / math->line_height;
 	tex_pos = (math->draw_start - HEIGHT / 2 + math->line_height / 2) * step;
 	x_y[1] = math->draw_start - 1;

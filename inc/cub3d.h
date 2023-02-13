@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/13 12:29:34 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/13 12:59:03 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <math.h>
 # include <sys/time.h>
 
-# define FOV 1
+# define FOV 0.66
 # define WIDTH 1920
 # define HEIGHT 1080
 # define SPACE 9
