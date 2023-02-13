@@ -6,7 +6,7 @@
 #    By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/13 13:30:11 by loumouli          #+#    #+#              #
-#    Updated: 2023/02/13 11:58:35 by loumouli         ###   ########.fr        #
+#    Updated: 2023/02/13 14:50:09 by loumouli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ C_FILES		=	main.c						\
 				parsing/set_map.c			\
 				parsing/parsing_utils.c		\
 				parsing/set_textures.c		\
+				parsing/utils.c
 				
 					
 SRCS		= $(patsubst %, $(C_DIR)/%, $(C_FILES))

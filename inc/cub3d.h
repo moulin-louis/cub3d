@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/13 14:23:53 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/13 14:49:32 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,8 @@ int		get_nbr_lines(int fd);
 int		check_file_name(char *file);
 float	calculate_buffer_zone_x(t_data *data);
 float	calculate_buffer_zone_y(t_data *data);
-bool	ut_atoi(int *nbr, const char *str);
+bool	ut_atoi(unsigned int *nbr, const char *str);
+int		check_color(char **buff);
 
 /*-----------------------------------ERROR---------------------------------*/
 

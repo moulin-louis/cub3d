@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_textures.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:03:51 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/10 14:59:16 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/13 14:50:18 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static int	get_color(t_data *data, char **tmp)
 {
-	int		color;
-	char	**buff;
+	int				color;
+	char			**buff;
 
 	buff = ft_split(tmp[1], ',');
 	if (!buff)
@@ -29,7 +29,13 @@ static int	get_color(t_data *data, char **tmp)
 		free_array((void **)buff);
 		cub3d_err(data, "Color description error : format needed: r, g, b\n");
 	}
-	color = get_rgb(ft_atoi(buff[0]), ft_atoi(buff[1]), ft_atoi(buff[2]));
+	color = check_color(buff);
+	if (color == -1)
+	{
+		free_array((void **)tmp);
+		free_array((void **)buff);
+		cub3d_err(data, "Color description error : format needed: r, g, b\n");
+	}
 	return (free_array((void **)buff), color);
 }
 

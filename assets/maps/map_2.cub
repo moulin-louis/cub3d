@@ -3,7 +3,7 @@ SO     ./assets/textures/BRICK_2A_v2.xpm
 WE ./assets/textures/BRICK_3D_v2.xpm
 EA ./assets/textures/BRICK_4A_v2.xpm
 
-F                             220,100,0
+F                            0,100,0
 C 225,30,0
 
         1111111111111111111111111
