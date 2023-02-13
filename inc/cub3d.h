@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/12 11:33:28 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/13 12:29:34 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,8 @@ int		ft_strcmp(const char *s1, const char *s2);
 int		array_len(void **array);
 int		get_nbr_lines(int fd);
 int		check_file_name(char *file);
+float	calculate_buffer_zone_x(t_data *data);
+float	calculate_buffer_zone_y(t_data *data);
 
 /*-----------------------------------ERROR---------------------------------*/
 
