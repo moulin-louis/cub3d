@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 12:54:37 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/13 09:46:38 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/13 12:31:41 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,15 @@ void	camera_strafe(int key, t_data *data)
 {
 	int		diff_x;
 	int		diff_y;
+	float	buff_x;
+	float	buff_y;
 
+	buff_x = calculate_buffer_zone_x(data);
+	buff_y = calculate_buffer_zone_y(data);
 	if (key == XK_a)
 	{
-		diff_x = (int)(data->pos_x - data->dir_y * MOVSPEED);
-		diff_y = (int)(data->pos_y + data->dir_x * MOVSPEED);
+		diff_x = (int)(data->pos_x - data->dir_y * MOVSPEED - buff_y);
+		diff_y = (int)(data->pos_y + data->dir_x * MOVSPEED + buff_x);
 		if (data->map[diff_x][(int)data->pos_y] == 0)
 			data->pos_x -= data->dir_y * MOVSPEED;
 		if (data->map[(int)data->pos_x][diff_y] == 0)
@@ -58,8 +62,8 @@ void	camera_strafe(int key, t_data *data)
 	}
 	if (key == XK_d)
 	{
-		diff_x = (int)(data->pos_x + data->dir_y * MOVSPEED);
-		diff_y = (int)(data->pos_y - data->dir_x * MOVSPEED);
+		diff_x = (int)(data->pos_x + data->dir_y * MOVSPEED + buff_y);
+		diff_y = (int)(data->pos_y - data->dir_x * MOVSPEED - buff_x);
 		if (data->map[diff_x][(int)data->pos_y] == 0)
 			data->pos_x += data->dir_y * MOVSPEED;
 		if (data->map[(int)data->pos_x][diff_y] == 0)
@@ -71,11 +75,15 @@ void	camera_forw_backw(int key, t_data *data)
 {
 	int		diff_x;
 	int		diff_y;
+	float	buff_x;
+	float	buff_y;
 
+	buff_x = calculate_buffer_zone_x(data);
+	buff_y = calculate_buffer_zone_y(data);
 	if (key == XK_w)
 	{
-		diff_x = (int)(data->pos_x + data->dir_x * MOVSPEED);
-		diff_y = (int)(data->pos_y + data->dir_y * MOVSPEED);
+		diff_x = (int)(data->pos_x + data->dir_x * MOVSPEED + buff_x);
+		diff_y = (int)(data->pos_y + data->dir_y * MOVSPEED + buff_y);
 		if (data->map[diff_x][(int)data->pos_y] == 0)
 			data->pos_x += data->dir_x * MOVSPEED;
 		if (data->map[(int)data->pos_x][diff_y] == 0)
@@ -83,8 +91,8 @@ void	camera_forw_backw(int key, t_data *data)
 	}
 	if (key == XK_s)
 	{
-		diff_x = (int)(data->pos_x - data->dir_x * MOVSPEED);
-		diff_y = (int)(data->pos_y - data->dir_y * MOVSPEED);
+		diff_x = (int)(data->pos_x - data->dir_x * MOVSPEED - buff_x);
+		diff_y = (int)(data->pos_y - data->dir_y * MOVSPEED - buff_y);
 		if (data->map[diff_x][(int)data->pos_y] == 0)
 			data->pos_x -= data->dir_x * MOVSPEED;
 		if (data->map[(int)data->pos_x][diff_y] == 0)
