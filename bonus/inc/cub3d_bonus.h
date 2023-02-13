@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/11 12:02:50 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:31:31 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "../lib/libft/inc/libft.h"
 # include "../lib/minilibx-linux/mlx.h"
 # include "../lib/minilibx-linux/mlx_int.h"
+# include <stdbool.h>
 # include <math.h>
 # include <sys/time.h>
 
@@ -45,6 +46,11 @@ typedef struct s_data
 	void	*img;
 	int		floor;
 	int		ceiling;
+
+	char	*path_no;
+	char	*path_so;
+	char	*path_we;
+	char	*path_ea;
 
 	t_tex	nord;
 	t_tex	south;
@@ -105,6 +111,10 @@ void	add_map(t_data *data);
 int		check_map(t_data *data);
 void	add_textures_and_colors(t_data *data);
 void	check_texture_color_error(t_data *data);
+void	check_xpm_file(t_data *data, char **tmp);
+void	add_tex_path(t_data *data, char **tmp, char *side);
+void	check_invalid_info(t_data *data, char **tmp);
+void	check_texture_color_error(t_data *data);
 
 /*----------------------------------RENDRING-------------------------------*/
 
@@ -139,6 +149,8 @@ int		get_nbr_lines(int fd);
 int		check_file_name(char *file);
 float	calculate_buffer_zone_x(t_data *data);
 float	calculate_buffer_zone_y(t_data *data);
+bool	ut_atoi(unsigned int *nbr, const char *str);
+int		check_color(char **buff);
 
 /*-----------------------------------ERROR---------------------------------*/
 

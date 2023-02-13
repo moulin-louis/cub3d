@@ -6,7 +6,7 @@
 #    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/13 13:30:11 by loumouli          #+#    #+#              #
-#    Updated: 2023/02/13 14:43:14 by mpignet          ###   ########.fr        #
+#    Updated: 2023/02/13 16:29:23 by mpignet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,9 @@ C_FILES		=	main_bonus.c						\
 				parsing/check_map_bonus.c			\
 				parsing/set_map_bonus.c				\
 				parsing/parsing_utils_bonus.c		\
+				parsing/parsing_utils_2_bonus.c		\
 				parsing/set_textures_bonus.c		\
+				parsing/check_textures_bonus.c		\
 
 
 SRCS		= $(patsubst %, $(C_DIR)/%, $(C_FILES))
