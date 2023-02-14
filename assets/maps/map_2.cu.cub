@@ -1,11 +1,11 @@
-NO                             ./assets/textures/BRICK_1A_v2.xpm
+NO                                   ./assets/textures/BRICK_1A_v2.xpm
 SO     ./assets/textures/BRICK_2A_v2.xpm
 WE ./assets/textures/BRICK_3D_v2.xpm
 EA ./assets/textures/BRICK_4A_v2.xpm
 
 
-F                            0,100,0
-C  225,30,0
+F                           0,100,0
+C 1,1,1,
 
 
         1111111111111111111111111
@@ -22,3 +22,5 @@ C  225,30,0
 11000001110101011111011110N0111
 11110111 1110101 101111110001
 11111111 1111111 111111 11111
+
+

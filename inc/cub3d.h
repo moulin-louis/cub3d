@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/13 16:26:03 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/14 11:29:26 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ float	calculate_buffer_zone_x(t_data *data);
 float	calculate_buffer_zone_y(t_data *data);
 bool	ut_atoi(unsigned int *nbr, const char *str);
 int		check_color(char **buff);
+void	free_arr_exit(char **ar, t_data *data, char *err);
 
 /*-----------------------------------ERROR---------------------------------*/
 

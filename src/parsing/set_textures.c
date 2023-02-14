@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_textures.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:03:51 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/13 16:17:09 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/14 11:32:14 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@ static int	get_color(t_data *data, char **tmp)
 
 	buff = ft_split(tmp[1], ',');
 	if (!buff)
-	{
-		free_array((void **)tmp);
-		cub3d_err(data, "Malloc error\n");
-	}
+		free_arr_exit(tmp, data, "split color error\n");
 	else if (array_len((void **)buff) != 3)
 	{
 		free_array((void **)tmp);
@@ -44,7 +41,7 @@ static void	add_we_ea(t_data *data, char **tmp)
 	if (!ft_strcmp(tmp[0], "WE"))
 	{
 		if (data->west.img)
-			cub3d_err(data, "Mutiple path definitions for West walls\n");
+			free_arr_exit(tmp, data, "Mutiple path def for West walls\n");
 		check_xpm_file(data, tmp);
 		add_tex_path(data, tmp, "WE");
 		data->west.img = mlx_xpm_file_to_image(data->mlx, tmp[1],
@@ -56,7 +53,7 @@ static void	add_we_ea(t_data *data, char **tmp)
 	else if (!ft_strcmp(tmp[0], "EA"))
 	{
 		if (data->east.img)
-			cub3d_err(data, "Mutiple path definitions for East walls\n");
+			free_arr_exit(tmp, data, "Mutiple path def for East walls\n");
 		check_xpm_file(data, tmp);
 		add_tex_path(data, tmp, "EA");
 		data->east.img = mlx_xpm_file_to_image(data->mlx, tmp[1],
@@ -72,7 +69,7 @@ static void	check_and_add_texture(t_data *data, char **tmp)
 	if (!ft_strcmp(tmp[0], "NO"))
 	{
 		if (data->nord.img)
-			cub3d_err(data, "Mutiple path definitions for North walls\n");
+			free_arr_exit(tmp, data, "Mutiple path def for North walls\n");
 		check_xpm_file(data, tmp);
 		add_tex_path(data, tmp, "NO");
 		data->nord.img = mlx_xpm_file_to_image(data->mlx, tmp[1],
@@ -84,7 +81,7 @@ static void	check_and_add_texture(t_data *data, char **tmp)
 	else if (!ft_strcmp(tmp[0], "SO"))
 	{
 		if (data->south.img)
-			cub3d_err(data, "Mutiple path definitions for South walls\n");
+			free_arr_exit(tmp, data, "Mutiple path def for South walls\n");
 		check_xpm_file(data, tmp);
 		add_tex_path(data, tmp, "SO");
 		data->south.img = mlx_xpm_file_to_image(data->mlx, tmp[1],

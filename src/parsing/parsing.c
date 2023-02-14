@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:34:07 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/13 14:58:51 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/14 11:14:00 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ static char	**parse_file(t_data *data, char *file)
 		return (free_array((void **)buff),
 			cub3d_err(data, "Failed opening file\n"), NULL);
 	fill_buffer(data, buff, nbr_lines, fd);
+	close(fd);
 	return (buff);
 }
 
