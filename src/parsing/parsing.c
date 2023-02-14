@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:34:07 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/14 11:14:00 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/14 12:15:58 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,20 @@ static char	**parse_file(t_data *data, char *file)
 	fill_buffer(data, buff, nbr_lines, fd);
 	close(fd);
 	return (buff);
+}
+
+void	check_empty_line(t_data *data)
+{
+	int	x;
+
+	x = data->map_index -1;
+	while (data->tmp_map[++x])
+	{
+		if (ft_strlen(data->tmp_map[x]) == 0)
+		{
+			cub3d_err(data, "Empty line after map content\n");
+		}
+	}
 }
 
 t_data	parsing(char *path_map)

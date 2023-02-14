@@ -6,7 +6,7 @@
 /*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 17:39:50 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/14 11:48:33 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/14 12:16:43 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,8 @@
 
 static void	check_box(t_data *data, int i, size_t j)
 {
-	printf("j = %lu\n", j);
-	printf("i = %d\n", i);
 	if (data->tmp_map[i + 1] && data->tmp_map[i + 1][j])
 	{		
-		// printf("j = %lu\n", j);
-		// printf("i = %d\n", i);
 		if (data->tmp_map[i + 1][j] != '1' && data->tmp_map[i + 1][j] != ' ')
 			cub3d_err(data, "Map not properly closed !\n");
 	}
@@ -53,8 +49,6 @@ static void	check_line(t_data *data, int i)
 	size_t	j;
 
 	j = 0;
-	//printf("i = %d\n", i);
-	//printf("line len = %ld\n", ft_strlen(data->tmp_map[i]));
 	if (ft_strlen(data->tmp_map[i]) == 0)
 		return ;
 	while (data->tmp_map[i][j])
@@ -109,7 +103,6 @@ int	check_map(t_data *data)
 	check_char(data);
 	while (data->tmp_map[++i])
 	{
-		printf("map[%d] = %s\n", i, data->tmp_map[i]);
 		check_line(data, i);
 		end = ft_strlen(data->tmp_map[i]) - 1;
 		begin = 0;
