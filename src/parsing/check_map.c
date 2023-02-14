@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 17:39:50 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/14 14:29:39 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/14 16:16:37 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,28 @@ static void	check_line(t_data *data, int i)
 	}
 }
 
+int	check_around_player(t_data *data, int i, size_t j)
+{
+	//printf("i : %d / j : %ld\n", i, j);
+	if (ft_strlen(data->tmp_map[i + 1]) < j || ft_strlen(data->tmp_map[i - 1]) < j)
+		cub3d_err(data, "Map not properly closed !\n");
+	if (i < (data->end_index - 1) && ft_strlen(data->tmp_map[i + 1]) >= j
+		&& data->tmp_map[i + 1][j])
+	{		
+		if (data->tmp_map[i + 1][j] != '1' && data->tmp_map[i + 1][j] != ' '
+		&& data->tmp_map[i + 1][j] != '0')
+			cub3d_err(data, "Map not properly closed !1\n");
+	}
+	if (i > data->map_index && ft_strlen(data->tmp_map[i - 1]) >= j
+		&& data->tmp_map[i - 1][j])
+	{	
+		if (data->tmp_map[i - 1][j] != '1' && data->tmp_map[i - 1][j] != ' '
+			&& data->tmp_map[i - 1][j] != '0')
+			cub3d_err(data, "Map not properly closed !2\n");
+	}
+	return (1);
+}
+
 static void	check_char(t_data *data)
 {
 	int	i;
@@ -88,7 +110,7 @@ static void	check_char(t_data *data)
 				cub3d_err(data, "Invalid char in map !\n");
 			if (data->tmp_map[i][j] == 'N' || data->tmp_map[i][j] == 'S'
 				|| data->tmp_map[i][j] == 'W' || data->tmp_map[i][j] == 'E')
-				player++;
+				player += check_around_player(data, i, j);
 			j++;
 		}
 		i++;
