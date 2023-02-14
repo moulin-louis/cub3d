@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:34:07 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/14 12:15:58 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/14 16:26:38 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	check_box_zero(t_data *data, int i, size_t j)
+{
+	if (data->tmp_map[i + 1]
+		&& (ft_strlen(data->tmp_map[i + 1]) < j || !data->tmp_map[i + 1][j]))
+		cub3d_err(data, "Map not properly closed !\n");
+	if (i > data->map_index
+		&& (ft_strlen(data->tmp_map[i - 1]) < j || !data->tmp_map[i - 1][j]))
+		cub3d_err(data, "Map not properly closed !\n");
+}
 
 static void	fill_buffer(t_data *data, char **buff, int nbr_lines, int fd)
 {
@@ -66,12 +76,8 @@ void	check_empty_line(t_data *data)
 
 	x = data->map_index -1;
 	while (data->tmp_map[++x])
-	{
 		if (ft_strlen(data->tmp_map[x]) == 0)
-		{
 			cub3d_err(data, "Empty line after map content\n");
-		}
-	}
 }
 
 t_data	parsing(char *path_map)

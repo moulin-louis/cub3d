@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/14 12:14:44 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/14 16:24:44 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ void	check_xpm_file(t_data *data, char **tmp);
 void	add_tex_path(t_data *data, char **tmp, char *side);
 void	check_invalid_info(t_data *data, char **tmp);
 void	check_texture_color_error(t_data *data);
+void	check_box_zero(t_data *data, int i, size_t j);
 
 /*----------------------------------RENDRING-------------------------------*/
 

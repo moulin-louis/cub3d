@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 17:39:50 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/14 16:16:37 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/14 16:24:27 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,6 @@ static void	check_box(t_data *data, int i, size_t j)
 	}
 }
 
-static void	check_box_zero(t_data *data, int i, size_t j)
-{
-	if (data->tmp_map[i + 1]
-		&& (ft_strlen(data->tmp_map[i + 1]) < j || !data->tmp_map[i + 1][j]))
-		cub3d_err(data, "Map not properly closed !\n");
-	if (i > data->map_index
-		&& (ft_strlen(data->tmp_map[i - 1]) < j || !data->tmp_map[i - 1][j]))
-		cub3d_err(data, "Map not properly closed !\n");
-}
-
 static void	check_line(t_data *data, int i)
 {
 	size_t	j;
@@ -70,8 +60,8 @@ static void	check_line(t_data *data, int i)
 
 int	check_around_player(t_data *data, int i, size_t j)
 {
-	//printf("i : %d / j : %ld\n", i, j);
-	if (ft_strlen(data->tmp_map[i + 1]) < j || ft_strlen(data->tmp_map[i - 1]) < j)
+	if (ft_strlen(data->tmp_map[i + 1]) < j
+		|| ft_strlen(data->tmp_map[i - 1]) < j)
 		cub3d_err(data, "Map not properly closed !\n");
 	if (i < (data->end_index - 1) && ft_strlen(data->tmp_map[i + 1]) >= j
 		&& data->tmp_map[i + 1][j])
