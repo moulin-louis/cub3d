@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 17:39:50 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/14 12:16:43 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/14 14:29:39 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 static void	check_box(t_data *data, int i, size_t j)
 {
-	if (data->tmp_map[i + 1] && data->tmp_map[i + 1][j])
+	if (i < (data->end_index - 1) && ft_strlen(data->tmp_map[i + 1]) >= j
+		&& data->tmp_map[i + 1][j])
 	{		
 		if (data->tmp_map[i + 1][j] != '1' && data->tmp_map[i + 1][j] != ' ')
 			cub3d_err(data, "Map not properly closed !\n");
 	}
-	if (i > data->map_index && data->tmp_map[i - 1][j])
+	if (i > data->map_index && ft_strlen(data->tmp_map[i - 1]) >= j
+		&& data->tmp_map[i - 1][j])
 	{	
 		if (data->tmp_map[i - 1][j] != '1' && data->tmp_map[i - 1][j] != ' ')
 			cub3d_err(data, "Map not properly closed !\n");
@@ -29,7 +31,7 @@ static void	check_box(t_data *data, int i, size_t j)
 		if (data->tmp_map[i][j - 1] != '1' && data->tmp_map[i][j - 1] != ' ')
 			cub3d_err(data, "Map not properly closed !\n");
 	}
-	if (j < ft_strlen(data->tmp_map[i]))
+	if (j < ft_strlen(data->tmp_map[i]) - 1)
 	{
 		if (data->tmp_map[i][j + 1] != '1' && data->tmp_map[i][j + 1] != ' ')
 			cub3d_err(data, "Map not properly closed !\n");
@@ -38,9 +40,11 @@ static void	check_box(t_data *data, int i, size_t j)
 
 static void	check_box_zero(t_data *data, int i, size_t j)
 {
-	if (data->tmp_map[i + 1] && !data->tmp_map[i + 1][j])
+	if (data->tmp_map[i + 1]
+		&& (ft_strlen(data->tmp_map[i + 1]) < j || !data->tmp_map[i + 1][j]))
 		cub3d_err(data, "Map not properly closed !\n");
-	if (i > data->map_index && !data->tmp_map[i - 1][j])
+	if (i > data->map_index
+		&& (ft_strlen(data->tmp_map[i - 1]) < j || !data->tmp_map[i - 1][j]))
 		cub3d_err(data, "Map not properly closed !\n");
 }
 
@@ -108,8 +112,9 @@ int	check_map(t_data *data)
 		begin = 0;
 		while (data->tmp_map[i][begin] == ' ')
 			begin++;
-		if (data->tmp_map[i][begin] != '1' || data->tmp_map[i][end] != '1')
-			cub3d_err(data, "Map not properly closed\n");
+		if (data->tmp_map[i][begin] != '1' ||
+			(data->tmp_map[i][end] != '1' && data->tmp_map[i][end] != ' '))
+			cub3d_err(data, "Map not properly closed !\n");
 	}
 	return (0);
 }
