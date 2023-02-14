@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
+#    By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/13 13:30:11 by loumouli          #+#    #+#              #
-#    Updated: 2023/02/13 16:29:23 by mpignet          ###   ########.fr        #
+#    Updated: 2023/02/14 12:22:30 by loumouli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,13 +34,13 @@ C_FILES		=	main_bonus.c						\
 				rendering/color_bonus.c				\
 				rendering/minimap_bonus.c			\
 				rendering/textures_bonus.c			\
-				parsing/parsing_bonus.c				\
 				parsing/check_map_bonus.c			\
-				parsing/set_map_bonus.c				\
+				parsing/check_textures_bonus.c		\
+				parsing/parsing_bonus.c				\
 				parsing/parsing_utils_bonus.c		\
 				parsing/parsing_utils_2_bonus.c		\
+				parsing/set_map_bonus.c				\
 				parsing/set_textures_bonus.c		\
-				parsing/check_textures_bonus.c		\
 
 
 SRCS		= $(patsubst %, $(C_DIR)/%, $(C_FILES))

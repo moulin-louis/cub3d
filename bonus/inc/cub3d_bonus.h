@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:04:16 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/13 16:31:31 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/14 12:24:42 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdbool.h>
 # include <math.h>
 # include <sys/time.h>
+# include <sys/types.h>
 
 # define FOV 0.66
 # define WIDTH 1920
@@ -151,6 +152,8 @@ float	calculate_buffer_zone_x(t_data *data);
 float	calculate_buffer_zone_y(t_data *data);
 bool	ut_atoi(unsigned int *nbr, const char *str);
 int		check_color(char **buff);
+void	free_arr_exit(char **ar, t_data *data, char *err);
+void	check_empty_line(t_data *data);
 
 /*-----------------------------------ERROR---------------------------------*/
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils_2_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:49:44 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/13 16:36:55 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/14 12:22:47 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,10 @@ bool	ut_atoi(unsigned int *nbr, const char *str)
 		str++;
 	}
 	return (true);
+}
+
+void	free_arr_exit(char **arr, t_data *data, char *err)
+{
+	free_array((void **)arr);
+	cub3d_err(data, err);
 }

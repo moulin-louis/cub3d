@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:34:07 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/13 16:34:52 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/14 12:22:45 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static char	**parse_file(t_data *data, char *file)
 	nbr_lines = get_nbr_lines(fd);
 	buff = malloc(sizeof(char *) * (nbr_lines + 1));
 	if (!buff)
-		return (cub3d_err(data, "Malloc error\n"), NULL);
+		cub3d_err(data, "Malloc error\n");
 	buff[nbr_lines] = NULL;
 	close(fd);
 	fd = open(file, O_RDONLY);
@@ -56,7 +56,22 @@ static char	**parse_file(t_data *data, char *file)
 		return (free_array((void **)buff),
 			cub3d_err(data, "Failed opening file\n"), NULL);
 	fill_buffer(data, buff, nbr_lines, fd);
+	close(fd);
 	return (buff);
+}
+
+void	check_empty_line(t_data *data)
+{
+	int	x;
+
+	x = data->map_index -1;
+	while (data->tmp_map[++x])
+	{
+		if (ft_strlen(data->tmp_map[x]) == 0)
+		{
+			cub3d_err(data, "Empty line after map content\n");
+		}
+	}
 }
 
 t_data	parsing(char *path_map)

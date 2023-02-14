@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_map.c                                          :+:      :+:    :+:   */
+/*   set_map_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 16:40:42 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/08 16:43:43 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/14 12:22:50 by loumouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ void	add_map(t_data *data)
 	int		len;
 
 	len = get_map_len(data);
+	check_empty_line(data);
 	check_map(data);
 	data->map = malloc(sizeof(int *) * (len + 1));
 	if (!data->map)
