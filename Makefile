@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+         #
+#    By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/13 13:30:11 by loumouli          #+#    #+#              #
-#    Updated: 2023/02/13 16:18:04 by mpignet          ###   ########.fr        #
+#    Updated: 2023/02/16 12:54:18 by loumouli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,11 +80,11 @@ $(O_DIR)/%.o: $(C_DIR)/%.c
 
 
 $(MLX):
-		@echo "Compiling MLX from source :"
-		make -C ./lib/minilibx-linux
+			@echo "Compiling MLX from source :"
+			make -C ./lib/minilibx-linux
 
 $(LIBFT):
-		make -C ./lib/libft
+			make -C ./lib/libft
 
 
 $(NAME): $(MLX) $(LIBFT) $(O_DIR) $(OBJS)
@@ -95,10 +95,12 @@ $(NAME): $(MLX) $(LIBFT) $(O_DIR) $(OBJS)
 # ################################## #
 
 clean:
+			$(RM) ${NAME}
 			make -C ./lib/libft clean
 			$(RM) $(O_DIR)
 
-fclean:
+fclean:	
+			$(RM) ${NAME}
 			$(RM) $(O_DIR)
 			make -C ./lib/minilibx-linux clean
 			make -C ./lib/libft fclean
@@ -107,16 +109,16 @@ fclean:
 re:			fclean all
 
 bonus:
-	make -C ./bonus/ all
+			make -C ./bonus/ all
 
 bonus_re:
-	make -C ./bonus/ re
+			make -C ./bonus/ re
 
 bonus_fclean:
-	make -C ./bonus/ fclean
+			make -C ./bonus/ fclean
 
 bonus_clean:
-	make -C ./bonus/ clean
+			make -C ./bonus/ clean
 
 
 .PHONY: all clean fclean re bonus bonus_re bonus_fclean bonus_clean
