@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:56:27 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/13 16:27:43 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/16 17:05:19 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	check_file_name(char *file)
 	size_t	i;
 
 	i = 0;
+	if (!file)
+		return (1);
 	while (file[i])
 		i++;
 	if (i < 4)

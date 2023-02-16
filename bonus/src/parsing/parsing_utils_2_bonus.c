@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils_2_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:49:44 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/14 12:22:47 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/16 17:22:50 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ void	check_invalid_info(t_data *data, char **tmp)
 			free_array((void **)tmp);
 			cub3d_err(data, "Unknown identifier in file\n");
 		}
+	}
+	if (len != 0 && len != 2)
+	{
+		free_array((void **)tmp);
+		cub3d_err(data, "Color or Texture description : wrong infos\n");
 	}
 }
 

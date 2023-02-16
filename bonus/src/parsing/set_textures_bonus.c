@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_textures_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:03:51 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/14 12:22:52 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/16 14:58:49 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,26 +93,33 @@ static void	check_and_add_texture(t_data *data, char **tmp)
 	add_we_ea(data, tmp);
 }
 
-void	add_color(t_data *data, char **tmp)
+int	add_color(t_data *data, char **tmp)
 {
 	if (!ft_strcmp(tmp[0], "F"))
 	{
 		if (data->floor != -1)
+			return (free_array((void **)tmp),
+				cub3d_err(data, "Mutiple color definitions for Floor\n"), 1);
+		else if (array_len((void **)tmp) > 2)
 		{
 			free_array((void **)tmp);
-			cub3d_err(data, "Mutiple color definitions for Floor\n");
+			cub3d_err(data, "Color description error : format : r, g, b\n");
 		}
 		data->floor = get_color(data, tmp);
 	}
 	else if (!ft_strcmp(tmp[0], "C"))
 	{
 		if (data->ceiling != -1)
+			return (free_array((void **)tmp),
+				cub3d_err(data, "Mutiple color definitions for Ceiling\n"), 1);
+		else if (array_len((void **)tmp) > 2)
 		{
 			free_array((void **)tmp);
-			cub3d_err(data, "Mutiple color definitions for Ceiling\n");
+			cub3d_err(data, "Color description error : format : r, g, b\n");
 		}
 		data->ceiling = get_color(data, tmp);
 	}
+	return (0);
 }
 
 void	add_textures_and_colors(t_data *data)

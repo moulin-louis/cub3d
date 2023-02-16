@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:13:55 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/13 16:14:51 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/16 17:05:14 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ int	check_file_name_xpm(char *file)
 	size_t	i;
 
 	i = 0;
+	if (!file)
+		return (1);
 	while (file[i])
 		i++;
 	if (i < 4)
