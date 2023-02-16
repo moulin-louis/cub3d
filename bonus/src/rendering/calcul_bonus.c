@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   calcul.c                                           :+:      :+:    :+:   */
+/*   calcul_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:01:34 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/11 10:23:51 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/16 14:05:28 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	draw_line(t_math *math, t_data *data, int x)
 		img_pix_put(&img_data, x, y, data->ceiling);
 	math->current_x = x;
 	draw_text_line(data, math, &img_data);
-	y = math->draw_end - 1;
+	y = math->draw_end;
 	while (++y < HEIGHT)
 		img_pix_put(&img_data, x, y, data->floor);
 }

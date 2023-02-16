@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 11:29:21 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/13 15:01:50 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/16 14:05:15 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	get_tex_line(t_data *data, t_tex tex, t_math *math, t_img_data *img_d)
 	step = 1.0 * tex.height / math->line_height;
 	tex_pos = (math->draw_start - HEIGHT / 2 + math->line_height / 2) * step;
 	x_y[1] = math->draw_start - 1;
-	while (++x_y[1] < (int)math->draw_end)
+	while (++x_y[1] <= (int)math->draw_end)
 	{
 		tex_y = (int)tex_pos;
 		tex_pos += step;
