@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loumouli <loumouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 10:53:07 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/13 15:41:59 by loumouli         ###   ########.fr       */
+/*   Updated: 2023/02/16 13:38:30 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,12 @@ void	display_pixel(t_data *data, int x, int y, int offset)
 		color = get_rgb(128, 56, 0);
 	else if (data->map[y][x] == 0)
 		color = get_rgb(128, 128, 128);
-	img_pix_put(&img_data, (x * 2) + offset, (y * 2) + 0, color);
-	img_pix_put(&img_data, (x * 2) + offset, (y * 2) + 1, color);
-	img_pix_put(&img_data, (x * 2) + offset, (y * 2) + 2, color);
-	img_pix_put(&img_data, (x * 2) + offset, (y * 2) + 3, color);
+	img_pix_put(&img_data, (x * 6) + offset, (y * 6) + 0, color);
+	img_pix_put(&img_data, (x * 6) + offset, (y * 6) + 1, color);
+	img_pix_put(&img_data, (x * 6) + offset, (y * 6) + 2, color);
+	img_pix_put(&img_data, (x * 6) + offset, (y * 6) + 3, color);
+	img_pix_put(&img_data, (x * 6) + offset, (y * 6) + 4, color);
+	img_pix_put(&img_data, (x * 6) + offset, (y * 6) + 5, color);
 }
 
 /*draw a minimap on the screen*/
@@ -73,6 +75,8 @@ void	draw_minimap(t_data *data)
 			display_pixel(data, x, y, 1);
 			display_pixel(data, x, y, 2);
 			display_pixel(data, x, y, 3);
+			display_pixel(data, x, y, 4);
+			display_pixel(data, x, y, 5);
 		}
 	}
 }
