@@ -114,6 +114,8 @@ void	check_xpm_file(t_data *data, char **tmp);
 void	add_tex_path(t_data *data, char **tmp, char *side);
 void	check_invalid_info(t_data *data, char **tmp);
 void	check_box_zero(t_data *data, int i, size_t j);
+void	add_ea(t_data *data, char **tmp);
+void	add_so(t_data *data, char **tmp);
 
 /*----------------------------------RENDRING-------------------------------*/
 

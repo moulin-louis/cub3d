@@ -38,6 +38,7 @@ C_FILES		=	main.c						\
 				parsing/set_map.c			\
 				parsing/parsing_utils.c		\
 				parsing/set_textures.c		\
+				parsing/set_textures_2.c		\
 				parsing/check_textures.c	\
 				parsing/parsing_utils_2.c	
 				

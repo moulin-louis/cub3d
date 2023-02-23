@@ -36,7 +36,7 @@ static int	get_color(t_data *data, char **tmp)
 	return (free_array((void **)buff), color);
 }
 
-static void	add_we_ea(t_data *data, char **tmp)
+void	add_we_ea(t_data *data, char **tmp)
 {
 	if (!ft_strcmp(tmp[0], "WE"))
 	{
@@ -46,22 +46,13 @@ static void	add_we_ea(t_data *data, char **tmp)
 		add_tex_path(data, tmp, "WE");
 		data->west.img = mlx_xpm_file_to_image(data->mlx, tmp[1],
 				&data->west.width, &data->west.height);
+		if (data->west.img == NULL)
+			free_arr_exit(tmp, data, "failed load xpm\n");
 		data->west.addr = mlx_get_data_addr(data->west.img,
 				&data->west.bpp, &data->west.size_line,
 				&data->west.endian);
 	}
-	else if (!ft_strcmp(tmp[0], "EA"))
-	{
-		if (data->east.img)
-			free_arr_exit(tmp, data, "Mutiple path def for East walls\n");
-		check_xpm_file(data, tmp);
-		add_tex_path(data, tmp, "EA");
-		data->east.img = mlx_xpm_file_to_image(data->mlx, tmp[1],
-				&data->east.width, &data->east.height);
-		data->east.addr = mlx_get_data_addr(data->east.img,
-				&data->east.bpp, &data->east.size_line,
-				&data->east.endian);
-	}	
+	add_ea(data, tmp);
 }
 
 static void	check_and_add_texture(t_data *data, char **tmp)
@@ -74,22 +65,13 @@ static void	check_and_add_texture(t_data *data, char **tmp)
 		add_tex_path(data, tmp, "NO");
 		data->nord.img = mlx_xpm_file_to_image(data->mlx, tmp[1],
 				&data->nord.width, &data->nord.height);
+		if (data->nord.img == NULL)
+			free_arr_exit(tmp, data, "failed load xpm\n");
 		data->nord.addr = mlx_get_data_addr(data->nord.img,
 				&data->nord.bpp, &data->nord.size_line,
 				&data->nord.endian);
 	}
-	else if (!ft_strcmp(tmp[0], "SO"))
-	{
-		if (data->south.img)
-			free_arr_exit(tmp, data, "Mutiple path def for South walls\n");
-		check_xpm_file(data, tmp);
-		add_tex_path(data, tmp, "SO");
-		data->south.img = mlx_xpm_file_to_image(data->mlx, tmp[1],
-				&data->south.width, &data->south.height);
-		data->south.addr = mlx_get_data_addr(data->south.img,
-				&data->south.bpp, &data->south.size_line,
-				&data->south.endian);
-	}
+	add_so(data, tmp);
 	add_we_ea(data, tmp);
 }
 
