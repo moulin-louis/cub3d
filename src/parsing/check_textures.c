@@ -69,7 +69,7 @@ void	add_tex_path(t_data *data, char **tmp, char *side)
 	add_others(data, tmp, side);
 }
 
-int	check_file_name_xpm(char *file)
+int	check_file_name_xpm(const char *file)
 {
 	size_t	i;
 

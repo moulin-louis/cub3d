@@ -50,7 +50,7 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
-cub3d
+cub3D
 cub3d_bonus
 .vscode
 .idea
