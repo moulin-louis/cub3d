@@ -66,7 +66,7 @@ bool	ut_atoi(unsigned int *nbr, const char *str)
 {
 	unsigned int	nbr_tmp;
 	unsigned int	nbr_tmp2;
-	int	i;
+	int				i;
 
 	*nbr = 0;
 	i = -1;
