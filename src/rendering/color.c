@@ -17,7 +17,7 @@ float	calculate_buffer_zone_x(t_data *data)
 	float	buff;
 
 	if (data->dir_x < 0)
-		buff =(float)-0.2;
+		buff = (float)-0.2;
 	else
 		buff = (float)0.2;
 	return (buff);
