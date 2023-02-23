@@ -141,7 +141,7 @@ void	draw_text_line(t_data *data, t_math *math, t_img_data *img_data);
 int		ft_strcmp(const char *s1, const char *s2);
 int		array_len(void **array);
 int		get_nbr_lines(int fd);
-int		check_file_name(char *file);
+int		check_file_name(const char *file);
 float	calculate_buffer_zone_x(t_data *data);
 float	calculate_buffer_zone_y(t_data *data);
 bool	ut_atoi(unsigned int *nbr, const char *str);

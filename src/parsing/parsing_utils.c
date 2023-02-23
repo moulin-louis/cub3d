@@ -24,7 +24,7 @@ void	free_array(void **array)
 	free(array);
 }
 
-int	check_file_name(char *file)
+int	check_file_name(const char *file)
 {
 	size_t	i;
 
@@ -71,9 +71,9 @@ int	array_len(void **array)
 
 int	ft_strcmp(const char *s1, const char *s2)
 {
-	int	i;
-	int	ls1;
-	int	ls2;
+	int				i;
+	unsigned int	ls1;
+	unsigned int	ls2;
 
 	if (!s1 || !s2)
 		return (1);
