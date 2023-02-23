@@ -27,12 +27,6 @@
 # define HEIGHT 1080
 # define SPACE 9
 # define END 42
-# define START_N 2
-# define START_S 3
-# define START_W 4
-# define START_E 5
-# define TEX_WIDTH 64
-# define TEX_HEIGHT 64
 
 typedef struct s_tex
 {
@@ -119,7 +113,6 @@ void	check_texture_color_error(t_data *data);
 void	check_xpm_file(t_data *data, char **tmp);
 void	add_tex_path(t_data *data, char **tmp, char *side);
 void	check_invalid_info(t_data *data, char **tmp);
-void	check_texture_color_error(t_data *data);
 void	check_box_zero(t_data *data, int i, size_t j);
 
 /*----------------------------------RENDRING-------------------------------*/
@@ -134,8 +127,7 @@ void	calculate_init(t_math *math, t_data *data, int x);
 
 /*-----------------------------------COLOR---------------------------------*/
 
-int		get_rgb(int red, int green, int blue);
-void	grab_pixel(t_data *data, t_math *math, int x);
+int		get_rgb(unsigned int red, unsigned int green, unsigned int blue);
 void	img_pix_put(t_img_data *img_data, int x, int y, int color);
 
 /*----------------------------------TEXTURE---------------------------------*/

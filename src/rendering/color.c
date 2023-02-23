@@ -43,7 +43,7 @@ void	img_pix_put(t_img_data *img_data, int x, int y, int color)
 	*(int *)pixel = color;
 }
 
-int	get_rgb(int red, int green, int blue)
+int	get_rgb(unsigned int red, unsigned int green, unsigned int blue)
 {
 	return (red << 16 | green << 8 | blue);
 }

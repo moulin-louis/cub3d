@@ -64,8 +64,8 @@ int	check_color(char **buff)
 
 bool	ut_atoi(unsigned int *nbr, const char *str)
 {
-	int	nbr_tmp;
-	int	nbr_tmp2;
+	unsigned int	nbr_tmp;
+	unsigned int	nbr_tmp2;
 	int	i;
 
 	*nbr = 0;
@@ -73,7 +73,7 @@ bool	ut_atoi(unsigned int *nbr, const char *str)
 	while (str[++i])
 		if (str[i] < '0' || str[i] > '9')
 			return (false);
-	while (*str != '\0' && *str >= '0' && *str <= '9')
+	while (*str && *str >= '0' && *str <= '9')
 	{
 		i = 0;
 		nbr_tmp2 = *nbr;
