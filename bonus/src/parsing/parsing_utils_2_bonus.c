@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:49:44 by loumouli          #+#    #+#             */
-/*   Updated: 2023/02/16 17:22:50 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/23 12:19:11 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ void	check_texture_color_error(t_data *data)
 
 void	check_invalid_info(t_data *data, char **tmp)
 {
+	int	len;
+
+	len = array_len((void **)tmp);
 	if (tmp[0])
 	{
 		if (ft_strcmp(tmp[0], "F") && ft_strcmp(tmp[0], "C")
