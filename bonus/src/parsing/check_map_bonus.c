@@ -6,7 +6,7 @@
 /*   By: mpignet <mpignet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 17:39:50 by mpignet           #+#    #+#             */
-/*   Updated: 2023/02/14 16:25:46 by mpignet          ###   ########.fr       */
+/*   Updated: 2023/02/23 12:47:06 by mpignet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ static void	check_line(t_data *data, int i)
 
 int	check_around_player(t_data *data, int i, size_t j)
 {
-	if (ft_strlen(data->tmp_map[i + 1]) < j
-		|| ft_strlen(data->tmp_map[i - 1]) < j)
+	if (ft_strlen(data->tmp_map[i + 1]) <= j
+		|| ft_strlen(data->tmp_map[i - 1]) <= j)
 		cub3d_err(data, "Map not properly closed !\n");
 	if (i < (data->end_index - 1) && ft_strlen(data->tmp_map[i + 1]) >= j
 		&& data->tmp_map[i + 1][j])
