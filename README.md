@@ -1,5 +1,6 @@
 # cub3d
 ## Project by:
+- [@Maelp20](https://github.com/Maelp20)
 - [@moulin-louis](https://github.com/moulin-louis)
 ## Description:
 - This project is inspired by the world-famous eponymous 90's game, which was the first FPS ever.
